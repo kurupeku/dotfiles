@@ -5,8 +5,41 @@ repo = 'Shougo/dein.vim'
 repo = 'scrooloose/nerdtree'
 
 [[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
+hook_add = '''
+    let g:rainbow_active = 1
+'''
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hok_add = '''
+    set signcolumn=yes
+    let g:gitgutter_async = 1
+    let g:gitgutter_sign_modified = 'rw'
+    highlight GitGutterAdd ctermfg=green
+    highlight GitGutterChange ctermfg=yellow
+    highlight GitGutterDelete ctermfg=red
+    highlight gitGutterChangeDelete ctermfg=yellow
+'''
+
+[[plugins]]
 repo = 'cocopon/pgmnt.vim'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
-# repo = 'joshdick/onedark.vim'
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+on_i = 1
+merged = '0'
+hook_source = 'call coil398#init#coc#hook_source()'

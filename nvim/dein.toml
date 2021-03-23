@@ -1,29 +1,77 @@
+# プラグインマネージャ ----------
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# ユーザー補助 ------------------
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+
+[[plugins]]
+repo = 'reireias/vim-cheatsheet'
+hook_add = '''
+    let g:cheatsheet#cheatfile = '~/dotfiles/nvim/cheatsheet.md'
+'''
+
+# ファイラー関係 -----------------
 [[plugins]]
 repo = 'scrooloose/nerdtree'
+hook_add = '''
+    nnoremap <Leader>n :NERDTreeFocus<CR>
+    nnoremap <silent><C-n> :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+# ファジーサーチ ------------------
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+merged = '0'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+hook_add = '''
+    nnoremap <C-p> :Files<CR>
+    command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'cat {}']}, <bang>0)'''
+
+# ウィンドウ・タブ関係 ------------
+[[plugins]]
+repo = 'simeji/winresizer'
+
+# LSP -----------------------------
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+merged = '0'
+hook_add = '''
+    source ~/dotfiles/nvim/coc.rc.vim
+'''
+
+# エディター関係 -----------------
+[[plugins]]
+repo = 'sheerun/vim-polyglot'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
 
 [[plugins]]
-repo = 'tomtom/tcomment_vim'
-
-[[plugins]]
-repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+repo = 'tpope/vim-commentary'
 
 [[plugins]]
 repo = 'luochen1990/rainbow'
-hook_add = '''
-    let g:rainbow_active = 1
-'''
+hook_add = 'let g:rainbow_active = 1'
 
 [[plugins]]
+repo = 'jiangmiao/auto-pairs'
+
+# Git関係 -------------------------
+[[plugins]]
 repo = 'airblade/vim-gitgutter'
-hok_add = '''
+hook_add = '''
     set signcolumn=yes
-    let g:gitgutter_async = 1
+    let g:giwtgutter_async = 1
     let g:gitgutter_sign_modified = 'rw'
     highlight GitGutterAdd ctermfg=green
     highlight GitGutterChange ctermfg=yellow
@@ -32,14 +80,28 @@ hok_add = '''
 '''
 
 [[plugins]]
+repo = 'tpope/vim-fugitive'
+
+# 見た目関係 ----------------------
+[[plugins]]
 repo = 'cocopon/pgmnt.vim'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
-repo = 'neoclide/coc.nvim'
-rev = 'release'
-on_i = 1
-merged = '0'
-hook_source = 'call coil398#init#coc#hook_source()'
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+    let g:airline_theme = 'minimalist'
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'yuttie/comfortable-motion.vim'
+hook_add = '''
+    let g:comfortable_motion_interval = 2400.0 / 60
+    let g:comfortable_motion_friction = 100.0
+    let g:comfortable_motion_air_drag = 3.0
+'''

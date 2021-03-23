@@ -1,3 +1,6 @@
+"Leader
+let mapleader = ' '
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible
@@ -20,9 +23,8 @@ endif
 "プラグイン読み込み＆キャッシュ作成
 let &runtimepath     = s:dein_repo_dir .",". &runtimepath
 let s:toml_file      = expand('~/dotfiles/nvim/dein.toml')
-"fnamemodify(expand('<sfile>'), ':h').'/dein.toml'
 let s:toml_lazy_file = expand('~/dotfiles/nvim/dein_lazy.toml')
-"fnamemodify(expand('<sfile>'), ':h').'/dein_lazy.toml'
+
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
@@ -47,8 +49,19 @@ set virtualedit=onemore
 set number
 "ルーラーを表示
 set ruler
-"ステータスバーを常時表示
-set laststatus=2
+"ヘルプの日本語化 (require 'vim-ja/vimdoc-ja'
+set helplang=ja
+"カラースキーマの設定 (require 'cocopon/iceberg.vim')
+set termguicolors
+syntax enable 
+colorscheme iceberg
+"透過設定
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none
+
 
 "検索-------------------------------------
 "検索結果をハイライト表示する
@@ -80,33 +93,36 @@ set softtabstop=4
 
 "ユーティリティ-------------------------------------
 "カレントディレクトリを自動で移動
-set autochdir
+"set autochdir
 "Vimの無名レジスタとシステムのクリップボードを連携
 set clipboard+=unnamed,unnamedplus
-"eコマンド等でTabキーを押すとパスを保管する
+"eコマンド等でTabキーを押すとパスを補完する
 set wildmode=longest,full
 "コマンドラインの補完
 set wildmode=list:longest
 "NERDTreeで隠しファイルをデフォルトで表示
 let NERDTreeShowHidden = 1
+"編集中のファイルがあっても別ファイルを開ける
+set hidden
+"ファイル保存時にバックアップファイルを作らない
+set nobackup
+set nowritebackup
+"メッセージ表示欄を2行分確保する
+set cmdheight=2
+"スワップファイルの書き込み頻度を300msに設定
+set updatetime=300
+"メッセージ表示時のチラツキを防止
+set shortmess+=c
 
-"カラースキーマの設定
-set termguicolors
-syntax on
-colorscheme iceberg
-"colorscheme onedark
-
-"透過設定
-highlight Normal ctermbg=none
-highlight NonText ctermbg=none
-highlight LineNr ctermbg=none
-highlight Folded ctermbg=none
-highlight EndOfBuffer ctermbg=none
+"coc関係
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 "キーマップ---------------------------------------
-"Leader
-let mapleader = ' '
-
 "折り返し時に表示行単位での移動できるようにする
 nnoremap j gj
 nnoremap k gk
@@ -124,7 +140,3 @@ inoremap <silent> っj <ESC>
 
 "ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
-
-"NERDTreeの起動
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <silent><C-n> :NERDTreeToggle<CR>

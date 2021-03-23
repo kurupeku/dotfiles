@@ -49,6 +49,9 @@ hook_add = '''
     source ~/dotfiles/nvim/coc.rc.vim
 '''
 
+[[plugins]]
+repo = 'antoinemadec/coc-fzf'
+
 # エディター関係 -----------------
 [[plugins]]
 repo = 'sheerun/vim-polyglot'
@@ -92,11 +95,14 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_add = '''
-    let g:airline_theme = 'minimalist'
+    let g:airline_theme='Cobalt 2'
 '''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
+
+# [[plugins]]
+# repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
 repo = 'yuttie/comfortable-motion.vim'

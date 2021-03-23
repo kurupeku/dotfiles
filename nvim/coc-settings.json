@@ -1,0 +1,12 @@
+{
+  "coc.preferences.formatOnType": true,
+  "diagnostic.format": true,
+  "suggest.removeDuplicateItems": true,
+  "suggest.autoTrigger": "always",
+  "solargraph.completion": true,
+  "solargraph.references": true,
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
+  "solargraph.autoformat": true,
+  "solargraph.checkGemVersion": true
+}

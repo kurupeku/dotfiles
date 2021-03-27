@@ -9,16 +9,42 @@ repo = 'vim-jp/vimdoc-ja'
 [[plugins]]
 repo = 'reireias/vim-cheatsheet'
 hook_add = '''
-    let g:cheatsheet#cheatfile = '~/dotfiles/nvim/cheatsheet.md'
+    let g:cheatsheet#cheat_file = '~/dotfiles/nvim/cheatsheet.md'
+    let g:cheatsheet#float_window = 1
+    let g:cheatsheet#float_window_width_ratio = 0.8
+    let g:cheatsheet#float_window_height_ratio = 0.8
+    nnoremap <silent> <Leader><Leader> :Cheat<CR>
 '''
 
 # ファイラー関係 -----------------
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
+    let g:NERDTreeQuitOnOpen=1
+    let g:NERDTreeWinSize=50
+    let g:NERDTreeMapOpenSplit='<C-s>'
+    let g:NERDTreeMapOpenVSplit='<C-v>'
+    let g:NERDTreeIgnore=['\.git$', '\.svn$', '\.hg$', '\.vscode$', '\.idea$', '\.DS_Store$', '\.clean$', '\.swp$', '\.bak$', '\~$']
+    let g:NERDTreeDirArrows = 1
+    let g:NERDTreeDirArrowExpandable  = '▶'
+    let g:NERDTreeDirArrowCollapsible = '▼'
     nnoremap <Leader>n :NERDTreeFocus<CR>
     nnoremap <silent><C-n> :NERDTreeToggle<CR>
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 '''
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+    set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
+    let g:webdevicons_conceal_nerdtree_brackets = '1'
+    let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+    let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+    if exists('g:loaded_webdevicons')
+        call webdevicons#refresh()
+    endif
+'''
+    # let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 
 [[plugins]]
 repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -27,7 +53,7 @@ repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
 [[plugins]]
 repo = 'junegunn/fzf'
 build = './install --all'
-merged = '0'
+merged = 0
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
@@ -44,7 +70,7 @@ repo = 'simeji/winresizer'
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
-merged = '0'
+merged = 0
 hook_add = '''
     source ~/dotfiles/nvim/coc.rc.vim
 '''
@@ -95,14 +121,13 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_add = '''
-    let g:airline_theme='Cobalt 2'
+    let g:airline_theme='cobalt2'
+    let g:airline#extensions#tabline#enabled=1
+    let g:airline_powerline_fonts=1
 '''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
-
-# [[plugins]]
-# repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
 repo = 'yuttie/comfortable-motion.vim'

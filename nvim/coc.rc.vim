@@ -1,30 +1,29 @@
 let g:coc_global_extensions = [
-            \'coc-json',
-            \'coc-git',
-            \'coc-css',
-            \'coc-cssmodules',
-            \'coc-emmet',
-            \'coc-go',
-            \'coc-graphql',
-            \'coc-highlight',
-            \'coc-html',
-            \'coc-html-css-support',
-            \'coc-markdownlint',
-            \'coc-prettier',
-            \'coc-python',
-            \'coc-sh',
-            \'coc-snippets',
-            \'coc-solargraph',
-            \'coc-spell-checker',
-            \'coc-sql',
-            \'coc-svg',
-            \'coc-toml',
-            \'coc-translator',
-            \'coc-tsserver',
-            \'coc-vetur',
-            \'coc-yaml',
-            \'coc-yank',
-            \]
+  \'coc-json',
+  \'coc-git',
+  \'coc-css',
+  \'coc-cssmodules',
+  \'coc-emmet',
+  \'coc-go',
+  \'coc-graphql',
+  \'coc-highlight',
+  \'coc-html',
+  \'coc-html-css-support',
+  \'coc-prettier',
+  \'coc-python',
+  \'coc-sh',
+  \'coc-snippets',
+  \'coc-solargraph',
+  \'coc-spell-checker',
+  \'coc-sql',
+  \'coc-svg',
+  \'coc-toml',
+  \'coc-translator',
+  \'coc-tsserver',
+  \'coc-vetur',
+  \'coc-yaml',
+  \'coc-yank',
+  \]
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -48,15 +47,11 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
+" Completion の表示・非表示を切り替え
+inoremap <silent><expr> <C-Space> coc#refresh()
+
+" エンターを押すと最初の候補を選択する
 " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm(): \<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -71,7 +66,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 "スペース2回でCocList
-nmap <silent> <space><space> :<C-u>CocList<cr>
+nmap <silent> gl :<C-u>CocList<cr>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -86,7 +81,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Formatting selected code.
+" Formatting code.
 xmap <leader>f  <Plug>(coc-format)
 nmap <leader>f  <Plug>(coc-format)
 
@@ -146,7 +141,7 @@ endif
 " Add (Neo)Vim's native statusline support.
 " Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -160,9 +155,9 @@ endif
 " Search workspace symbols.
 " nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" nnoremap <silent><nowait> <Leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" nnoremap <silent><nowait> <Leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 

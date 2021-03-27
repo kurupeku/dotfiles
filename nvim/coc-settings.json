@@ -1,12 +1,20 @@
 {
-  "coc.preferences.formatOnType": true,
-  "diagnostic.format": true,
+  // Suggest
   "suggest.removeDuplicateItems": true,
   "suggest.autoTrigger": "always",
-  "solargraph.completion": true,
-  "solargraph.references": true,
-  "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
-  "solargraph.autoformat": true,
-  "solargraph.checkGemVersion": true
+
+  // HTML
+  "html.filetypes": [
+    "html","handlebars","htmldjango","blade", "eruby", "slim", "haml"
+  ],
+
+  // Javascript
+  "javascript.showUnused": true,
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enable": true,
+
+  // Typescript
+  "typescript.showUnused": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enable": true,
 }

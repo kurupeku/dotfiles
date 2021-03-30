@@ -5,7 +5,13 @@
 
   // HTML
   "html.filetypes": [
-    "html","handlebars","htmldjango","blade", "eruby", "slim", "haml"
+    "html",
+    "handlebars",
+    "htmldjango",
+    "blade",
+    "eruby",
+    "slim",
+    "haml"
   ],
 
   // Javascript
@@ -17,4 +23,9 @@
   "typescript.showUnused": true,
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enable": true,
+
+  // Solargraph
+  "solargraph.autoformat": true,
+  "solargraph.formatting": true,
+  "solargraph.diagnostics": true
 }

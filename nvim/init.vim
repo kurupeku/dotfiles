@@ -100,8 +100,6 @@ set clipboard+=unnamed,unnamedplus
 set wildmode=longest,full
 " コマンドラインの補完
 set wildmode=list:longest
-" NERDTreeで隠しファイルをデフォルトで表示
-let NERDTreeShowHidden = 1
 " 編集中のファイルがあっても別ファイルを開ける
 set hidden
 " ファイル保存時にバックアップファイルを作らない
@@ -113,6 +111,12 @@ set cmdheight=1
 set updatetime=300
 " メッセージ表示時のチラツキを防止
 set shortmess+=c
+
+" UNDO の永続化設定
+if has("persistent_undo")
+    set undodir=~/.undodir
+    set undofile
+endif
 
 " coc関係
 if has("patch-8.1.1564")
@@ -137,11 +141,11 @@ inoremap <C-l> <Right>
 inoremap <silent> jj <ESC>
 
 " ESC連打でハイライト解除
-nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
+nnoremap <silent><Esc><Esc> :nohlsearch<CR><Esc>
 
 " ウィンドウ分割
-nnoremap <C-w>s :split<Return><C-w>w
-nnoremap <C-w>v :vsplit<Return><C-w>w
+nnoremap <silent><C-w>s :split<Return><C-w>w
+nnoremap <silent><C-w>v :vsplit<Return><C-w>w
 
 " バッファの再読み込み
 nnoremap <silent><Leader>r :bufdo e<CR>

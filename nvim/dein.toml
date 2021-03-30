@@ -28,9 +28,9 @@ hook_add = '''
     let g:NERDTreeDirArrows = 1
     let g:NERDTreeDirArrowExpandable  = '▶'
     let g:NERDTreeDirArrowCollapsible = '▼'
-    nnoremap <Leader>n :NERDTreeFocus<CR>
+    let g:NERDTreeShowHidden = 1
+    nnoremap <silent><Leader>n :NERDTreeFocus<CR>
     nnoremap <silent><C-n> :NERDTreeToggle<CR>
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 '''
 
 [[plugins]]
@@ -60,6 +60,9 @@ repo = 'vwxyutarooo/nerdtree-devicons-syntax'
 repo = 'jeetsukumaran/vim-buffergator'
 hook_add = '''
     let g:buffergator_suppress_keymaps = 1
+    let g:buffergator_viewport_split_policy = 'T'
+    let g:buffergator_split_size = 20
+    let g:buffergator_vsplit_size = 60
     nnoremap <silent><Leader>b :BuffergatorToggle<CR>
 '''
 

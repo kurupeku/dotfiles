@@ -1,6 +1,9 @@
 " Leader
 let mapleader = ' '
 
+" Enable filetype
+filetype plugin indent on
+
 " dein Scripts-----------------------------
 if &compatible
   set nocompatible

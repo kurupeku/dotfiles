@@ -143,3 +143,5 @@ nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 nnoremap <C-w>s :split<Return><C-w>w
 nnoremap <C-w>v :vsplit<Return><C-w>w
 
+" バッファの再読み込み
+nnoremap <silent><Leader>r :bufdo e<CR>

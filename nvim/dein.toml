@@ -37,17 +37,31 @@ hook_add = '''
 repo = 'ryanoasis/vim-devicons'
 hook_add = '''
     set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
-    let g:webdevicons_conceal_nerdtree_brackets = '1'
-    let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
-    let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+    let g:webdevicons_conceal_nerdtree_brackets = 1
+    let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+    let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+
+    let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+    let g:DevIconsEnableFoldersOpenClose = 1
+
     if exists('g:loaded_webdevicons')
         call webdevicons#refresh()
     endif
 '''
-    # let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 
 [[plugins]]
 repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+[[plugins]]
+repo = 'vwxyutarooo/nerdtree-devicons-syntax'
+
+# バッファ管理 --------------------
+[[plugins]]
+repo = 'jeetsukumaran/vim-buffergator'
+hook_add = '''
+    let g:buffergator_suppress_keymaps = 1
+    nnoremap <silent><Leader>b :BuffergatorToggle<CR>
+'''
 
 # ファジーサーチ ------------------
 [[plugins]]
@@ -87,10 +101,6 @@ repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
-
-[[plugins]]
-repo = 'luochen1990/rainbow'
-hook_add = 'let g:rainbow_active = 1'
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'

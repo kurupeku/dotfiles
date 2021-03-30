@@ -61,7 +61,7 @@ repo = 'jeetsukumaran/vim-buffergator'
 hook_add = '''
     let g:buffergator_suppress_keymaps = 1
     let g:buffergator_viewport_split_policy = 'T'
-    let g:buffergator_split_size = 20
+    let g:buffergator_hsplit_size = 20
     let g:buffergator_vsplit_size = 60
     nnoremap <silent><Leader>b :BuffergatorToggle<CR>
 '''

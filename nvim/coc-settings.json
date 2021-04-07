@@ -27,5 +27,11 @@
   // Solargraph
   "solargraph.autoformat": true,
   "solargraph.formatting": true,
-  "solargraph.diagnostics": true
+  "solargraph.diagnostics": true,
+  "solargraph.hover": true,
+  "solargraph.completion": true,
+  "solargraph.symbols": true,
+  "solargraph.rename": true,
+  "solargraph.references": true,
+  "solargraph.definitions": true
 }

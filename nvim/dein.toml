@@ -83,7 +83,7 @@ hook_add = '''
 [[plugins]]
 repo = 'simeji/winresizer'
 
-# LSP -----------------------------
+# 補完 ----------------------------
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
@@ -94,6 +94,9 @@ hook_add = '''
 
 [[plugins]]
 repo = 'antoinemadec/coc-fzf'
+
+[[plugins]]
+repo = 'codota/tabnine-vim'
 
 # エディター関係 -----------------
 [[plugins]]

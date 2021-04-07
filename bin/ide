@@ -14,9 +14,6 @@ EOM
 exit 1
 }
 
-echo $#
-echo $1
-
 if [ $# -eq 0 ]; then
 
   tmux split-window -v -p 30

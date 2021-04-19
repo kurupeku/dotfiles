@@ -1,9 +1,7 @@
 {
-  // Suggest
   "suggest.removeDuplicateItems": true,
   "suggest.autoTrigger": "always",
 
-  // HTML
   "html.filetypes": [
     "html",
     "handlebars",
@@ -14,17 +12,14 @@
     "haml"
   ],
 
-  // Javascript
   "javascript.showUnused": true,
   "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enable": true,
 
-  // Typescript
   "typescript.showUnused": true,
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enable": true,
 
-  // Solargraph
   "solargraph.autoformat": true,
   "solargraph.formatting": true,
   "solargraph.diagnostics": true,

@@ -56,7 +56,7 @@ set ruler
 set helplang=ja
 " カラースキーマの設定 (require 'cocopon/iceberg.vim')
 set termguicolors
-syntax enable 
+syntax enable
 colorscheme iceberg
 " 透過設定
 highlight Normal ctermbg=none
@@ -133,6 +133,12 @@ endif
 " 折り返し時に表示行単位での移動できるようにする
 nnoremap j gj
 nnoremap k gk
+
+" 検索時に対象を画面中央に持ってくる
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
 
 " 入力モードでのカーソル移動
 inoremap <C-j> <Down>

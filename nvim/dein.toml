@@ -29,8 +29,8 @@ hook_add = '''
     let g:NERDTreeDirArrowExpandable  = '▶'
     let g:NERDTreeDirArrowCollapsible = '▼'
     let g:NERDTreeShowHidden = 1
-    nnoremap <silent><Leader>n :NERDTreeFocus<CR>
-    nnoremap <silent><C-n> :NERDTreeToggle<CR>
+    nnoremap <silent><Leader>m :NERDTreeFocus<CR>
+    nnoremap <silent><C-m> :NERDTreeToggle<CR>
 '''
 
 [[plugins]]
@@ -95,8 +95,8 @@ hook_add = '''
 [[plugins]]
 repo = 'antoinemadec/coc-fzf'
 
-[[plugins]]
-repo = 'codota/tabnine-vim'
+# [[plugins]]
+# repo = 'codota/tabnine-vim'
 
 # エディター関係 -----------------
 [[plugins]]
@@ -107,6 +107,9 @@ repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
+hook_add = '''
+    nnoremap <Leader>c gcc
+'''
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'

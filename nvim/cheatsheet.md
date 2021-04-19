@@ -8,8 +8,8 @@
 
 ### NERDTree
 
-- <C-n>            : NERDTree の表示・非表示を切り替え
-- <Leader>n        : NERDTree にフォーカスする
+- <C-m>            : NERDTree の表示・非表示を切り替え
+- <Leader>m        : NERDTree にフォーカスする
 - <C-s>            : 選択中のファイルをウィンドウ水平分割で開く
 - <C-v>            : 選択中のファイルをウィンドウ垂直分割で開く
 
@@ -27,6 +27,7 @@
 - <C-p>            : カレントディレクトリ以下のファイルを fzf でファジーサーチ
 
 ### coc.vim
+
 - <C-Space>        : Completion の表示
 - <Tab>            : 次の Completion へ
 - <S-Tab>          : 手前の Completion へ

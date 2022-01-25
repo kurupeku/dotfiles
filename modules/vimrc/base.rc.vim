@@ -39,8 +39,8 @@ set cursorline
 
 " 行をまたいで移動
 nnoremap k gk
-nnoremap j gj
 nnoremap gk k
+nnoremap j gj
 nnoremap gj j
 
 " インデント方法の変更
@@ -67,7 +67,7 @@ set ttyfast
 let mapleader = "\<Space>"
 
 " jjでインサートモードを抜ける
-inoremap <silent> jj <ESC>
+imap jj <Esc>
 
 " TABにて対応ペアにジャンプ
 nnoremap &lt;Tab&gt; %
@@ -85,4 +85,3 @@ noremap "+p "*p
 noremap "+P "*P
 noremap <C-S-c> "*y
 noremap <C-S-v> "*P
-

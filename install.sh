@@ -16,14 +16,17 @@ for f in .??*; do
     [ "$f" = ".git" ] && continue
     [ "$f" = ".gitignore" ] && continue
     [ "$f" == ".DS_Store" ] && continue
+    [ "$f" == ".config" ] && continue
 
-    ln -snfv "${DOTPATH}/${f}" "${HOME}/${f}"
+    ln -snf $DOTPATH/"$f" $HOME/"$f"
+    echo "Installed $f"
 done
 
+ln -snfv "${DOTPATH}/.config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 ln -snfv "${DOTPATH}/.bashrc" "${HOME}/.zshrc"
 
 # OSの判定
-source ./etc/define_os.sh
+source ./modules/scripts/define_os.sh
 
 # パッケージマネージャーのセットアップ
 if [ $OS == "Mac" ]; then
@@ -41,10 +44,16 @@ if [ $OS == "Mac" ]; then
 fi
 
 # パッケージのインストールorアップグレード
+echo "installing packages..."
 for p in "${PACKAGES[@]}"; do
   if [ $OS == "Mac" ]; then
     brew install $p || brew upgrade $p
   fi
 done
 
+if [ $OS == "Mac" ]; then
+  brew cleanup
+fi
+
+echo "all processes are done."
 exec $SHELL -l

@@ -25,3 +25,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .
+
+# for ide
+.vscode
+.idea
+*.iml

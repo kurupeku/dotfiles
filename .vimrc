@@ -13,14 +13,14 @@ set hlsearch
 " 括弧入力時の対応する括弧を表示
 set showmatch
 
+" 対応する括弧やブレースを表示
+set showmatch matchtime=1
+
 " ウィンドウの右下にまだ実行していない入力中のコマンドを表示
 set showcmd
 
 " ステータスラインを常に表示
 set laststatus=2
-
-" 対応する括弧やブレースを表示
-set showmatch matchtime=1
 
 " メッセージ表示欄を2行確保
 set cmdheight=2
@@ -32,7 +32,7 @@ set scrolloff=5
 syntax enable
 
 " Escの2回押しでハイライト消去
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+nmap <Esc><Esc> :nohl<CR><Esc>
 
 " カーソル行をハイライト
 set cursorline
@@ -40,8 +40,6 @@ set cursorline
 " 行をまたいで移動
 nnoremap k gk
 nnoremap j gj
-nnoremap gk k
-nnoremap gj j
 
 " インデント方法の変更
 set cinoptions+=:0
@@ -86,3 +84,7 @@ noremap "+P "*P
 noremap <C-S-c> "*y
 noremap <C-S-v> "*P
 
+" 検索時にカーソルの位置を中央に持ってくる
+noremap * *zz
+noremap # #zz
+noremap n nzz

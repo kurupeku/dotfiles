@@ -8,14 +8,15 @@ PACKAGES=(
   neovim
   gtop
   sqlite
+  asdf
 )
 
 # dotfileのシンボリックリンクを作成
 for f in .??*; do
     [ "$f" = ".git" ] && continue
     [ "$f" = ".gitignore" ] && continue
-    [ "$f" == ".DS_Store" ] && continue
-    [ "$f" == ".config" ] && continue
+    [ "$f" = ".DS_Store" ] && continue
+    [ "$f" = ".config" ] && continue
 
     ln -snf $DOTPATH/"$f" $HOME/"$f"
     echo "Installed $f"
@@ -23,12 +24,13 @@ done
 
 ln -snfv "${DOTPATH}/.config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 ln -snfv "${DOTPATH}/.bashrc" "${HOME}/.zshrc"
+ln -snfv "${DOTPATH}/.bash_profile" "${HOME}/.zsh_profile"
 
 # OSの判定
-source ./modules/scripts/define_os.sh
+. ./modules/scripts/define_os.sh
 
 # パッケージマネージャーのセットアップ
-if [ $OS == "Mac" ]; then
+if [ $OS = "Mac" ]; then
   echo "installing homebrew..."
   which brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -45,12 +47,12 @@ fi
 # パッケージのインストールorアップグレード
 echo "installing packages..."
 for p in "${PACKAGES[@]}"; do
-  if [ $OS == "Mac" ]; then
+  if [ $OS = "Mac" ]; then
     brew install $p || brew upgrade $p
   fi
 done
 
-if [ $OS == "Mac" ]; then
+if [ $OS = "Mac" ]; then
   brew cleanup
 fi
 

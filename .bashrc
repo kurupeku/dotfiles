@@ -1,3 +1,5 @@
+#!/bin/sh
+
 alias vi="nvim"
 alias vim="nvim"
 alias d="docker"

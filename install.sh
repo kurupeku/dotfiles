@@ -1,6 +1,5 @@
 #!/bin/sh
 
-RELEASE_FILE=/etc/os-release
 DOTPATH=~/dotfiles
 PACKAGES=(
   git

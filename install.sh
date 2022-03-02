@@ -56,5 +56,9 @@ if [ $OS = "Mac" ]; then
   brew cleanup
 fi
 
+# asdfで言語を導入
+echo "installing runtimes..."
+. ./modules/scripts/environments.sh
+
 echo "all processes are done."
 exec $SHELL -l

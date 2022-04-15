@@ -1,6 +1,8 @@
 #!/bin/sh
 
 DOTPATH=~/dotfiles
+VIM_CONF_PATH=$DOTPATH/.vim
+NVIM_CONF_PATH=$DOTPATH/.config/nvim
 PACKAGES=(
   bash
   zsh

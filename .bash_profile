@@ -1,3 +1,4 @@
 #!/bin/sh
 
-. "$(brew --prefix asdf)/libexec/asdf.sh"
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

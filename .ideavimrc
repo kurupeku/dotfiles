@@ -62,7 +62,7 @@ set fileencodings=utf-8
 set ttyfast
 
 " leaderを<Space>にマッピング
-let mapleader = "\<Space>"
+let mapleader = " "
 
 " jjでインサートモードを抜ける
 inoremap <silent> jj <ESC>
@@ -154,8 +154,6 @@ nnoremap Wy :<C-u>action SplitHorizontally<CR>
 
 " EasyMotionを有効化
 set easymotion
-nnoremap f <Plug>(easymotion-s2)
-nnoremap F <Plug>(easymotion-sn)
 
 " surround のプラグインをオン
 set surround

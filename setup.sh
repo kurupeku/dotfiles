@@ -2,32 +2,30 @@
 
 DOTPATH=~/dotfiles
 PACKAGES=(
+  bash
+  zsh
   git
   curl
   vim
   neovim
-  gtop
-  sqlite
-  asdf
 )
 
 # dotfileのシンボリックリンクを作成
 for f in .??*; do
-    [ "$f" = ".git" ] && continue
-    [ "$f" = ".gitignore" ] && continue
-    [ "$f" = ".DS_Store" ] && continue
-    [ "$f" = ".config" ] && continue
+  [ "$f" = ".git" ] && continue
+  [ "$f" = ".gitignore" ] && continue
+  [ "$f" = ".DS_Store" ] && continue
+  [ "$f" = ".config" ] && continue
 
-    ln -snf $DOTPATH/"$f" $HOME/"$f"
-    echo "Installed $f"
+  ln -snf $DOTPATH/"$f" $HOME/"$f"
+  echo "Installed $f"
 done
 
-ln -snfv "${DOTPATH}/.config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
-ln -snfv "${DOTPATH}/.bashrc" "${HOME}/.zshrc"
-ln -snfv "${DOTPATH}/.bash_profile" "${HOME}/.zsh_profile"
+mkdir -p "${DOTPATH}/.config/nvim"
+ln -snfv "${DOTPATH}/.vimrc" "${HOME}/.config/nvim/init.vim"
 
 # OSの判定
-. ./modules/scripts/define_os.sh
+. $DOTPATH/modules/scripts/define_os.sh
 
 # パッケージマネージャーのセットアップ
 if [ $OS = "Mac" ]; then
@@ -56,9 +54,10 @@ if [ $OS = "Mac" ]; then
   brew cleanup
 fi
 
-# asdfで言語を導入
-echo "installing runtimes..."
-. ./modules/scripts/environments.sh
+# zinitのインストール
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+mkdir -p "$(dirname $ZINIT_HOME)"
+git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 
 echo "all processes are done."
 exec $SHELL -l

@@ -57,9 +57,11 @@ set mouse=a
 
 " Encodeの設定
 set encoding=utf-8
+scriptencoding utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 set ttyfast
+set ambiwidth=double
 
 " leaderを<Space>にマッピング
 let mapleader = "\<Space>"
@@ -100,6 +102,26 @@ set number
 
 " コマンドモードでのコマンド補完を有効化する
 set wildmenu
+
+" ペースト時のインデント制御
+if &term =~ "xterm"
+  let &t_SI .= "\e[?2004h"
+  let &t_EI .= "\e[?2004l"
+  let &pastetoggle = "\e[201~"
+
+  function XTermPasteBegin(ret)
+      set paste
+      return a:ret
+  endfunction
+
+  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+endif
+
+" Undoの永続化
+if has('persistent_undo')
+  set undodir=~/.config/nvim/undo
+  set undofile
+endif
 
 " Go用の設定
 au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=4

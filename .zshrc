@@ -90,3 +90,5 @@ zinit light zsh-users/zsh-completions
 # asdfに関する設定
 . $HOME/.asdf/asdf.sh
 
+# 自作コマンドディレクトリをPATHに追加
+PATH=~/dotfiles/cmd:$PATH

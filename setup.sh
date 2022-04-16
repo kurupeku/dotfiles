@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DOTPATH=~/dotfiles
+DOTPATH=${HOME}/dotfiles
 
 # ディレクトリが存在しなければ先にDL
 if [ ! -e "$DOTPATH" ]; then
@@ -26,7 +26,6 @@ if [ ! -e "$DOTPATH" ]; then
     die "curl or wget required"
   fi
 
-  cd ~/dotfiles
   if [ $? -ne 0 ]; then
     die "not found: $DOTPATH"
   fi
@@ -34,6 +33,7 @@ if [ ! -e "$DOTPATH" ]; then
   echo "fetched my dotfiles"
 fi
 
+cd $DOTPATH
 # dotfileのシンボリックリンクを作成
 for f in .??*; do
   [ "$f" = ".git" ] && continue
@@ -41,11 +41,14 @@ for f in .??*; do
   [ "$f" = ".DS_Store" ] && continue
   [ "$f" = ".config" ] && continue
 
-  ln -snf $DOTPATH/"$f" "~/$f"
+  ln -snf "${DOTPATH}/${f}" "${HOME}/${f}"
 done
 
 mkdir -p "${DOTPATH}/.config/nvim"
-ln -snfv "${DOTPATH}/.vimrc" "~/.config/nvim/init.vim"
+ln -snfv "${DOTPATH}/.vimrc" "${HOME}/.config/nvim/init.vim"
+
+# UNDOの永続化用ディレクトリ作成
+mkdir "${DOTPATH}/.config/nvim/undo"
 
 # OSの判定
 . $DOTPATH/modules/scripts/define_os.sh

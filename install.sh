@@ -10,9 +10,37 @@ PACKAGES=(
   curl
 )
 
-GUI_PACKAGES=(
-  iterm2
-)
+# ディレクトリが存在しなければ先にDL
+if [ ! -e "${$HOME}/dotfiles" ]; then
+  echo "fetching dotfiles repository..."
+
+  # git が使えるなら git
+  if has "git"; then
+    git clone --recursive "https://github.com/kurupeku/dotfiles.git" "$DOTPATH"
+
+  # 使えない場合は curl か wget を使用する
+  elif has "curl" || has "wget"; then
+    tarball="https://github.com/kurupeku/dotfiles/archive/master.tar.gz"
+
+    # どっちかでダウンロードして，tar に流す
+    if has "curl"; then
+      curl -L $tarball
+    elif has "wget"; then
+      wget -O - $tarball
+    fi | tar zxv
+
+    mv -f dotfiles-master "$DOTPATH"
+  else
+    die "curl or wget required"
+  fi
+
+  cd ~/.dotfiles
+  if [ $? -ne 0 ]; then
+    die "not found: $DOTPATH"
+  fi
+
+  echo "fetched my dotfiles"
+fi
 
 # OSの判定
 . $DOTPATH/modules/scripts/define_os.sh
@@ -43,14 +71,9 @@ for p in "${PACKAGES[@]}"; do
   fi
 done
 
-for p in "${GUI_PACKAGES[@]}"; do
-  if [ $OS = "Mac" ]; then
-    brew install --cask $p
-  fi
-done
-
-# パッケージの更新と後片付け
+# OS固有の処理
 if [ $OS = "Mac" ]; then
+  brew install iterm2 --cask
   brew upgrade
   brew upgrade --cask --greedy
   brew cleanup
@@ -70,6 +93,6 @@ fi
 
 echo 'please restart zsh and execute "p10k configure", if your first installing'
 
-echo "all processes are done."
+echo "all processes are done"
 exec $SHELL -l
 

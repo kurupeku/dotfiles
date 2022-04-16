@@ -1,5 +1,5 @@
 # history
-HISTFILE=$HOME/.zsh_history     # 履歴を保存するファイル
+HISTFILE=~/.zsh_history     # 履歴を保存するファイル
 HISTSIZE=100000                 # メモリ上に保存する履歴のサイズ
 SAVEHIST=1000000                # 上述のファイルに保存する履歴のサイズ
 

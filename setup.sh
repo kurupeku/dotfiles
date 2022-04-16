@@ -8,7 +8,7 @@ if [ ! -e "$DOTPATH" ]; then
 
   # git が使えるなら git
   if type "git" > /dev/null 2>&1; then
-    git clone --recursive "$GITHUB_URL" "$DOTPATH"
+    git clone --recursive "https://github.com/kurupeku/dotfiles.git" "$DOTPATH"
 
   # 使えない場合は curl か wget を使用する
   elif type "curl" > /dev/null 2>&1 || type "wget" > /dev/null 2>&1; then

@@ -3,7 +3,7 @@
 DOTPATH=~/dotfiles
 
 # ディレクトリが存在しなければ先にDL
-if [ ! -e "${$HOME}/dotfiles" ]; then
+if [ ! -e "$DOTPATH" ]; then
   echo "fetching dotfiles repository..."
 
   # git が使えるなら git

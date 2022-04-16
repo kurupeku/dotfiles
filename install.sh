@@ -93,7 +93,14 @@ if [ ! -e $ZINIT_HOME ]; then
   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-echo 'please restart zsh and execute "p10k configure", if your first installing'
+echo 'installing nerd-fonts...'
+# nerd-fontsの導入
+if [ ! -e "~/nerd-fonts" ]; then
+  cd
+  git clone --branch=master --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+  cd nerd-fonts
+  ./install.sh
+fi
 
 echo "all processes are done"
 exec $SHELL -l

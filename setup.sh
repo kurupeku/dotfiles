@@ -41,22 +41,25 @@ for f in .??*; do
   [ "$f" = ".DS_Store" ] && continue
   [ "$f" = ".config" ] && continue
 
-  ln -snf $DOTPATH/"$f" $HOME/"$f"
+  ln -snf $DOTPATH/"$f" "~/$f"
 done
 
 mkdir -p "${DOTPATH}/.config/nvim"
-ln -snfv "${DOTPATH}/.vimrc" "${HOME}/.config/nvim/init.vim"
+ln -snfv "${DOTPATH}/.vimrc" "~/.config/nvim/init.vim"
 
 # OSの判定
 . $DOTPATH/modules/scripts/define_os.sh
 
 # OS個別のインストール作業
+echo "installing nvim..."
 if [ $OS = "Mac" ]; then
-  brew install vim 
   brew install nvim
+  brew install ripgrep
+  brew install tmux
   brew cleanup
 elif [ $OS = "CentOS" ]; then
-  yun install -y vim nvim
+  yun install -y nvim ripgrep tmux
 elif [ $OS = "Ubuntu" ]; then
-  apt install -y vim nvim
+  apt install -y nvim ripgrep tmux
 fi
+

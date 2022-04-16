@@ -37,6 +37,7 @@ cd $DOTPATH
 # dotfileのシンボリックリンクを作成
 for f in .??*; do
   [ "$f" = ".git" ] && continue
+  [ "$f" = ".gitconfig" ] && continue
   [ "$f" = ".gitignore" ] && continue
   [ "$f" = ".DS_Store" ] && continue
   [ "$f" = ".config" ] && continue

@@ -11,7 +11,7 @@ PACKAGES=(
 )
 
 # ディレクトリが存在しなければ先にDL
-if [ ! -e "${$HOME}/dotfiles" ]; then
+if [ ! -e "~/dotfiles" ]; then
   echo "fetching dotfiles repository..."
 
   # git が使えるなら git

@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # history
 HISTFILE=~/.zsh_history     # 履歴を保存するファイル
 HISTSIZE=100000                 # メモリ上に保存する履歴のサイズ
@@ -68,6 +75,7 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 # alias
+alias lg="lazygit"
 alias vi="nvim"
 alias vim="nvim"
 alias d="docker"
@@ -86,6 +94,9 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # zinit経由でzsh-completions導入
 zinit light zsh-users/zsh-completions
+
+# zinit経由でzsh-syntax-highlignting導入
+zinit light zsh-users/zsh-syntax-highlighting
 
 # asdfに関する設定
 . $HOME/.asdf/asdf.sh

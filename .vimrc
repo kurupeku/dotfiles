@@ -29,7 +29,7 @@ set cmdheight=2
 set scrolloff=10
 
 " シンタックスハイライトの有効化
-syntax enable
+syntax on
 
 " Escの2回押しでハイライト消去
 nmap <Esc><Esc> :nohl<CR><Esc>
@@ -92,7 +92,9 @@ noremap # #zz
 noremap n nzz
 
 " テーマ設定
-colorscheme iceberg
+colorscheme nord
+set termguicolors
+set background=dark
 
 " help日本語化
 set helplang=ja,en
@@ -167,20 +169,20 @@ call jetpack#add('tpope/vim-surround')
 call jetpack#add('tpope/vim-repeat')
 call jetpack#add('tpope/vim-commentary')
 
-call jetpack#add('cocopon/iceberg.vim')
+call jetpack#add('arcticicestudio/nord-vim')
 
 call jetpack#add('nvim-treesitter/nvim-treesitter', { 'merged': 0, 'do': ':TSUpdate'})
 
 call jetpack#add('vim-airline/vim-airline')
 call jetpack#add('vim-airline/vim-airline-themes')
 
-call jetpack#add('vim-scripts/vim-auto-save')
+call jetpack#add('mattn/vim-goimports')
+
 call jetpack#add('vim-jp/vimdoc-ja')
 call jetpack#add('cohama/lexima.vim')
 call jetpack#add('yuttie/comfortable-motion.vim')
 call jetpack#add('bronson/vim-trailing-whitespace')
 call jetpack#add('Yggdroot/indentLine')
-call jetpack#add('sheerun/vim-polyglot')
 call jetpack#add('terryma/vim-expand-region')
 call jetpack#add('simeji/winresizer')
 call jetpack#add('tyru/open-browser.vim')
@@ -199,12 +201,12 @@ function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> gs <plug>(lsp-document-symbol-search)
-  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-  nmap <buffer> gr <plug>(lsp-references)
-  nmap <buffer> gi <plug>(lsp-implementation)
-  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> gd        <plug>(lsp-definition)
+  nmap <buffer> gs        <plug>(lsp-document-symbol-search)
+  nmap <buffer> gS        <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> gr        <plug>(lsp-references)
+  nmap <buffer> gi        <plug>(lsp-implementation)
+  nmap <buffer> gt        <plug>(lsp-type-definition)
   nmap <buffer> <leader>f :FixWhitespace<CR><plug>(lsp-document-format)<plug>(lsp-document-format)
   nmap <buffer> <leader>a <plug>(lsp-code-action)
   nmap <buffer> <leader>r <plug>(lsp-rename)
@@ -266,12 +268,15 @@ augroup END
 " nvim-treesitterの設定
 if has('nvim')
   lua <<EOF
-require('nvim-treesitter.configs').setup {
+require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
-  ignore_install = { "phpdoc" },
+  ignore_install = { "swift", "phpdoc" },
   highlight = {
     enable = true,
     disable = {},
+  },
+  indent = {
+    enable = true,
   }
 }
 EOF
@@ -289,12 +294,12 @@ let g:EasyMotion_enter_jump_first = 1
 let g:EasyMotion_space_jump_first = 1
 nmap <Leader><Leader> <Plug>(easymotion-overwin-f)
 nmap <Leader><Leader> <Plug>(easymotion-overwin-f2)
-map <Leader>l <Plug>(easymotion-bd-jk)
-nmap <Leader>l <Plug>(easymotion-overwin-line)
-map / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map n <Plug>(easymotion-next)
-map N <Plug>(easymotion-prev)
+map  <Leader>l        <Plug>(easymotion-bd-jk)
+nmap <Leader>l        <Plug>(easymotion-overwin-line)
+map  /                <Plug>(easymotion-sn)
+omap /                <Plug>(easymotion-tn)
+map  n                <Plug>(easymotion-next)
+map  N                <Plug>(easymotion-prev)
 
 " vim-trailling-whitespaceの設定
 autocmd! BufWritePre * call execute('FixWhitespace')
@@ -305,12 +310,8 @@ let g:comfortable_motion_scroll_up_key = "k"
 noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
 noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 
-" vim-auto-saveの設定
-let g:auto_save = 1
-let g:auto_save_silent = 1
-
 " vim-expand-regionの設定
-vmap v <Plug>(expand_region_expand)
+vmap v     <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 " winresizerの設定

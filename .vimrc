@@ -104,6 +104,7 @@ set number
 
 " コマンドモードでのコマンド補完を有効化する
 set wildmenu
+set wildmode=longest,full
 
 " ペースト時のインデント制御
 if &term =~ "xterm"
@@ -155,6 +156,9 @@ call jetpack#add('prabirshrestha/vim-lsp')
 call jetpack#add('mattn/vim-lsp-settings')
 call jetpack#add('prabirshrestha/asyncomplete.vim')
 call jetpack#add('prabirshrestha/asyncomplete-lsp.vim')
+call jetpack#add('hrsh7th/vim-vsnip')
+call jetpack#add('hrsh7th/vim-vsnip-integ')
+call jetpack#add('rafamadriz/friendly-snippets')
 
 call jetpack#add('lambdalisue/fern.vim')
 call jetpack#add('lambdalisue/fern-git-status.vim')
@@ -164,6 +168,7 @@ call jetpack#add('lambdalisue/nerdfont.vim')
 call jetpack#add('lambdalisue/fern-renderer-nerdfont.vim')
 call jetpack#add('lambdalisue/glyph-palette.vim')
 
+call jetpack#add('editorconfig/editorconfig-vim')
 call jetpack#add('easymotion/vim-easymotion')
 call jetpack#add('tpope/vim-surround')
 call jetpack#add('tpope/vim-repeat')
@@ -208,7 +213,7 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gr        <plug>(lsp-references)
   nmap <buffer> gi        <plug>(lsp-implementation)
   nmap <buffer> gt        <plug>(lsp-type-definition)
-  nmap <buffer> <leader>f :FixWhitespace<CR><plug>(lsp-document-format)<plug>(lsp-document-format)
+  nmap <buffer> <leader>f :FixWhitespace<CR><plug>(lsp-document-format)
   nmap <buffer> <leader>a <plug>(lsp-code-action)
   nmap <buffer> <leader>r <plug>(lsp-rename)
   nmap <buffer> <leader>V <plug>(lsp-previous-diagnostic)
@@ -217,7 +222,7 @@ function! s:on_lsp_buffer_enabled() abort
 
   let g:lsp_format_sync_timeout = 1000
   let g:lsp_diagnostics_echo_cursor = 1
-  autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+  autocmd! BufWritePre * call execute('LspDocumentFormatSync')
 endfunction
 
 augroup lsp_install
@@ -225,6 +230,31 @@ augroup lsp_install
   " call s:on_lsp_buffer_enabled only for languages that has the server registered.
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+
+" goimportsの設定
+let g:goimports_simplify = 1
+
+" vim-vsnipの設定
+let g:vsnip_snippet_dir = expand($XDG_CONFIG_HOME . '/vsnip')
+" 補完のポップアップメニュー表示中 <CR> で候補を確定
+inoremap <expr><CR> pumvisible() ? "\<c-y>" : "\<cr>"
+" :h vsnip-mapping
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" If you want to use snippet for multiple filetypes, you can `g:vsnip_filetypes` for it.
+let g:vsnip_filetypes = {}
+let g:vsnip_filetypes.javascriptreact = ['javascript']
+let g:vsnip_filetypes.typescriptreact = ['typescript']
 
 " ファジーファインダーの設定
 if has('nvim')

@@ -169,18 +169,30 @@ call jetpack#add('tpope/vim-commentary')
 
 call jetpack#add('cocopon/iceberg.vim')
 
+call jetpack#add('nvim-treesitter/nvim-treesitter', { 'merged': 0, 'do': ':TSUpdate'})
+
 call jetpack#add('vim-airline/vim-airline')
 call jetpack#add('vim-airline/vim-airline-themes')
 
 call jetpack#add('vim-scripts/vim-auto-save')
 call jetpack#add('vim-jp/vimdoc-ja')
 call jetpack#add('cohama/lexima.vim')
-call jetpack#add('miyakogi/seiya.vim')
 call jetpack#add('yuttie/comfortable-motion.vim')
 call jetpack#add('bronson/vim-trailing-whitespace')
 call jetpack#add('Yggdroot/indentLine')
 call jetpack#add('sheerun/vim-polyglot')
+call jetpack#add('terryma/vim-expand-region')
+call jetpack#add('simeji/winresizer')
+call jetpack#add('tyru/open-browser.vim')
+
 call jetpack#end()
+
+for name in jetpack#names()
+  if !jetpack#tap(name)
+    call jetpack#sync()
+    break
+  endif
+endfor
 
 " LSPの設定
 function! s:on_lsp_buffer_enabled() abort
@@ -193,7 +205,7 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gr <plug>(lsp-references)
   nmap <buffer> gi <plug>(lsp-implementation)
   nmap <buffer> gt <plug>(lsp-type-definition)
-  nmap <buffer> <leader>f <plug>(lsp-document-format)<plug>(lsp-document-format)
+  nmap <buffer> <leader>f :FixWhitespace<CR><plug>(lsp-document-format)<plug>(lsp-document-format)
   nmap <buffer> <leader>a <plug>(lsp-code-action)
   nmap <buffer> <leader>r <plug>(lsp-rename)
   nmap <buffer> <leader>V <plug>(lsp-previous-diagnostic)
@@ -206,9 +218,9 @@ function! s:on_lsp_buffer_enabled() abort
 endfunction
 
 augroup lsp_install
-    au!
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  au!
+  " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
 " ファジーファインダーの設定
@@ -251,6 +263,20 @@ augroup fern-settings
   autocmd FileType fern call s:fern_settings()
 augroup END
 
+" nvim-treesitterの設定
+if has('nvim')
+  lua <<EOF
+require('nvim-treesitter.configs').setup {
+  ensure_installed = "all",
+  ignore_install = { "phpdoc" },
+  highlight = {
+    enable = true,
+    disable = {},
+  }
+}
+EOF
+endif
+
 " airlineの設定
 " let g:airline_theme = 'solarized'               " テーマの指定
 " let g:airline_solarized_bg='dark'
@@ -265,14 +291,13 @@ nmap <Leader><Leader> <Plug>(easymotion-overwin-f)
 nmap <Leader><Leader> <Plug>(easymotion-overwin-f2)
 map <Leader>l <Plug>(easymotion-bd-jk)
 nmap <Leader>l <Plug>(easymotion-overwin-line)
-map  / <Plug>(easymotion-sn)
+map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
 
-" seiya.vimの設定
-let g:seiya_auto_enable=1
-let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+" vim-trailling-whitespaceの設定
+autocmd! BufWritePre * call execute('FixWhitespace')
 
 " comfortable-motion.vimの設定
 let g:comfortable_motion_scroll_down_key = "j"
@@ -283,4 +308,15 @@ noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 " vim-auto-saveの設定
 let g:auto_save = 1
 let g:auto_save_silent = 1
+
+" vim-expand-regionの設定
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" winresizerの設定
+let g:winresizer_start_key = '<C-W>e'
+
+" open-browser.vimの設定
+nmap ? <Plug>(openbrowser-smart-search)
+vmap ? <Plug>(openbrowser-smart-search)
 

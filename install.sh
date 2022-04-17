@@ -1,15 +1,12 @@
 #!/bin/sh
 
 DOTPATH=~/dotfiles
-VIM_CONF_PATH=$DOTPATH/.vim
-NVIM_CONF_PATH=$DOTPATH/.config/nvim
 PACKAGES=(
   bash
   zsh
   git
   curl
 )
-
 
 # ディレクトリが存在しなければ先にDL
 if [ ! -e "$DOTPATH" ]; then
@@ -43,7 +40,6 @@ if [ ! -e "$DOTPATH" ]; then
   echo "fetched my dotfiles"
 fi
 
-
 # OSの判定
 . $DOTPATH/modules/scripts/define_os.sh
 
@@ -75,6 +71,7 @@ done
 
 # OS固有の処理
 if [ $OS = "Mac" ]; then
+  brew install jesseduffield/lazygit/lazygit
   brew install iterm2 --cask
   brew upgrade
   brew upgrade --cask --greedy

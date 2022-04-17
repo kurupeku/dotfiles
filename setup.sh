@@ -62,8 +62,13 @@ if [ $OS = "Mac" ]; then
   brew install tmux
   brew cleanup
 elif [ $OS = "CentOS" ]; then
+  yun update
   yun install -y nvim ripgrep tmux
 elif [ $OS = "Ubuntu" ]; then
+  apt update
   apt install -y nvim ripgrep tmux
+elif [ $OS = "Alpine" ]; then
+  apk update
+  apk install -y nvim ripgrep tmux
 fi
 

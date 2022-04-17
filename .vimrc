@@ -110,8 +110,8 @@ if &term =~ "xterm"
   let &pastetoggle = "\e[201~"
 
   function XTermPasteBegin(ret)
-      set paste
-      return a:ret
+    set paste
+    return a:ret
   endfunction
 
   inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
@@ -122,6 +122,8 @@ if has('persistent_undo')
   set undodir=~/.config/nvim/undo
   set undofile
 endif
+
+map <leader>g :!lazygit<CR>
 
 " Go用の設定
 au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=4
@@ -181,25 +183,55 @@ call jetpack#add('sheerun/vim-polyglot')
 call jetpack#end()
 
 " LSPの設定
-nnoremap gd :LspPeekDefinition<CR>
-nnoremap <leader>r :LspRename<CR>
-nnoremap <leader>f :LspDocumentFormat<CR>:LspDocumentDiagnostics<CR>
-nnoremap <leader>a :LspCodeAction<CR>
-nnoremap <leader>h :LspHover<CR>
-nnoremap <leader>v :LspNextDiagnostic<CR>
-autocmd BufWritePre <buffer> LspDocumentFormatSync
-let g:lsp_diagnostics_echo_cursor = 1
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gs <plug>(lsp-document-symbol-search)
+  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> <leader>f <plug>(lsp-document-format)<plug>(lsp-document-format)
+  nmap <buffer> <leader>a <plug>(lsp-code-action)
+  nmap <buffer> <leader>r <plug>(lsp-rename)
+  nmap <buffer> <leader>V <plug>(lsp-previous-diagnostic)
+  nmap <buffer> <leader>v <plug>(lsp-next-diagnostic)
+  nmap <buffer> <leader>h <plug>(lsp-hover)
+
+  let g:lsp_format_sync_timeout = 1000
+  let g:lsp_diagnostics_echo_cursor = 1
+  autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 " ファジーファインダーの設定
 if has('nvim')
-  nnoremap <leader>/ :Telescope find_files<cr>
-  nnoremap <leader>? :Telescope find_files hidden=true<cr>
-  nnoremap <leader>; :Telescope live_grep<cr>
+  nnoremap <leader>/ :Telescope find_files hidden=true<cr>
+  nnoremap <leader>? :Telescope live_grep<cr>
+  nnoremap <leader>b <cmd>Telescope buffers<cr>
+  lua << EOF
+require('telescope').setup{
+  defaults = {
+    file_ignore_patterns = {
+      "^%.git/", "^%.tmp/", "%.cache/", "%.DS_Store", "%.idea", ".iml", "%.vscode"
+    },
+  }
+}
+EOF
 endif
 
 " fern（ファイラー）の設定
 nnoremap <silent> <C-e> :Fern . -reveal=%<CR>
 let g:fern#renderer = 'nerdfont'
+let g:fern#default_hidden = 1
+let g:fern#default_exclude = '^\%(\.git\|\.byebug\|\.DS_Store\|\.idea\|*\.iml\|\.vscode\)$'
 augroup my-glyph-palette
   autocmd! *
   autocmd FileType fern call glyph_palette#apply()
@@ -220,8 +252,8 @@ augroup fern-settings
 augroup END
 
 " airlineの設定
-let g:airline_theme = 'solarized'               " テーマの指定
-let g:airline_solarized_bg='dark'
+" let g:airline_theme = 'solarized'               " テーマの指定
+" let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1 " タブラインを表示
 
 " vim-easymotionの設定
@@ -231,11 +263,12 @@ let g:EasyMotion_enter_jump_first = 1
 let g:EasyMotion_space_jump_first = 1
 nmap <Leader><Leader> <Plug>(easymotion-overwin-f)
 nmap <Leader><Leader> <Plug>(easymotion-overwin-f2)
-map <Leader>l <Plug>(easymotion-j)
-map <Leader>l <Plug>(easymotion-k)
-nmap <Leader>g <Plug>(easymotion-sn)
-xmap <Leader>g <Plug>(easymotion-sn)
-omap <Leader>g <Plug>(easymotion-tn)
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
 
 " seiya.vimの設定
 let g:seiya_auto_enable=1

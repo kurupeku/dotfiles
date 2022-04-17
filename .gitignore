@@ -30,3 +30,7 @@ Temporary Items
 .vscode
 .idea
 *.iml
+
+# binary dir
+bin
+

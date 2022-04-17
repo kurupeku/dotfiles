@@ -5,11 +5,13 @@ if [ "$(uname)" == 'Darwin' ]; then
   OS='Mac'
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   if grep '^NAME="CentOS' "${RELEASE_FILE}" >/dev/null; then
-   OS="CentOS"
+    OS="CentOS"
   elif grep '^NAME="Ubuntu' "${RELEASE_FILE}" >/dev/null; then
-   OS="Ubuntu"
+    OS="Ubuntu"
   elif grep '^NAME="Amazon' "${RELEASE_FILE}" >/dev/null; then
-   OS="Amazon Linux"
+    OS="Amazon Linux"
+  elif grep '^NAME="Alpine' "${RELEASE_FILE}" >/dev/null; then
+    OS="Alpine"
   else
     echo "Your platform ($(uname -a)) is not supported."
     exit 1

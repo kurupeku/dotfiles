@@ -178,6 +178,7 @@ call jetpack#add('vim-airline/vim-airline-themes')
 
 call jetpack#add('mattn/vim-goimports')
 
+call jetpack#add('ervandew/supertab')
 call jetpack#add('vim-jp/vimdoc-ja')
 call jetpack#add('cohama/lexima.vim')
 call jetpack#add('yuttie/comfortable-motion.vim')
@@ -300,6 +301,9 @@ map  /                <Plug>(easymotion-sn)
 omap /                <Plug>(easymotion-tn)
 map  n                <Plug>(easymotion-next)
 map  N                <Plug>(easymotion-prev)
+
+" supertabの設定
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " vim-trailling-whitespaceの設定
 autocmd! BufWritePre * call execute('FixWhitespace')

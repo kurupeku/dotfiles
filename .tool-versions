@@ -1,5 +1,4 @@
-nodejs 17.7.1
-golang 1.18
-python 3.10.3
-go-sdk system
+nodejs 17.9.0
+golang 1.18.1
+python 3.10.4
 ruby 3.1.1

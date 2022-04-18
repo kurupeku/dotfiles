@@ -83,6 +83,7 @@ alias dc="docker compose"
 alias dcd="docker compose -f docker-compose.dev.yml"
 alias dct="docker compose -f docker-compose.test.yml"
 alias dcp="docker compose -f docker-compose.prod.yml"
+alias python=python3
 
 # zinitに関する設定
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"

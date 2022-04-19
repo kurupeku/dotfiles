@@ -49,7 +49,7 @@ mkdir -p "${DOTPATH}/.config/nvim"
 ln -snfv "${DOTPATH}/.vimrc" "${HOME}/.config/nvim/init.vim"
 
 # UNDOの永続化用ディレクトリ作成
-mkdir "${DOTPATH}/.config/nvim/undo"
+mkdir -p "${DOTPATH}/.config/nvim/undo"
 
 # OSの判定
 . $DOTPATH/modules/scripts/define_os.sh
@@ -62,13 +62,13 @@ if [ $OS = "Mac" ]; then
   brew install tmux
   brew cleanup
 elif [ $OS = "CentOS" ]; then
-  yun update
-  yun install -y nvim ripgrep tmux
+  sudo yun update
+  sudo yun install -y nvim ripgrep tmux
 elif [ $OS = "Ubuntu" ]; then
-  apt update
-  apt install -y nvim ripgrep tmux
+  sudo apt update
+  sudo apt install -y nvim ripgrep tmux
 elif [ $OS = "Alpine" ]; then
-  apk update
-  apk install -y nvim ripgrep tmux
+  sudo apk update
+  sudo apk install -y nvim ripgrep tmux
 fi
 

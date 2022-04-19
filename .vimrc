@@ -133,8 +133,7 @@ endif
 map <leader>g :!lazygit<CR>
 
 " Go用の設定
-au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=8 noet
-
+au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=4 noet
 " Python用の設定
 au BufNewFile,BufRead *.go set tabstop=8 softtabstop=4 shiftwidth=4
 
@@ -193,6 +192,7 @@ call jetpack#add('tpope/vim-repeat')
 call jetpack#add('tpope/vim-commentary')
 
 call jetpack#add('arcticicestudio/nord-vim')
+call jetpack#add('miyakogi/seiya.vim')
 
 call jetpack#add('nvim-treesitter/nvim-treesitter', { 'merged': 0, 'do': ':TSUpdate'})
 
@@ -533,4 +533,7 @@ let g:winresizer_start_key = '<C-W>e'
 " open-browser.vimの設定
 nmap ? <Plug>(openbrowser-smart-search)
 vmap ? <Plug>(openbrowser-smart-search)
+
+" seiya.vimの設定
+let g:seiya_auto_enable=1
 

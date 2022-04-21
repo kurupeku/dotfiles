@@ -46,6 +46,7 @@ set cinoptions+=:0
 
 " インデント幅
 set shiftwidth=2
+set autoindent
 set smartindent
 
 " タブキー押下時に挿入される文字幅を指定
@@ -115,8 +116,8 @@ augroup END
 
 " ペースト時のインデント制御
 if &term =~ "xterm"
-  let &t_SI .= "\e[?2004h"
-  let &t_EI .= "\e[?2004l"
+  let &t_ti .= "\e[?2004h"
+  let &t_te .= "\e[?2004l"
   let &pastetoggle = "\e[201~"
 
   function XTermPasteBegin(ret)
@@ -124,7 +125,10 @@ if &term =~ "xterm"
     return a:ret
   endfunction
 
+  noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
   inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+  cnoremap <special> <Esc>[200~ <nop>
+  cnoremap <special> <Esc>[201~ <nop>
 endif
 
 " Undoの永続化
@@ -136,8 +140,7 @@ endif
 map <leader>g :!lazygit<CR>
 
 " Go用の設定
-au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=4
-
+au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=4 noet
 " Python用の設定
 au BufNewFile,BufRead *.go set tabstop=8 softtabstop=4 shiftwidth=4
 
@@ -151,20 +154,31 @@ endif
 " vim plugins
 call jetpack#begin()
 
-call jetpack#add('tpope/vim-fugitive')
-call jetpack#add('rhysd/conflict-marker.vim')
-call jetpack#add('airblade/vim-gitgutter')
+call jetpack#add('tyru/open-browser.vim')
+call jetpack#add('neovim/nvim-lspconfig')
+call jetpack#add('williamboman/nvim-lsp-installer')
+call jetpack#add('hrsh7th/nvim-cmp')
+call jetpack#add('hrsh7th/cmp-nvim-lsp')
+call jetpack#add('hrsh7th/cmp-buffer')
+call jetpack#add('hrsh7th/cmp-path')
+call jetpack#add('hrsh7th/cmp-cmdline')
+call jetpack#add('hrsh7th/nvim-cmp')
+" call jetpack#add('prabirshrestha/vim-lsp')
+" call jetpack#add('mattn/vim-lsp-settings')
+" call jetpack#add('prabirshrestha/asyncomplete.vim')
+" call jetpack#add('prabirshrestha/asyncomplete-lsp.vim')
+call jetpack#add('hrsh7th/vim-vsnip')
+call jetpack#add('hrsh7th/vim-vsnip-integ')
+call jetpack#add('hrsh7th/cmp-vsnip')
+call jetpack#add('onsails/lspkind.nvim')
+call jetpack#add('hrsh7th/cmp-nvim-lsp-signature-help')
+call jetpack#add('ray-x/cmp-treesitter')
+call jetpack#add('folke/lsp-colors.nvim')
+call jetpack#add('lukas-reineke/lsp-format.nvim')
+" call jetpack#add('rafamadriz/friendly-snippets')
 
 call jetpack#add('nvim-lua/plenary.nvim')
 call jetpack#add('nvim-telescope/telescope.nvim')
-
-call jetpack#add('prabirshrestha/vim-lsp')
-call jetpack#add('mattn/vim-lsp-settings')
-call jetpack#add('prabirshrestha/asyncomplete.vim')
-call jetpack#add('prabirshrestha/asyncomplete-lsp.vim')
-call jetpack#add('hrsh7th/vim-vsnip')
-call jetpack#add('hrsh7th/vim-vsnip-integ')
-call jetpack#add('rafamadriz/friendly-snippets')
 
 call jetpack#add('lambdalisue/fern.vim')
 call jetpack#add('lambdalisue/fern-git-status.vim')
@@ -174,6 +188,10 @@ call jetpack#add('lambdalisue/nerdfont.vim')
 call jetpack#add('lambdalisue/fern-renderer-nerdfont.vim')
 call jetpack#add('lambdalisue/glyph-palette.vim')
 
+call jetpack#add('tpope/vim-fugitive')
+call jetpack#add('rhysd/conflict-marker.vim')
+call jetpack#add('airblade/vim-gitgutter')
+
 call jetpack#add('editorconfig/editorconfig-vim')
 call jetpack#add('easymotion/vim-easymotion')
 call jetpack#add('tpope/vim-surround')
@@ -181,6 +199,7 @@ call jetpack#add('tpope/vim-repeat')
 call jetpack#add('tpope/vim-commentary')
 
 call jetpack#add('arcticicestudio/nord-vim')
+call jetpack#add('miyakogi/seiya.vim')
 
 call jetpack#add('nvim-treesitter/nvim-treesitter', { 'merged': 0, 'do': ':TSUpdate'})
 
@@ -210,33 +229,196 @@ for name in jetpack#names()
 endfor
 
 " LSPの設定
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-  nmap <buffer> gd        :LspPeekDefinition<CR>
-  nmap <buffer> gs        <plug>(lsp-document-symbol-search)
-  nmap <buffer> gS        <plug>(lsp-workspace-symbol-search)
-  nmap <buffer> gr        <plug>(lsp-references)
-  nmap <buffer> gi        :LspPeekImplementation<CR>
-  nmap <buffer> gt        :LspPeekTypeDefinition<CR>
-  nmap <buffer> <leader>f :FixWhitespace<CR><plug>(lsp-document-format)
-  nmap <buffer> <leader>a <plug>(lsp-code-action)
-  nmap <buffer> <leader>r <plug>(lsp-rename)
-  nmap <buffer> <leader>V <plug>(lsp-previous-diagnostic)
-  nmap <buffer> <leader>v <plug>(lsp-next-diagnostic)
-  nmap <buffer> <leader>h <plug>(lsp-hover)
+" function! s:on_lsp_buffer_enabled() abort
+"   setlocal omnifunc=lsp#complete
+"   setlocal signcolumn=yes
+"   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+"   nmap <buffer> gd        <plug>(lsp-definition)
+"   nmap <buffer> gs        <plug>(lsp-document-symbol-search)
+"   nmap <buffer> gS        <plug>(lsp-workspace-symbol-search)
+"   nmap <buffer> gr        <plug>(lsp-references)
+"   nmap <buffer> gi        <plug>(lsp-implementation)
+"   nmap <buffer> gt        <plug>(lsp-type-definition)
+"   nmap <buffer> <leader>f :FixWhitespace<CR><plug>(lsp-document-format)
+"   nmap <buffer> <leader>a <plug>(lsp-code-action)
+"   nmap <buffer> <leader>r <plug>(lsp-rename)
+"   nmap <buffer> <leader>V <plug>(lsp-previous-diagnostic)
+"   nmap <buffer> <leader>v <plug>(lsp-next-diagnostic)
+"   nmap <buffer> <leader>h <plug>(lsp-hover)
 
-  let g:lsp_format_sync_timeout = 1000
-  let g:lsp_diagnostics_echo_cursor = 1
-  autocmd! BufWritePre * call execute('LspDocumentFormatSync')
-endfunction
+"   let g:lsp_format_sync_timeout = 1000
+"   let g:lsp_diagnostics_echo_cursor = 1
+"   autocmd! BufWritePre * call execute('LspDocumentFormatSync')
+" endfunction
 
-augroup lsp_install
-  au!
-  " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
+" augroup lsp_install
+"   au!
+"   " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+"   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+" augroup END
+
+" nvim-lsp関係の設定
+if has('nvim')
+  lua << EOF
+require("lsp-format").setup {}
+require "lspconfig".gopls.setup { on_attach = require "lsp-format".on_attach }
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  require "lsp-format".on_attach(client)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
+
+require "lspconfig".gopls.setup { on_attach = on_attach }
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+for _, lsp in pairs(servers) do
+  require('lspconfig')[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    }
+  }
+end
+
+local lsp_installer = require("nvim-lsp-installer")
+local cmp = require'cmp'
+local lspkind = require('lspkind')
+
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-u>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, -- For vsnip users.
+    -- { name = 'luasnip' }, -- For luasnip users.
+    -- { name = 'ultisnips' }, -- For ultisnips users.
+    -- { name = 'snippy' }, -- For snippy users.
+    { name = 'treesitter' },
+    { name = 'nvim_lsp_signature_help' }
+  }, {
+    { name = 'buffer' },
+  }),
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol', -- show only symbol annotations
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+
+      -- The function below will be called before any actual modifications from lspkind
+      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+      before = function (entry, vim_item)
+        return vim_item
+      end
+    })
+  }
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources ={
+    { name = 'nvim_lsp_document_symbol' }
+  }, {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
+require'lsp-colors'.setup({
+   Error = "#db4b4b",
+   Warning = "#e0af68",
+   Information = "#0db9d7",
+   Hint = "#10B981"
+})
+
+-- Setup lspconfig.
+-- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
+-- or if the server is already installed).
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
+    opts.on_attach = on_attach
+    opts.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+    -- (optional) Customize the options passed to the server
+    -- if server.name == "tsserver" then
+    --     opts.root_dir = function() ... end
+    -- end
+
+    -- This setup() function will take the provided server configuration and decorate it with the necessary properties
+    -- before passing it onwards to lspconfig.
+    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+    server:setup(opts)
+end)
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+EOF
+endif
+
+autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()<CR>
 
 " goimportsの設定
 let g:goimports_simplify = 1
@@ -313,16 +495,11 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
     disable = {},
   },
-  indent = {
-    enable = true,
-  }
 }
 EOF
 endif
 
 " airlineの設定
-" let g:airline_theme = 'solarized'               " テーマの指定
-" let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1 " タブラインを表示
 
 " vim-easymotionの設定
@@ -366,4 +543,7 @@ let g:winresizer_start_key = '<C-W>e'
 " open-browser.vimの設定
 nmap ? <Plug>(openbrowser-smart-search)
 vmap ? <Plug>(openbrowser-smart-search)
+
+" seiya.vimの設定
+let g:seiya_auto_enable=1
 

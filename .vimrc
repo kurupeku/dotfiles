@@ -106,6 +106,13 @@ set number
 set wildmenu
 set wildmode=longest,full
 
+" ファイルの自動リロード
+set autoread
+augroup vimrc-checktime
+  autocmd!
+  autocmd WinEnter * checktime
+augroup END
+
 " ペースト時のインデント制御
 if &term =~ "xterm"
   let &t_SI .= "\e[?2004h"
@@ -130,7 +137,6 @@ map <leader>g :!lazygit<CR>
 
 " Go用の設定
 au BufNewFile,BufRead *.go set noexpandtab tabstop=4 shiftwidth=4
-au BufWritePre *.go Fmt
 
 " Python用の設定
 au BufNewFile,BufRead *.go set tabstop=8 softtabstop=4 shiftwidth=4
@@ -183,6 +189,7 @@ call jetpack#add('vim-airline/vim-airline-themes')
 
 call jetpack#add('mattn/vim-goimports')
 
+call jetpack#add('vim-scripts/vim-auto-save')
 call jetpack#add('ervandew/supertab')
 call jetpack#add('vim-jp/vimdoc-ja')
 call jetpack#add('cohama/lexima.vim')
@@ -207,12 +214,12 @@ function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-  nmap <buffer> gd        <plug>(lsp-definition)
+  nmap <buffer> gd        :LspPeekDefinition<CR>
   nmap <buffer> gs        <plug>(lsp-document-symbol-search)
   nmap <buffer> gS        <plug>(lsp-workspace-symbol-search)
   nmap <buffer> gr        <plug>(lsp-references)
-  nmap <buffer> gi        <plug>(lsp-implementation)
-  nmap <buffer> gt        <plug>(lsp-type-definition)
+  nmap <buffer> gi        :LspPeekImplementation<CR>
+  nmap <buffer> gt        :LspPeekTypeDefinition<CR>
   nmap <buffer> <leader>f :FixWhitespace<CR><plug>(lsp-document-format)
   nmap <buffer> <leader>a <plug>(lsp-code-action)
   nmap <buffer> <leader>r <plug>(lsp-rename)
@@ -331,6 +338,11 @@ map  /                <Plug>(easymotion-sn)
 omap /                <Plug>(easymotion-tn)
 map  n                <Plug>(easymotion-next)
 map  N                <Plug>(easymotion-prev)
+
+" vim-auto-saveの設定
+let g:auto_save_in_insert_mode = 0
+let g:auto_save_write_all_buffers = 1
+let g:auto_save_silent = 1
 
 " supertabの設定
 let g:SuperTabDefaultCompletionType = "<c-n>"

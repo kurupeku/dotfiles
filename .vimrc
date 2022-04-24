@@ -147,7 +147,6 @@ endif
 " vim plugins
 call jetpack#begin()
 
-call jetpack#add('tyru/open-browser.vim')
 call jetpack#add('neovim/nvim-lspconfig')
 call jetpack#add('williamboman/nvim-lsp-installer')
 call jetpack#add('hrsh7th/nvim-cmp')

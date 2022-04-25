@@ -63,16 +63,17 @@ require("neo-tree").setup({
       nowait = true,
     },
     mappings = {
-      ["<space>"] = { "toggle_node", nowait = false, }, -- disable `nowait` if you have existing combos starting with this char that you want to use
+      ["<space>"] = { "toggle_node", nowait = true }, -- disable `nowait` if you have existing combos starting with this char that you want to use
       ["<2-LeftMouse>"] = "open",
       ["<cr>"] = "open",
+      ["l"] = "open",
       ["S"] = "open_split",
       -- ["S"] = "split_with_window_picker",
       ["s"] = "open_vsplit",
       -- ["s"] = "vsplit_with_window_picker",
       ["t"] = "open_tabnew",
       ["w"] = "open_with_window_picker",
-      ["C"] = "close_node",
+      ["h"] = "close_node",
       ["a"] = "add",
       ["A"] = "add_directory",
       ["d"] = "delete",

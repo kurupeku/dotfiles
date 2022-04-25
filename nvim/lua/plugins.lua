@@ -50,7 +50,7 @@ return packer.startup {
     use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget' end }
 
     -- AutoComplete関連のプラグイン
-    use 'windwp/nvim-autopairs'
+    use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
     use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim', 'nvim-autopairs', 'cmp-nvim-lsp' }, config = function() require 'plugins.nvim-cmp' end }
     use { 'onsails/lspkind-nvim', config = function() require 'plugins.lspkind-nvim' end }
     use { 'hrsh7th/cmp-nvim-lsp' }
@@ -74,13 +74,6 @@ return packer.startup {
     use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
 
     -- ファイラー
-    -- use { 'lambdalisue/fern.vim', config = function() require 'plugins.fern-vim' end, after = { 'FixCursorHold.nvim' } }
-    -- use { 'antoinemadec/FixCursorHold.nvim', config = function() require 'plugins.FixCursorHold-nvim' end }
-    -- use { 'lambdalisue/fern-git-status.vim', after = { 'fern.vim' } }
-    -- use { 'lambdalisue/fern-hijack.vim', after = { 'fern.vim' } }
-    -- use { 'yuki-yano/fern-preview.vim', config = function() require 'plugins.fern-preview-vim' end, after = { 'fern.vim' } }
-    -- use { 'lambdalisue/fern-renderer-nerdfont.vim', config = function() require 'plugins.fern-renderer-nerdfont-vim' end, after = { 'fern.vim' }, disable = disable_nerd }
-    -- use { 'lambdalisue/fern-renderer-devicons.vim', config = function() require 'plugins.fern-renderer-devicons-vim' end, after = { 'fern.vim' }, disable = disable_nerd }
     use { 'nvim-neo-tree/neo-tree.nvim', config = function() require 'plugins.neo-tree' end, after = { 'plenary.nvim', 'nui.nvim', 'nvim-web-devicons' } }
 
     -- ファジーファインダー
@@ -103,9 +96,7 @@ return packer.startup {
     use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end, after = { 'nvim-treesitter' } }
 
     -- Icon表示
-    -- use { 'ryanoasis/vim-devicons', disable = disable_nerd }
     use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end, disable = disable_nerd }
-    use { 'lambdalisue/glyph-palette.vim', config = function() require 'plugins.glyph-palette' end, disable = disable_nerd }
 
     -- ステータスライン
     use { 'nvim-lualine/lualine.nvim', config = function() require 'plugins.lualine' end }
@@ -114,10 +105,13 @@ return packer.startup {
     use { 'akinsho/bufferline.nvim', config = function() require 'plugins.bufferline' end, tag = "*" }
 
     -- 選択範囲拡張プラグイン
-    use { 'terryma/vim-expand-region', config = function() end }
+    use { 'terryma/vim-expand-region', config = function() end, event = 'VimEnter' }
+
+    -- ワードジャンプ
+    use { 'phaazon/hop.nvim', config = function() require 'plugins.hop' end, event = 'VimEnter' }
 
     -- スクロールの円滑化
-    use { 'yuttie/comfortable-motion.vim', config = function() require 'plugins.confortable-motion' end }
+    use { 'karb94/neoscroll.nvim', config = function() require 'neoscroll'.setup() end, event = 'VimEnter' }
 
     -- 通知カスタマイズ
     use { 'rcarriga/nvim-notify', config = function() require 'plugins.nvim-notify' end, event = 'VimEnter' }
@@ -129,12 +123,11 @@ return packer.startup {
     use 'editorconfig/editorconfig-vim'
 
     -- ブラケットユーティリティ
-    use 'cohama/lexima.vim'
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
 
     -- コメントアウト
-    use 'tpope/vim-commentary'
+    use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
 
     -- インデントの可視化
     use 'Yggdroot/indentLine'

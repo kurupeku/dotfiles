@@ -120,7 +120,6 @@ return packer.startup {
     use { 'rcarriga/nvim-notify', config = function() require 'plugins.nvim-notify' end, event = 'VimEnter' }
 
     -- 空白の可視化
-    -- use { 'bronson/vim-trailing-whitespace', config = function() vim.cmd [[autocmd! BufWritePre * call execute('FixWhitespace')]] end }
     use { "McAuleyPenney/tidy.nvim", event = "BufWritePre" }
 
     -- エディターコンフィグの適応

@@ -1,7 +1,8 @@
 local lsp_installer = require "nvim-lsp-installer"
 
 local on_attach = function(client, bufnr)
-  -- require "lsp-format".on_attach(client)
+  -- vim-illuminateの設定
+  require 'illuminate'.on_attach(client)
 
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 

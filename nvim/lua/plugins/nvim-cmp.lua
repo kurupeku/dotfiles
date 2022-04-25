@@ -34,7 +34,8 @@ cmp.setup({
       name = "dictionary",
       keyword_length = 2,
     },
-    { name = 'treesitter' }
+    { name = 'treesitter' },
+    { name = 'nvim_lua' }
   }, {
     { name = 'buffer' },
   })

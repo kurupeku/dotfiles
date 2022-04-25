@@ -65,8 +65,10 @@ return packer.startup {
     use { 'f3fora/cmp-spell', after = 'nvim-cmp' }
     use { 'uga-rosa/cmp-dictionary', after = 'nvim-cmp', config = function() require('plugins.cmp-dictionary') end }
     use { 'ray-x/cmp-treesitter', after = 'nvim-cmp' }
+    use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
     use { 'hrsh7th/vim-vsnip', config = function() require 'plugins.vim-vsnip' end }
     use { 'hrsh7th/vim-vsnip-integ', after = { 'vim-vsnip' } }
+    use { 'windwp/nvim-ts-autotag', after = { 'nvim-treesitter' } }
 
     -- AI補完系
     use { 'github/copilot.vim', cmd = { 'Copilot' } }
@@ -94,6 +96,7 @@ return packer.startup {
     use { 'romgrk/nvim-treesitter-context', config = function() require 'plugins.nvim-treesitter-context' end, after = { 'nvim-treesitter' } }
     use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end, after = { 'nvim-treesitter' } }
     use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end, after = { 'nvim-treesitter' } }
+    use { 'RRethy/vim-illuminate', after = { 'nvim-lspconfig' } }
 
     -- Icon表示
     use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end, disable = disable_nerd }
@@ -117,7 +120,8 @@ return packer.startup {
     use { 'rcarriga/nvim-notify', config = function() require 'plugins.nvim-notify' end, event = 'VimEnter' }
 
     -- 空白の可視化
-    use { 'bronson/vim-trailing-whitespace', config = function() vim.cmd [[autocmd! BufWritePre * call execute('FixWhitespace')]] end }
+    -- use { 'bronson/vim-trailing-whitespace', config = function() vim.cmd [[autocmd! BufWritePre * call execute('FixWhitespace')]] end }
+    use { "McAuleyPenney/tidy.nvim", event = "BufWritePre" }
 
     -- エディターコンフィグの適応
     use 'editorconfig/editorconfig-vim'
@@ -129,11 +133,17 @@ return packer.startup {
     -- コメントアウト
     use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
 
+    -- カラーコードの可視化
+    use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end, event = 'VimEnter' }
+
     -- インデントの可視化
     use 'Yggdroot/indentLine'
 
     -- ドキュメントの日本語化
     use 'vim-jp/vimdoc-ja'
+
+    -- 起動時間の高速化
+    use 'lewis6991/impatient.nvim'
 
     -- Golang用プラグイン
     use 'mattn/vim-goimports'

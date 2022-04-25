@@ -107,6 +107,13 @@ set number
 set wildmenu
 set wildmode=longest,full
 
+" ファイルの自動リロード
+set autoread
+augroup vimrc-checktime
+  autocmd!
+  autocmd WinEnter * checktime
+augroup END
+
 " ペースト時のインデント制御
 if &term =~ "xterm"
   let &t_ti .= "\e[?2004h"
@@ -200,6 +207,7 @@ call jetpack#add('vim-airline/vim-airline-themes')
 
 call jetpack#add('mattn/vim-goimports')
 
+call jetpack#add('vim-scripts/vim-auto-save')
 call jetpack#add('ervandew/supertab')
 call jetpack#add('vim-jp/vimdoc-ja')
 call jetpack#add('cohama/lexima.vim')
@@ -506,6 +514,11 @@ map  /                <Plug>(easymotion-sn)
 omap /                <Plug>(easymotion-tn)
 map  n                <Plug>(easymotion-next)
 map  N                <Plug>(easymotion-prev)
+
+" vim-auto-saveの設定
+let g:auto_save_in_insert_mode = 0
+let g:auto_save_write_all_buffers = 1
+let g:auto_save_silent = 1
 
 " supertabの設定
 let g:SuperTabDefaultCompletionType = "<c-n>"

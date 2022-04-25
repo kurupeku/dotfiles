@@ -46,7 +46,9 @@ for f in .??*; do
 done
 
 mkdir -p "${DOTPATH}/.config/nvim"
-ln -snfv "${DOTPATH}/.vimrc" "${HOME}/.config/nvim/init.vim"
+# ln -snfv "${DOTPATH}/.vimrc" "${HOME}/.config/nvim/init.vim"
+ln -snfv "${DOTPATH}/nvim/init.lua" "${HOME}/.config/nvim/init.lua"
+ln -snfv "${DOTPATH}/nvim/lua/" "${HOME}/.config/nvim/"
 
 # UNDOの永続化用ディレクトリ作成
 mkdir -p "${DOTPATH}/.config/nvim/undo"

@@ -27,10 +27,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
+-- cmp_nvim_lspを各言語サーバーに紐付け
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 lsp_installer.on_server_ready(function(server)
-  local opts = {}
-  opts.on_attach = on_attach
-
+  local opts = { capabilities = capabilities, on_attach = on_attach }
   -- 特定のサーバーに設定を追加したい場合は以下に記述
 
   -- 最後にセットアップ関数を起動

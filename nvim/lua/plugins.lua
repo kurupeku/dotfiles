@@ -52,7 +52,7 @@ return packer.startup {
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
     use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim', 'nvim-autopairs', 'cmp-nvim-lsp' }, config = function() require 'plugins.nvim-cmp' end }
-    use { 'onsails/lspkind-nvim', config = function() require 'plugins.lspkind-nvim' end }
+    use { 'onsails/lspkind-nvim' }
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' }
@@ -64,10 +64,10 @@ return packer.startup {
     use { 'hrsh7th/cmp-calc', after = 'nvim-cmp' }
     use { 'f3fora/cmp-spell', after = 'nvim-cmp' }
     use { 'uga-rosa/cmp-dictionary', after = 'nvim-cmp', config = function() require('plugins.cmp-dictionary') end }
-    use { 'ray-x/cmp-treesitter', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
     use { 'hrsh7th/vim-vsnip', config = function() require 'plugins.vim-vsnip' end }
     use { 'hrsh7th/vim-vsnip-integ', after = { 'vim-vsnip' } }
+    use { 'ray-x/cmp-treesitter', after = { 'nvim-cmp', 'nvim-treesitter' } }
     use { 'windwp/nvim-ts-autotag', after = { 'nvim-treesitter' } }
 
     -- AI補完系

@@ -62,7 +62,9 @@ scriptencoding utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 set ttyfast
-set ambiwidth=double
+set ambiwidth=single
+
+set noswapfile
 
 " leaderを<Space>にマッピング
 let mapleader = "\<Space>"

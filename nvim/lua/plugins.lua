@@ -129,6 +129,9 @@ return packer.startup {
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
 
+    -- オートセーブ
+    use { "Pocco81/AutoSave.nvim", config = function() require 'plugins.autosave' end, event = 'BufEnter' }
+
     -- コメントアウト
     use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
 

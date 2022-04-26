@@ -29,11 +29,10 @@ vim.cmd [[
 
 local packer = require 'packer'
 local util = require 'packer.util'
+local disable_nerd = fn.empty(fn.glob([[~/nerd-fonts/install.sh]])) > 0
 
 return packer.startup {
   function(use)
-    local disable_nerd = fn.empty(fn.glob([[~/nerd-fonts/install.sh]])) > 0
-
     -- 自身も管理対象に追加
     use { 'wbthomason/packer.nvim', opt = true }
 
@@ -44,17 +43,18 @@ return packer.startup {
     -- Nvim builtin LSP用プラグイン
     use 'neovim/nvim-lspconfig'
     use { 'williamboman/nvim-lsp-installer', config = function() require 'plugins.nvim-lsp-installer' end, after = { 'nvim-lspconfig' } }
+    use { "ray-x/lsp_signature.nvim", after = { 'nvim-lsp-installer' } }
     use { 'tami5/lspsaga.nvim', config = function() require 'plugins.lspsaga' end, after = { 'nvim-lsp-installer' } }
+    use { "folke/trouble.nvim", after = { "nvim-lsp-installer", "lsp-colors.nvim" }, config = function() require("plugins.trouble") end }
+    use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget'.setup() end }
     use 'folke/lsp-colors.nvim'
-    use({ "folke/trouble.nvim", after = { "nvim-lsp-installer", "lsp-colors.nvim" }, config = function() require("plugins.trouble") end })
-    use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget' end }
 
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
     use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim', 'nvim-autopairs', 'cmp-nvim-lsp' }, config = function() require 'plugins.nvim-cmp' end }
     use { 'onsails/lspkind-nvim' }
     use { 'hrsh7th/cmp-nvim-lsp' }
-    use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
+    -- use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
@@ -65,6 +65,7 @@ return packer.startup {
     use { 'f3fora/cmp-spell', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
+    use { "lukas-reineke/cmp-rg", after = 'nvim-cmp' }
     use { 'hrsh7th/vim-vsnip', config = function() require 'plugins.vim-vsnip' end }
     use { 'hrsh7th/vim-vsnip-integ', after = { 'vim-vsnip' } }
     use { 'ray-x/cmp-treesitter', after = { 'nvim-cmp', 'nvim-treesitter' } }
@@ -92,6 +93,7 @@ return packer.startup {
     -- Syntax Highlight
     use { 'nvim-treesitter/nvim-treesitter', config = function() require 'plugins.nvim-treesitter' end, run = ':TSUpdate' }
     use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' } }
+    use { 'mfussenegger/nvim-ts-hint-textobject', after = { 'nvim-treesitter' } }
     use { 'romgrk/nvim-treesitter-context', config = function() require 'plugins.nvim-treesitter-context' end, after = { 'nvim-treesitter' } }
     use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end, after = { 'nvim-treesitter' } }
     use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end, after = { 'nvim-treesitter' } }

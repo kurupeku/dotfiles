@@ -4,6 +4,14 @@ local on_attach = function(client, bufnr)
   -- vim-illuminateの設定
   require 'illuminate'.on_attach(client)
 
+  -- lsp_signatureの設定
+  require "lsp_signature".on_attach({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    handler_opts = {
+      border = "rounded"
+    }
+  }, bufnr)
+
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   local opts = { noremap = true, silent = true }

@@ -43,12 +43,9 @@ cmp.setup({
     { name = 'emoji' },
     { name = 'calc' },
     { name = 'spell' },
-    {
-      name = "dictionary",
-      keyword_length = 2,
-    },
     { name = 'treesitter' },
-    { name = 'nvim_lua' }
+    { name = 'nvim_lua' },
+    { name = 'rg' }
   }, {
     { name = 'buffer' },
   })
@@ -57,7 +54,6 @@ cmp.setup({
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
   sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
   }, {
     { name = 'buffer' },
   })

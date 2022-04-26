@@ -63,7 +63,7 @@ return packer.startup {
     use { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-calc', after = 'nvim-cmp' }
     use { 'f3fora/cmp-spell', after = 'nvim-cmp' }
-    use { 'uga-rosa/cmp-dictionary', after = 'nvim-cmp', config = function() require('plugins.cmp-dictionary') end }
+    use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
     use { 'hrsh7th/vim-vsnip', config = function() require 'plugins.vim-vsnip' end }
     use { 'hrsh7th/vim-vsnip-integ', after = { 'vim-vsnip' } }
@@ -73,7 +73,6 @@ return packer.startup {
     -- AI補完系
     use { 'github/copilot.vim', cmd = { 'Copilot' } }
     use { 'zbirenbaum/copilot.lua', after = 'copilot.vim', config = function() require 'plugins.copilot' end }
-    use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
 
     -- ファイラー
     use { 'nvim-neo-tree/neo-tree.nvim', config = function() require 'plugins.neo-tree' end, after = { 'plenary.nvim', 'nui.nvim', 'nvim-web-devicons' } }
@@ -82,10 +81,10 @@ return packer.startup {
     use { 'nvim-telescope/telescope.nvim', config = function() require 'plugins.telescope' end, after = { 'plenary.nvim' } }
 
     -- ターミナル操作
-    use { "akinsho/toggleterm.nvim", config = function() require 'plugins.toggleterm' end }
+    use { "akinsho/toggleterm.nvim", config = function() require 'plugins.toggleterm' end, event = 'VimEnter' }
 
     -- ビジュアルスター検索
-    use { 'haya14busa/vim-asterisk', config = function() require 'plugins.vim-asterisk' end }
+    use { 'haya14busa/vim-asterisk', config = function() require 'plugins.vim-asterisk' end, event = 'VimEnter' }
 
     -- カラースキーマ
     use { 'EdenEast/nightfox.nvim', config = function() vim.cmd [[colorscheme nordfox]] end }
@@ -108,7 +107,7 @@ return packer.startup {
     use { 'akinsho/bufferline.nvim', config = function() require 'plugins.bufferline' end, tag = "*" }
 
     -- 選択範囲拡張プラグイン
-    use { 'terryma/vim-expand-region', config = function() end, event = 'VimEnter' }
+    use { 'terryma/vim-expand-region', config = function() require 'plugins.vim-expand-region' end, event = 'VimEnter' }
 
     -- ワードジャンプ
     use { 'phaazon/hop.nvim', config = function() require 'plugins.hop' end, event = 'VimEnter' }
@@ -119,27 +118,39 @@ return packer.startup {
     -- 通知カスタマイズ
     use { 'rcarriga/nvim-notify', config = function() require 'plugins.nvim-notify' end, event = 'VimEnter' }
 
+    -- インデントの可視化
+    use { 'lukas-reineke/indent-blankline.nvim', config = function() require 'plugins.indent-blankline' end, event = 'BufEnter' }
+
     -- 空白の可視化
     use { "McAuleyPenney/tidy.nvim", event = "BufWritePre" }
 
     -- エディターコンフィグの適応
-    use 'editorconfig/editorconfig-vim'
+    use { 'editorconfig/editorconfig-vim', event = 'BufEnter' }
 
     -- ブラケットユーティリティ
-    use 'tpope/vim-surround'
-    use 'tpope/vim-repeat'
+    use { 'tpope/vim-surround', event = "BufEnter" }
+    use { 'tpope/vim-repeat', event = 'VimEnter' }
 
     -- オートセーブ
     use { "Pocco81/AutoSave.nvim", config = function() require 'plugins.autosave' end, event = 'BufEnter' }
 
     -- コメントアウト
-    use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
+    use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end, event = 'BufEnter' }
 
     -- カラーコードの可視化
-    use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end, event = 'VimEnter' }
+    use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end, event = 'BufEnter' }
 
     -- インデントの可視化
-    use 'Yggdroot/indentLine'
+    use { 'Yggdroot/indentLine', event = 'BufEnter' }
+
+    -- インサートモードに入ると絶対行数表示に変更
+    use { 'myusuf3/numbers.vim', event = 'BufEnter' }
+
+    -- バッファを消してもウィンドウを保持
+    use { 'famiu/bufdelete.nvim', event = 'VimEnter' }
+
+    -- カーソル下の単語をブラウザで検索
+    use { 'tyru/open-browser.vim', config = function() require 'plugins.open-browser' end, event = 'BufEnter' }
 
     -- ドキュメントの日本語化
     use 'vim-jp/vimdoc-ja'
@@ -148,7 +159,7 @@ return packer.startup {
     use 'lewis6991/impatient.nvim'
 
     -- Golang用プラグイン
-    use 'mattn/vim-goimports'
+    use { 'mattn/vim-goimports', config = function() api.nvim_set_var('goimports_simplify', 1) end, ft = { 'go' } }
 
     if packer_bootstrap then
       packer.sync()

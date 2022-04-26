@@ -38,7 +38,7 @@ local opts = {
   helplang = "ja,en",
   -- UNDOの永続化
   -- undodir = [[$HOME/.config/nvim/undo]],
-  -- undofile = true,
+  undofile = true,
   -- 編集されたファイルを自動読み込み
   autoread = true,
   wrapscan = true

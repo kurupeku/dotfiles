@@ -4,6 +4,14 @@ local on_attach = function(client, bufnr)
   -- vim-illuminateの設定
   require 'illuminate'.on_attach(client)
 
+  -- lsp_signatureの設定
+  require "lsp_signature".on_attach({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    handler_opts = {
+      border = "rounded"
+    }
+  }, bufnr)
+
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   local opts = { noremap = true, silent = true }
@@ -27,10 +35,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
+-- cmp_nvim_lspを各言語サーバーに紐付け
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 lsp_installer.on_server_ready(function(server)
-  local opts = {}
-  opts.on_attach = on_attach
-
+  local opts = { capabilities = capabilities, on_attach = on_attach }
   -- 特定のサーバーに設定を追加したい場合は以下に記述
 
   -- 最後にセットアップ関数を起動

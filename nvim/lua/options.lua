@@ -49,6 +49,8 @@ local win_opts = {
   cursorline = true,
   -- 行数を表示
   number = true,
+  -- 相対行数を表示
+  relativenumber = true,
   -- サイン用ガーターを常に表示
   signcolumn = 'yes',
   -- スペルチェックを有効化

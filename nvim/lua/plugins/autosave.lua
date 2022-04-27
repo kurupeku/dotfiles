@@ -1,13 +1,12 @@
 local autosave = require "autosave"
 
-autosave.setup(
-  {
+autosave.setup {
   enabled = true,
   execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
   events = { "InsertLeave", "TextChanged" },
   conditions = {
     exists = true,
-    filename_is_not = {},
+    filename_is_not = { 'plugins.lua' },
     filetype_is_not = {},
     modifiable = true
   },
@@ -16,4 +15,3 @@ autosave.setup(
   clean_command_line_interval = 0,
   debounce_delay = 135
 }
-)

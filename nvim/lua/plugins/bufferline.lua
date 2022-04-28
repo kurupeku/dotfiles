@@ -1,6 +1,6 @@
 require('bufferline').setup {
   options = {
-    mode = "tabs", -- set to "tabs" to only show tabpages instead
+    mode = "buffers", -- set to "tabs" to only show tabpages instead
     numbers = "both",
     close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
     right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
@@ -66,7 +66,7 @@ require('bufferline').setup {
     separator_style = "slant",
     enforce_regular_tabs = false,
     always_show_bufferline = true,
-    sort_by = 'tabs'
+    sort_by = 'buffers'
   }
 }
 

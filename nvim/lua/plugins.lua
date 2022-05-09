@@ -43,7 +43,7 @@ return packer.startup {
     -- Nvim builtin LSP用プラグイン
     use 'neovim/nvim-lspconfig'
     use { 'williamboman/nvim-lsp-installer', config = function() require 'plugins.nvim-lsp-installer' end, after = { 'nvim-lspconfig' } }
-    use { "ray-x/lsp_signature.nvim", after = { 'nvim-lsp-installer' } }
+    -- use { "ray-x/lsp_signature.nvim", after = { 'nvim-lsp-installer' } }
     use { 'tami5/lspsaga.nvim', config = function() require 'plugins.lspsaga' end, after = { 'nvim-lsp-installer' } }
     use { "folke/trouble.nvim", after = { "nvim-lsp-installer", "lsp-colors.nvim" }, config = function() require("plugins.trouble") end }
     use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget'.setup() end }
@@ -54,7 +54,7 @@ return packer.startup {
     use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim', 'nvim-autopairs', 'cmp-nvim-lsp' }, config = function() require 'plugins.nvim-cmp' end }
     use { 'onsails/lspkind-nvim' }
     use { 'hrsh7th/cmp-nvim-lsp' }
-    -- use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
+    use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }

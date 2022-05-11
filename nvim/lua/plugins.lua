@@ -90,12 +90,13 @@ return packer.startup {
     -- カラースキーマ
     use { 'EdenEast/nightfox.nvim', config = function() vim.cmd [[colorscheme nordfox]] end }
 
-    -- Syntax Highlight
+    -- TreeSitter
     use { 'nvim-treesitter/nvim-treesitter', config = function() require 'plugins.nvim-treesitter' end, run = ':TSUpdate' }
     use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' } }
     use { 'mfussenegger/nvim-ts-hint-textobject', config = function() require 'plugins.nvim-ts-hint-textobject' end, after = { 'nvim-treesitter' } }
     use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end, after = { 'nvim-treesitter' } }
     use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end, after = { 'nvim-treesitter' } }
+    use { 'AckslD/nvim-anywise-reg.lua', config = function() require("anywise_reg").setup() end }
 
     -- Icon表示
     use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end, disable = disable_nerd }

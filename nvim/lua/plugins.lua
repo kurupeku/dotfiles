@@ -39,11 +39,11 @@ return packer.startup {
     -- 非依存プラグイン
     use 'nvim-lua/plenary.nvim'
     use 'MunifTanjim/nui.nvim'
+    use "tami5/sqlite.lua"
 
     -- Nvim builtin LSP用プラグイン
     use 'neovim/nvim-lspconfig'
     use { 'williamboman/nvim-lsp-installer', config = function() require 'plugins.nvim-lsp-installer' end, after = { 'nvim-lspconfig' } }
-    -- use { "ray-x/lsp_signature.nvim", after = { 'nvim-lsp-installer' } }
     use { 'tami5/lspsaga.nvim', config = function() require 'plugins.lspsaga' end, after = { 'nvim-lsp-installer' } }
     use { "folke/trouble.nvim", after = { "nvim-lsp-installer", "lsp-colors.nvim" }, config = function() require("plugins.trouble") end }
     use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget'.setup() end }
@@ -53,6 +53,8 @@ return packer.startup {
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
     use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim', 'nvim-autopairs', 'cmp-nvim-lsp' }, config = function() require 'plugins.nvim-cmp' end }
     use { 'onsails/lspkind-nvim' }
+    use { "nvim-telescope/telescope-frecency.nvim", config = function() require "telescope".load_extension("frecency") end, after = { "sqlite.lua", "telescope.nvim" }
+    }
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' }
@@ -94,10 +96,8 @@ return packer.startup {
     use { 'nvim-treesitter/nvim-treesitter', config = function() require 'plugins.nvim-treesitter' end, run = ':TSUpdate' }
     use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' } }
     use { 'mfussenegger/nvim-ts-hint-textobject', after = { 'nvim-treesitter' } }
-    use { 'romgrk/nvim-treesitter-context', config = function() require 'plugins.nvim-treesitter-context' end, after = { 'nvim-treesitter' } }
     use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end, after = { 'nvim-treesitter' } }
     use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end, after = { 'nvim-treesitter' } }
-    use { 'RRethy/vim-illuminate', after = { 'nvim-lspconfig' } }
 
     -- Icon表示
     use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end, disable = disable_nerd }

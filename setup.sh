@@ -73,4 +73,3 @@ elif [ $OS = "Alpine" ]; then
   sudo apk update
   sudo apk install -y nvim ripgrep tmux
 fi
-

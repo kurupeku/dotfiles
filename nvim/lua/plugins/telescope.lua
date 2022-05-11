@@ -5,17 +5,11 @@ require('telescope').setup {
     },
   },
   pickers = {},
-  extensions = {
-    -- telescope-frecency.nvimの設定
-    frecency = {
-      default_workspace = "CWD",
-      ignore_patterns = { "^%.git/", "^%.tmp/", "%.cache/", "%.DS_Store", "%.idea", ".iml", "%.vscode" },
-    }
-  }
+  extensions = {}
 }
 
 local maps = {
-  ff = [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]],
+  ff = [[<cmd>lua require('telescope.builtin').find_files()<cr>]],
   fg = [[<cmd>lua require('telescope.builtin').live_grep()<cr>]],
   fb = [[<cmd>lua require('telescope.builtin').buffers()<cr>]],
   fh = [[<cmd>lua require('telescope.builtin').help_tags()<cr>]]

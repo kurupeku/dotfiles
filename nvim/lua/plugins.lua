@@ -53,8 +53,6 @@ return packer.startup {
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
     use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim', 'nvim-autopairs', 'cmp-nvim-lsp' }, config = function() require 'plugins.nvim-cmp' end }
     use { 'onsails/lspkind-nvim' }
-    use { "nvim-telescope/telescope-frecency.nvim", config = function() require "telescope".load_extension("frecency") end, after = { "sqlite.lua", "telescope.nvim" }
-    }
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' }

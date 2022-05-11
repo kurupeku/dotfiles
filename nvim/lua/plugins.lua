@@ -93,7 +93,7 @@ return packer.startup {
     -- Syntax Highlight
     use { 'nvim-treesitter/nvim-treesitter', config = function() require 'plugins.nvim-treesitter' end, run = ':TSUpdate' }
     use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' } }
-    use { 'mfussenegger/nvim-ts-hint-textobject', after = { 'nvim-treesitter' } }
+    use { 'mfussenegger/nvim-ts-hint-textobject', config = function() require 'plugins.nvim-ts-hint-textobject' end, after = { 'nvim-treesitter' } }
     use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end, after = { 'nvim-treesitter' } }
     use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end, after = { 'nvim-treesitter' } }
 
@@ -114,6 +114,9 @@ return packer.startup {
 
     -- スクロールの円滑化
     use { 'karb94/neoscroll.nvim', config = function() require 'neoscroll'.setup() end, event = 'VimEnter' }
+
+    -- スクロールバー表示
+    use { "petertriho/nvim-scrollbar", config = function() require("scrollbar").setup() end, event = 'BufEnter' }
 
     -- 通知カスタマイズ
     use { 'rcarriga/nvim-notify', config = function() require 'plugins.nvim-notify' end, event = 'VimEnter' }

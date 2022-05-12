@@ -4,7 +4,7 @@ require 'lspsaga'.init_lsp_saga {
 
 --- In lsp attach function
 local map = vim.api.nvim_set_keymap
--- map("n", "<leader>r", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
+map("n", "<leader>r", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
 map("n", "<leader>a", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
 map("n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
 -- scroll down hover doc or scroll in definition preview

@@ -49,9 +49,6 @@ return packer.startup {
     use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget'.setup() end }
     use 'folke/lsp-colors.nvim'
 
-    -- Rename
-    use { 'filipdutescu/renamer.nvim', config = function() require 'plugins.renamer' end, branch = 'master', after = { 'plenary.nvim' } }
-
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
     use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim', 'nvim-autopairs', 'cmp-nvim-lsp' }, config = function() require 'plugins.nvim-cmp' end }

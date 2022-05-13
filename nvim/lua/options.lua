@@ -10,9 +10,6 @@ local opts = {
   backup = false,
   -- コマンド入力時に表示する
   showcmd = true,
-  -- コマンド表示域を2行にする
-  laststatus = 2,
-  cmdheight = 2,
   -- スクロール時に10行余白を確保する
   scrolloff = 10,
   -- <Tab>でshiftwidthの数だけ<Space>を入力する

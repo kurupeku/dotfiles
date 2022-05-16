@@ -74,3 +74,4 @@ require('bufferline').setup {
 local set_map = vim.api.nvim_set_keymap
 set_map('n', '<leader>[', '<cmd>BufferLineCyclePrev<cr>', { noremap = true, silent = true })
 set_map('n', '<leader>]', '<cmd>BufferLineCycleNext<cr>', { noremap = true, silent = true })
+set_map('n', '<leader>bd', [[<cmd>BufferLinePickClose<cr>]], { noremap = true, silent = true })

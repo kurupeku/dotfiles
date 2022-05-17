@@ -167,6 +167,7 @@ return packer.startup {
 
     -- Golang用プラグイン
     use { 'mattn/vim-goimports', setup = function() vim.api.nvim_set_var('goimports_simplify', 1) end, ft = { 'go' } }
+    use { 'buoto/gotests-vim', ft = { 'go' } }
 
     if packer_bootstrap then
       packer.sync()

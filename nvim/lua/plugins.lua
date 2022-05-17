@@ -141,9 +141,6 @@ return packer.startup {
     -- 文字区切りの変換
     use { 'endaaman/vim-case-master', config = function() require 'plugins.vim-case-master' end, event = 'BufEnter' }
 
-    -- オートセーブ
-    use { "Pocco81/AutoSave.nvim", config = function() require 'plugins.autosave' end, event = 'BufEnter' }
-
     -- コメントアウト
     use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end, event = 'BufEnter' }
 

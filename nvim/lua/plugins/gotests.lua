@@ -1,3 +1,1 @@
-require('gotests').setup()
-
-vim.api.nvim_set_keymap('n', '<leader>tg', [[:GoTests]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', [[<leader>tg]], [[<cmd>GoTests<cr>]], { noremap = true, silent = true })

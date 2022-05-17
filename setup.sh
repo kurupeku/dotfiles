@@ -61,15 +61,14 @@ echo "installing nvim..."
 if [ $OS = "Mac" ]; then
   brew install nvim
   brew install ripgrep
-  brew install tmux
   brew cleanup
 elif [ $OS = "CentOS" ]; then
   sudo yun update
-  sudo yun install -y nvim ripgrep tmux
+  sudo yun install -y nvim ripgrep
 elif [ $OS = "Ubuntu" ]; then
   sudo apt update
-  sudo apt install -y nvim ripgrep tmux
+  sudo apt install -y nvim ripgrep
 elif [ $OS = "Alpine" ]; then
-  sudo apk update
-  sudo apk install -y nvim ripgrep tmux
+  apk update
+  apk install -y nvim ripgrep
 fi

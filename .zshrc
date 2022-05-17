@@ -74,17 +74,6 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
-# alias
-alias lg="lazygit"
-alias vi="nvim"
-alias vim="nvim"
-alias d="docker"
-alias dc="docker compose"
-alias dcd="docker compose -f docker-compose.dev.yml"
-alias dct="docker compose -f docker-compose.test.yml"
-alias dcp="docker compose -f docker-compose.prod.yml"
-alias python=python3
-
 # zinitに関する設定
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
@@ -99,8 +88,14 @@ zinit light zsh-users/zsh-completions
 # zinit経由でzsh-syntax-highlignting導入
 zinit light zsh-users/zsh-syntax-highlighting
 
+# 自作コマンドディレクトリをPATHに追加
+PATH=$HOME/dotfiles/cmd:$PATH
+
 # asdfに関する設定
 . $HOME/.asdf/asdf.sh
 
-# 自作コマンドディレクトリをPATHに追加
-PATH=~/dotfiles/cmd:$PATH
+# 環境変数の設定
+. $HOME/dotfiles/modules/rc/env.sh
+
+# Aliasの設定
+. $HOME/dotfiles/modules/rc/alias.sh

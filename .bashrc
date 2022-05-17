@@ -1,11 +1,7 @@
 #!/bin/bash
-alias lg="lazygit"
-alias vi="nvim"
-alias vim="nvim"
-alias d="docker"
-alias dc="docker compose"
-alias dcd="docker compose -f docker-compose.dev.yml"
-alias dct="docker compose -f docker-compose.test.yml"
-alias dcp="docker compose -f docker-compose.prod.yml"
-alias python=python3
 
+# 環境変数の設定
+. $HOME/dotfiles/modules/rc/env.sh
+
+# Aliasの設定
+. $HOME/dotfiles/modules/rc/alias.sh

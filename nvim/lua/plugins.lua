@@ -169,8 +169,8 @@ return packer.startup {
     use 'lewis6991/impatient.nvim'
 
     -- Golang用プラグイン
-    use { 'mattn/vim-goimports', setup = function() vim.api.nvim_set_var('goimports_simplify', 1) end, ft = { 'go' } }
-    use { 'buoto/gotests-vim', config = function() require('plugins.gotests') end, ft = 'go' }
+    use { 'mattn/vim-goimports', config = function() vim.go.goimports_simplify = 1 end, ft = { 'go' } }
+    use { 'buoto/gotests-vim', ft = 'go' }
 
     if packer_bootstrap then
       packer.sync()

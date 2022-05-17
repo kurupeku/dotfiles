@@ -46,7 +46,6 @@ for f in .??*; do
 done
 
 mkdir -p "${DOTPATH}/.config/nvim"
-# ln -snfv "${DOTPATH}/.vimrc" "${HOME}/.config/nvim/init.vim"
 ln -snfv "${DOTPATH}/nvim/init.lua" "${HOME}/.config/nvim/init.lua"
 ln -snfv "${DOTPATH}/nvim/lua/" "${HOME}/.config/nvim/"
 
@@ -55,6 +54,9 @@ mkdir -p "${DOTPATH}/.config/nvim/undo"
 
 # OSの判定
 . $DOTPATH/modules/scripts/define_os.sh
+
+# cmdディレクトリの権限変更
+chmod -R 755 $HOME/dotfiles/cmd/
 
 # OS個別のインストール作業
 echo "installing nvim..."

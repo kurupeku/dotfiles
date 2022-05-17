@@ -88,14 +88,14 @@ zinit light zsh-users/zsh-completions
 # zinit経由でzsh-syntax-highlignting導入
 zinit light zsh-users/zsh-syntax-highlighting
 
-# 自作コマンドディレクトリをPATHに追加
-PATH=$HOME/dotfiles/cmd:$PATH
-
 # asdfに関する設定
 . $HOME/.asdf/asdf.sh
 
 # 環境変数の設定
 . $HOME/dotfiles/modules/rc/env.sh
+
+# PATH追加
+. $HOME/dotfiles/modules/rc/path.sh
 
 # Aliasの設定
 . $HOME/dotfiles/modules/rc/alias.sh

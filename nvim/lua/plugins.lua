@@ -41,6 +41,9 @@ return packer.startup {
     use 'MunifTanjim/nui.nvim'
     use "tami5/sqlite.lua"
 
+    -- Git関連
+    use { 'lewis6991/gitsigns.nvim', config = function() require('plugins.gitsigns') end, after = { 'plenary.nvim' } }
+
     -- Nvim builtin LSP用プラグイン
     use 'neovim/nvim-lspconfig'
     use { 'williamboman/nvim-lsp-installer', config = function() require 'plugins.nvim-lsp-installer' end, after = { 'nvim-lspconfig' } }

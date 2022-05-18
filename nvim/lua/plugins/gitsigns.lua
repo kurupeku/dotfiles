@@ -62,16 +62,16 @@ require('gitsigns').setup {
     end, { expr = true })
 
     -- Actions
-    map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>')
-    map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>')
-    map('n', '<leader>gS', gs.stage_buffer)
-    map('n', '<leader>gu', gs.undo_stage_hunk)
-    map('n', '<leader>gR', gs.reset_buffer)
-    map('n', '<leader>gp', gs.preview_hunk)
-    map('n', '<leader>gb', function() gs.blame_line { full = true } end)
+    map({ 'n', 'v' }, '<c-g>s', ':Gitsigns stage_hunk<CR>')
+    map({ 'n', 'v' }, '<c-g>r', ':Gitsigns reset_hunk<CR>')
+    map('n', '<c-g>S', gs.stage_buffer)
+    map('n', '<c-g>u', gs.undo_stage_hunk)
+    map('n', '<c-g>R', gs.reset_buffer)
+    map('n', '<c-g>p', gs.preview_hunk)
+    map('n', '<c-g>b', function() gs.blame_line { full = true } end)
     map('n', '<leader>tb', gs.toggle_current_line_blame)
-    map('n', '<leader>gd', gs.diffthis)
-    map('n', '<leader>gD', function() gs.diffthis('~') end)
+    map('n', '<c-g>d', gs.diffthis)
+    map('n', '<c-g>D', function() gs.diffthis('~') end)
     map('n', '<leader>td', gs.toggle_deleted)
 
     -- Text object

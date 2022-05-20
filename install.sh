@@ -71,7 +71,7 @@ done
 
 # OS固有の処理
 if [ $OS = "Mac" ]; then
-  brew install jesseduffield/lazygit/lazygit
+  brew install kubectl
   brew install iterm2 --cask
   brew upgrade
   brew upgrade --cask --greedy
@@ -80,21 +80,21 @@ fi
 
 # asdfのインストール
 if [ ! -e $HOME/.asdf ]; then
+  echo "installing asdf..."
   git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.9.0
 fi
-
-
 
 # zinitのインストール
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -e $ZINIT_HOME ]; then
+  echo "installing zinit..."
   mkdir -p "$(dirname $ZINIT_HOME)"
   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-echo 'installing nerd-fonts...'
 # nerd-fontsの導入
 if [ ! -e "$HOME/nerd-fonts" ]; then
+  echo 'installing nerd-fonts...'
   cd $HOME
   git clone --branch=master --depth 1 https://github.com/ryanoasis/nerd-fonts.git
   cd nerd-fonts

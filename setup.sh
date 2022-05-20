@@ -59,14 +59,17 @@ mkdir -p "${DOTPATH}/.config/nvim/undo"
 chmod -R 755 $HOME/dotfiles/cmd/
 
 # OS個別のインストール作業
-echo "installing nvim..."
+echo "installing packages..."
 if [ $OS = "Mac" ]; then
   brew install nvim
   brew install ripgrep
+  brew install lazygit
   brew cleanup
 elif [ $OS = "CentOS" ]; then
   sudo yun update
   sudo yun install -y nvim ripgrep
+  sudo dnf copr enable atim/lazygit -y
+  sudo dnf install lazygit
 elif [ $OS = "Ubuntu" ]; then
   sudo apt update
   sudo apt install -y nvim ripgrep

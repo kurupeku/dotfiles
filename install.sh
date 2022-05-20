@@ -72,6 +72,8 @@ done
 # OS固有の処理
 if [ $OS = "Mac" ]; then
   brew install kubectl
+  brew tap hashicorp/tap
+  brew install hashicorp/tap/terraform
   brew install iterm2 --cask
   brew upgrade
   brew upgrade --cask --greedy

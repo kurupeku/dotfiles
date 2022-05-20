@@ -1,5 +1,9 @@
 local lsp_installer = require "nvim-lsp-installer"
 
+local merge = function(t1, t2)
+  for k, v in pairs(t2) do t1[k] = v end
+end
+
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -28,8 +32,30 @@ end
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 lsp_installer.on_server_ready(function(server)
   local opts = { capabilities = capabilities, on_attach = on_attach }
-  -- 特定のサーバーに設定を追加したい場合は以下に記述
 
-  -- 最後にセットアップ関数を起動
+  -- 特定のサーバーに設定を追加したい場合は以下に記述
+  if server.name == 'yamlls' then
+    merge(opts, {
+      settings = {
+        yaml = {
+          schemas = {
+            ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
+            kubernetes = { '/k8s/*', '/kube*/*', '/*.k8s.yaml', '/*.k8s.yml' }
+          },
+        }
+      }
+    })
+  elseif server.name == 'jsonls' then
+    merge(opts, {
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+          validate = { enable = true },
+        },
+      },
+    })
+  end
+
+  -- セットアップ関数を起動
   server:setup(opts)
 end)

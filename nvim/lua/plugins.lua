@@ -51,6 +51,7 @@ return packer.startup {
     use { "folke/trouble.nvim", after = { "nvim-lsp-installer", "lsp-colors.nvim" }, config = function() require("plugins.trouble") end }
     use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget'.setup() end }
     use 'folke/lsp-colors.nvim'
+    use { "b0o/schemastore.nvim", after = { 'nvim-lsp-installer' }, ft = { 'json', 'jsonc' } }
 
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }

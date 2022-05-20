@@ -138,7 +138,7 @@ return packer.startup {
     use { 'editorconfig/editorconfig-vim', event = 'BufEnter' }
 
     -- ブラケットユーティリティ
-    use { 'tpope/vim-surround', event = "BufEnter" }
+    use { 'machakann/vim-sandwich', event = "BufEnter" }
     use { 'tpope/vim-repeat', event = 'VimEnter' }
 
     -- 文字区切りの変換

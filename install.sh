@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DOTPATH=~/dotfiles
+DOTPATH=$HOME/dotfiles
 PACKAGES=(
   bash
   zsh
@@ -32,7 +32,7 @@ if [ ! -e "$DOTPATH" ]; then
     die "curl or wget required"
   fi
 
-  cd ~/dotfiles
+  cd $HOME/dotfiles
   if [ $? -ne 0 ]; then
     die "not found: $DOTPATH"
   fi
@@ -79,9 +79,11 @@ if [ $OS = "Mac" ]; then
 fi
 
 # asdfのインストール
-if [ ! -e ~/.asdf ]; then
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
+if [ ! -e $HOME/.asdf ]; then
+  git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.9.0
 fi
+
+
 
 # zinitのインストール
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -92,8 +94,8 @@ fi
 
 echo 'installing nerd-fonts...'
 # nerd-fontsの導入
-if [ ! -e "~/nerd-fonts" ]; then
-  cd
+if [ ! -e "$HOME/nerd-fonts" ]; then
+  cd $HOME
   git clone --branch=master --depth 1 https://github.com/ryanoasis/nerd-fonts.git
   cd nerd-fonts
   ./install.sh

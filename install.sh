@@ -71,19 +71,10 @@ done
 
 # OS固有の処理
 if [ $OS = "Mac" ]; then
-  brew install kubectl
-  brew tap hashicorp/tap
-  brew install hashicorp/tap/terraform
   brew install iterm2 --cask
   brew upgrade
   brew upgrade --cask --greedy
   brew cleanup
-fi
-
-# asdfのインストール
-if [ ! -e $HOME/.asdf ]; then
-  echo "installing asdf..."
-  git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.9.0
 fi
 
 # zinitのインストール

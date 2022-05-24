@@ -1,6 +1,9 @@
 require("toggleterm").setup {
   open_mapping = [[<c-t>]],
-  direction = 'float'
+  direction = 'float',
+  on_open = function(term)
+    vim.cmd [[startinsert!]]
+  end
 }
 
 local api = vim.api
@@ -27,7 +30,7 @@ local lazygit  = Terminal:new({
   },
   -- function to run on opening the terminal
   on_open = function(term)
-    vim.cmd("startinsert!")
+    vim.cmd [[startinsert!]]
     api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
   end,
   -- function to run on closing the terminal

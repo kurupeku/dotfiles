@@ -130,7 +130,7 @@ return packer.startup {
     use { 'rcarriga/nvim-notify', config = function() require 'plugins.nvim-notify' end, event = 'VimEnter' }
 
     -- インデントの可視化
-    use { 'lukas-reineke/indent-blankline.nvim', config = function() require 'plugins.indent-blankline' end, event = 'BufEnter' }
+    use { 'lukas-reineke/indent-blankline.nvim', config = function() require 'plugins.indent-blankline' end }
 
     -- 空白の可視化
     use { "McAuleyPenney/tidy.nvim", event = "BufWritePre" }

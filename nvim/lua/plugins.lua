@@ -133,7 +133,7 @@ return packer.startup {
     use { 'lukas-reineke/indent-blankline.nvim', config = function() require 'plugins.indent-blankline' end }
 
     -- 空白の可視化
-    use { "McAuleyPenney/tidy.nvim", event = "BufWritePre" }
+    use { 'mcauley-penney/tidy.nvim', config = function() require 'tidy'.setup() end, event = 'BufWritePre' }
 
     -- エディターコンフィグの適応
     use { 'editorconfig/editorconfig-vim', event = 'BufEnter' }
@@ -170,8 +170,12 @@ return packer.startup {
     use 'lewis6991/impatient.nvim'
 
     -- Golang用プラグイン
-    use { 'mattn/vim-goimports', config = function() vim.go.goimports_simplify = 1 end, ft = { 'go' } }
+    use { 'mattn/vim-goimports', config = function() vim.g.goimports_simplify = 1 end, ft = { 'go' } }
     use { 'buoto/gotests-vim', ft = 'go' }
+
+    -- Markdown用プラグイン
+    use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, setup = function() require 'plugins.markdown-preview' end, ft = { "markdown" } }
+    use { "dhruvasagar/vim-table-mode", ft = { "markdown" } }
 
     if packer_bootstrap then
       packer.sync()

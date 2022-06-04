@@ -51,7 +51,6 @@ return packer.startup {
     use { "folke/trouble.nvim", after = { "nvim-lsp-installer", "lsp-colors.nvim" }, config = function() require("plugins.trouble") end }
     use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget'.setup() end }
     use 'folke/lsp-colors.nvim'
-    use { "b0o/schemastore.nvim", after = { 'nvim-lsp-installer' }, ft = { 'json', 'jsonc' } }
 
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
@@ -170,12 +169,16 @@ return packer.startup {
     use 'lewis6991/impatient.nvim'
 
     -- Golang用プラグイン
-    use { 'mattn/vim-goimports', config = function() vim.g.goimports_simplify = 1 end, ft = { 'go' } }
+    use { 'mattn/vim-goimports', config = function() api.nvim_set_var("goimports_simplify", 1) end, ft = { 'go' } }
     use { 'buoto/gotests-vim', ft = 'go' }
 
     -- Markdown用プラグイン
     use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, setup = function() require 'plugins.markdown-preview' end, ft = { "markdown" } }
     use { "dhruvasagar/vim-table-mode", ft = { "markdown" } }
+
+    -- JSON用プラグイン
+    use { "b0o/schemastore.nvim", after = { 'nvim-lsp-installer' }, ft = { 'json', 'jsonc' } }
+    use { "https://github.com/elzr/vim-json", config = function() api.nvim_set_var("vim_json_syntax_conceal", 1) end, after = "schemastore.nvim", ft = { "json" } }
 
     if packer_bootstrap then
       packer.sync()

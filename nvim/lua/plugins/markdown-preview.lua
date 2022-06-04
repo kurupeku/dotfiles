@@ -1,5 +1,5 @@
-local g = vim.g
-g.mkdp_auto_start = 1
-g.mkdp_auto_close = 1
-g.mkdp_filetypes = { "markdown" }
-g.mkdp_theme = "dark"
+local set_var = vim.api.nvim_set_var
+set_var("mkdp_auto_start", 1)
+set_var("mkdp_auto_close", 1)
+set_var("mkdp_filetypes", { "markdown" })
+set_var("mkdp_theme", "dark")

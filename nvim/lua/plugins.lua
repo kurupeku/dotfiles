@@ -169,7 +169,7 @@ return packer.startup {
     use 'lewis6991/impatient.nvim'
 
     -- Golang用プラグイン
-    use { 'mattn/vim-goimports', config = function() api.nvim_set_var("goimports_simplify", 1) end, ft = { 'go' } }
+    use { 'mattn/vim-goimports', config = function() vim.api.nvim_set_var("goimports_simplify", 1) end, ft = { 'go' } }
     use { 'buoto/gotests-vim', ft = 'go' }
 
     -- Markdown用プラグイン
@@ -178,7 +178,7 @@ return packer.startup {
 
     -- JSON用プラグイン
     use { "b0o/schemastore.nvim", after = { 'nvim-lsp-installer' }, ft = { 'json', 'jsonc' } }
-    use { "https://github.com/elzr/vim-json", config = function() api.nvim_set_var("vim_json_syntax_conceal", 1) end, after = "schemastore.nvim", ft = { "json" } }
+    use { "https://github.com/elzr/vim-json", config = function() vim.api.nvim_set_var("vim_json_syntax_conceal", 1) end, after = "schemastore.nvim", ft = { "json" } }
 
     if packer_bootstrap then
       packer.sync()

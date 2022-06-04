@@ -36,7 +36,6 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'vsnip' }, -- For vsnip users.
     { name = 'nvim_lsp_signature_help' },
-    { name = 'nvim_lsp_document_symbol' },
     { name = 'path' },
     { name = 'omni' },
     { name = 'copilot' },
@@ -62,7 +61,9 @@ cmp.setup.filetype('gitcommit', {
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = {
+  sources = cmp.config.sources {
+    { name = 'nvim_lsp_document_symbol' }
+  }, {
     { name = 'buffer' }
   }
 })

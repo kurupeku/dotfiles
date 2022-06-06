@@ -1,5 +1,6 @@
 local lsp_installer = require "nvim-lsp-installer"
-local opts = { noremap = true, silent = true }
+local null_ls = require "null-ls"
+local ts_utils = require "nvim-lsp-ts-utils"
 
 local merge = function(t1, t2)
   for k, v in pairs(t2) do t1[k] = v end
@@ -7,6 +8,8 @@ end
 
 local on_attach = function(client, bufnr)
   local function set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+local opts = { noremap = true, silent = true }
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
   set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   -- set_keymap("n", "<leader>V", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
@@ -47,9 +50,36 @@ local on_attach = function(client, bufnr)
   set_keymap("n", "<leader>V", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
   -- set_keymap("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>", {})
   -- set_keymap("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", {})
+
+  if client.resolved_capabilities.document_formatting then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+        vim.lsp.buf.formatting_sync()
+      end,
+    })
+  end
 end
 
+local tsserver_on_attach = function(client, bufnr)
+  local function set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local opts = { noremap = true, silent = true }
 
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+
+  ts_utils.setup({})
+  ts_utils.setup_client(client)
+
+  set_keymap("n", "<leader>o", ":TSLspOrganize<CR>", opts)
+  set_keymap("n", "<leader>R", ":TSLspRenameFile<CR>", opts)
+  set_keymap("n", "<leader>i", ":TSLspImportAll<CR>", opts)
+
+  on_attach(client, bufnr)
+end
 
 -- cmp_nvim_lspを各言語サーバーに紐付け
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -77,8 +107,30 @@ lsp_installer.on_server_ready(function(server)
         },
       },
     })
+  elseif server.name == 'tsserver' then
+    opts.on_attach = tsserver_on_attach
   end
 
   -- セットアップ関数を起動
   server:setup(opts)
 end)
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.code_actions.eslint,
+    null_ls.builtins.code_actions.shellcheck,
+
+    null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.diagnostics.shellcheck,
+    null_ls.builtins.diagnostics.markdownlint,
+    null_ls.builtins.diagnostics.staticcheck,
+    null_ls.builtins.diagnostics.rubocop,
+
+    null_ls.builtins.completion.luasnip,
+    null_ls.builtins.completion.spell,
+
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.rubocop,
+  },
+  on_attach = on_attach
+})

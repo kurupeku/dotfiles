@@ -46,14 +46,12 @@ return packer.startup {
 
     -- Nvim builtin LSP用プラグイン
     use 'neovim/nvim-lspconfig'
-    use { 'williamboman/nvim-lsp-installer', config = function() require 'plugins.nvim-lsp-installer' end, after = { 'nvim-lspconfig' } }
+    use { 'williamboman/nvim-lsp-installer', config = function() require 'plugins.nvim-lsp-installer' end, after = { 'nvim-lspconfig', 'null-ls.nvim', 'nvim-lsp-ts-utils', } }
     use { 'tami5/lspsaga.nvim', config = function() require 'plugins.lspsaga' end, after = { 'nvim-lsp-installer' } }
     use { "folke/trouble.nvim", after = { "nvim-lsp-installer", "lsp-colors.nvim" } }
     use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget'.setup() end }
     use 'folke/lsp-colors.nvim'
-
-    -- null-ls
-    use { 'jose-elias-alvarez/null-ls.nvim', config = function() require 'plugins.null-ls' end, after = { 'plenary.nvim' } }
+    use { 'jose-elias-alvarez/null-ls.nvim', after = { 'plenary.nvim' } }
 
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
@@ -154,7 +152,7 @@ return packer.startup {
     use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end, event = 'BufEnter' }
 
     -- インデントの可視化
-    use { 'Yggdroot/indentLine', event = 'BufEnter' }
+    use { 'Yggdroot/indentLine', config = function() vim.api.nvim_set_var('indentLine_setConceal', 0) end, event = 'BufEnter' }
 
     -- インサートモードに入ると絶対行数表示に変更
     use { 'myusuf3/numbers.vim', event = 'BufEnter' }
@@ -175,13 +173,15 @@ return packer.startup {
     use { 'mattn/vim-goimports', config = function() vim.api.nvim_set_var("goimports_simplify", 1) end, ft = { 'go' } }
     use { 'buoto/gotests-vim', ft = 'go' }
 
+    -- TypeScript用プラグイン
+    use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
+
     -- Markdown用プラグイン
     use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, setup = function() require 'plugins.markdown-preview' end, ft = { "markdown" } }
     use { "dhruvasagar/vim-table-mode", ft = { "markdown" } }
 
     -- JSON用プラグイン
     use { "b0o/schemastore.nvim", after = { 'nvim-lsp-installer' }, ft = { 'json', 'jsonc' } }
-    use { "https://github.com/elzr/vim-json", config = function() vim.api.nvim_set_var("vim_json_syntax_conceal", 1) end, after = "schemastore.nvim", ft = { "json" } }
 
     if packer_bootstrap then
       packer.sync()

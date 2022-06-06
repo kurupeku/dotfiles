@@ -8,8 +8,9 @@ end
 
 local on_attach = function(client, bufnr)
   local function set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-local opts = { noremap = true, silent = true }
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+  local opts = { noremap = true, silent = true }
+  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
   set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   -- set_keymap("n", "<leader>V", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
@@ -18,7 +19,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
   set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   -- set_keymap("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  set_keymap("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  -- set_keymap("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
@@ -39,7 +40,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
   -- lspsaga
   set_keymap("n", "<leader>r", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
-  -- set_keymap("n", "<leader>a", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
+  set_keymap("n", "<leader>a", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
   -- set_keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
   -- scroll down hover doc or scroll in definition preview
   -- set_keymap('n', '<C-j>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]], { noremap = true, silent = true })
@@ -66,6 +67,7 @@ end
 
 local tsserver_on_attach = function(client, bufnr)
   local function set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
   local opts = { noremap = true, silent = true }
 
   client.resolved_capabilities.document_formatting = false

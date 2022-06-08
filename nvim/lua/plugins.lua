@@ -40,6 +40,7 @@ return packer.startup {
     use 'nvim-lua/plenary.nvim'
     use 'MunifTanjim/nui.nvim'
     use "tami5/sqlite.lua"
+    use 'ray-x/guihua.lua'
 
     -- Git関連
     use { 'lewis6991/gitsigns.nvim', config = function() require('plugins.gitsigns') end, after = { 'plenary.nvim' } }
@@ -170,8 +171,7 @@ return packer.startup {
     use 'lewis6991/impatient.nvim'
 
     -- Golang用プラグイン
-    use { 'mattn/vim-goimports', config = function() vim.api.nvim_set_var("goimports_simplify", 1) end, ft = { 'go' } }
-    use { 'buoto/gotests-vim', ft = 'go' }
+    use { 'ray-x/go.nvim', config = function() require 'plugins.go' end, after = { 'guihua.lua' }, ft = { 'go' } }
 
     -- TypeScript用プラグイン
     use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }

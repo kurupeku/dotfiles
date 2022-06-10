@@ -119,20 +119,32 @@ end)
 
 null_ls.setup({
   sources = {
+    -- JS / TS
     null_ls.builtins.code_actions.eslint,
-    null_ls.builtins.code_actions.shellcheck,
-
     null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.diagnostics.shellcheck,
-    null_ls.builtins.diagnostics.markdownlint,
-    null_ls.builtins.diagnostics.staticcheck,
-    null_ls.builtins.diagnostics.rubocop,
-
-    null_ls.builtins.completion.luasnip,
-    null_ls.builtins.completion.spell,
-
     null_ls.builtins.formatting.prettier,
+
+    -- Golang
+    null_ls.builtins.code_actions.shellcheck,
+    null_ls.builtins.diagnostics.staticcheck,
+    null_ls.builtins.diagnostics.shellcheck,
+
+    -- Ruby
+    null_ls.builtins.diagnostics.rubocop,
     null_ls.builtins.formatting.rubocop,
+    null_ls.builtins.formatting.erb_lint,
+
+    -- Markdown
+    null_ls.builtins.diagnostics.markdownlint,
+
+    -- Bash
+    null_ls.builtins.formatting.shfmt,
+
+    -- Lua
+    null_ls.builtins.completion.luasnip,
+
+    -- Others
+    null_ls.builtins.completion.spell,
   },
   on_attach = on_attach
 })

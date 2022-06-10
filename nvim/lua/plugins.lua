@@ -47,16 +47,18 @@ return packer.startup {
 
     -- Nvim builtin LSP用プラグイン
     use 'neovim/nvim-lspconfig'
-    use { 'williamboman/nvim-lsp-installer', config = function() require 'plugins.nvim-lsp-installer' end, after = { 'nvim-lspconfig', 'null-ls.nvim', 'nvim-lsp-ts-utils', } }
+    use { 'williamboman/nvim-lsp-installer', config = function() require 'plugins.nvim-lsp-installer' end,
+      after = { 'nvim-lspconfig', 'null-ls.nvim', 'nvim-lsp-ts-utils', } }
     use { 'tami5/lspsaga.nvim', config = function() require 'plugins.lspsaga' end, after = { 'nvim-lsp-installer' } }
     use { "folke/trouble.nvim", after = { "nvim-lsp-installer", "lsp-colors.nvim" } }
     use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget'.setup() end }
     use 'folke/lsp-colors.nvim'
-    use { 'jose-elias-alvarez/null-ls.nvim', after = { 'plenary.nvim' } }
+    use { 'jose-elias-alvarez/null-ls.nvim' }
 
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
-    use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim', 'nvim-autopairs', 'cmp-nvim-lsp' }, config = function() require 'plugins.nvim-cmp' end }
+    use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim', 'nvim-autopairs', 'cmp-nvim-lsp' },
+      config = function() require 'plugins.nvim-cmp' end }
     use { 'onsails/lspkind-nvim' }
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
@@ -81,10 +83,12 @@ return packer.startup {
     use { 'zbirenbaum/copilot.lua', after = 'copilot.vim', config = function() require 'plugins.copilot' end }
 
     -- ファイラー
-    use { 'nvim-neo-tree/neo-tree.nvim', config = function() require 'plugins.neo-tree' end, after = { 'plenary.nvim', 'nui.nvim', 'nvim-web-devicons' } }
+    use { 'nvim-neo-tree/neo-tree.nvim', config = function() require 'plugins.neo-tree' end,
+      after = { 'plenary.nvim', 'nui.nvim', 'nvim-web-devicons' } }
 
     -- ファジーファインダー
-    use { 'nvim-telescope/telescope.nvim', config = function() require 'plugins.telescope' end, after = { 'plenary.nvim' } }
+    use { 'nvim-telescope/telescope.nvim', config = function() require 'plugins.telescope' end,
+      after = { 'plenary.nvim' } }
 
     -- ターミナル操作
     use { "akinsho/toggleterm.nvim", config = function() require 'plugins.toggleterm' end, event = 'VimEnter' }
@@ -101,13 +105,16 @@ return packer.startup {
     -- TreeSitter
     use { 'nvim-treesitter/nvim-treesitter', config = function() require 'plugins.nvim-treesitter' end, run = ':TSUpdate' }
     use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' } }
-    use { 'mfussenegger/nvim-ts-hint-textobject', config = function() require 'plugins.nvim-ts-hint-textobject' end, after = { 'nvim-treesitter' } }
+    use { 'mfussenegger/nvim-ts-hint-textobject', config = function() require 'plugins.nvim-ts-hint-textobject' end,
+      after = { 'nvim-treesitter' } }
     use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end, after = { 'nvim-treesitter' } }
-    use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end, after = { 'nvim-treesitter' } }
+    use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end,
+      after = { 'nvim-treesitter' } }
     use { 'AckslD/nvim-anywise-reg.lua', config = function() require("anywise_reg").setup() end }
 
     -- Icon表示
-    use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end, disable = disable_nerd }
+    use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end,
+      disable = disable_nerd }
 
     -- ステータスライン
     use { 'nvim-lualine/lualine.nvim', config = function() require 'plugins.lualine' end }
@@ -153,7 +160,8 @@ return packer.startup {
     use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end, event = 'BufEnter' }
 
     -- インデントの可視化
-    use { 'Yggdroot/indentLine', config = function() vim.api.nvim_set_var('indentLine_setConceal', 0) end, event = 'BufEnter' }
+    use { 'Yggdroot/indentLine', config = function() vim.api.nvim_set_var('indentLine_setConceal', 0) end,
+      event = 'BufEnter' }
 
     -- インサートモードに入ると絶対行数表示に変更
     use { 'myusuf3/numbers.vim', event = 'BufEnter' }
@@ -177,7 +185,8 @@ return packer.startup {
     use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
 
     -- Markdown用プラグイン
-    use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, setup = function() require 'plugins.markdown-preview' end, ft = { "markdown" } }
+    use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end,
+      setup = function() require 'plugins.markdown-preview' end, ft = { "markdown" } }
     use { "dhruvasagar/vim-table-mode", ft = { "markdown" } }
 
     -- JSON用プラグイン

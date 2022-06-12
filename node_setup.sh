@@ -3,6 +3,7 @@
 # Node npm packages
 NPM_PACKAGES=(
   eslint
+  tslint
   prettier
   typescript
   typescript-language-server

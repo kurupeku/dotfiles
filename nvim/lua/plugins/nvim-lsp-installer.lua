@@ -2,15 +2,28 @@ local lsp_installer = require "nvim-lsp-installer"
 local null_ls = require "null-ls"
 local ts_utils = require "nvim-lsp-ts-utils"
 
+local use_null_ls_server = {
+  'tsserver', 'jsonls'
+}
+
 local merge = function(t1, t2)
   for k, v in pairs(t2) do t1[k] = v end
+end
+
+
+local fix_formatting = function(client)
+  for _, s in pairs(use_null_ls_server) do
+    if s == client.name then
+      client.resolved_capabilities.document_formatting = false
+      client.resolved_capabilities.document_range_formatting = false
+    end
+  end
 end
 
 local on_attach = function(client, bufnr)
   local function set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   local opts = { noremap = true, silent = true }
-  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
   set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   -- set_keymap("n", "<leader>V", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
@@ -52,7 +65,9 @@ local on_attach = function(client, bufnr)
   -- set_keymap("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>", {})
   -- set_keymap("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", {})
 
+  fix_formatting(client)
   if client.resolved_capabilities.document_formatting then
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
@@ -69,9 +84,6 @@ local tsserver_on_attach = function(client, bufnr)
   local function set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   local opts = { noremap = true, silent = true }
-
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
 
   ts_utils.setup({})
   ts_utils.setup_client(client)

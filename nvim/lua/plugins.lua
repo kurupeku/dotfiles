@@ -116,6 +116,10 @@ return packer.startup {
     use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end,
       disable = disable_nerd }
 
+    -- スタート画面
+    use { 'goolord/alpha-nvim', after = { 'nvim-web-devicons' },
+      config = function() require 'alpha'.setup(require 'alpha.themes.startify'.config) end }
+
     -- ステータスライン
     use { 'nvim-lualine/lualine.nvim', config = function() require 'plugins.lualine' end }
 

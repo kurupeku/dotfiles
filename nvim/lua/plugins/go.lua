@@ -1,8 +1,10 @@
+local path = require 'nvim-lsp-installer.core.path'
+local install_root_dir = path.concat { vim.fn.stdpath 'data', 'lsp_servers' }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require('go').setup {
   go = 'go', -- go command, can be go[default] or go1.18beta1
-  goimport = 'gopls', -- goimport command, can be gopls[default] or goimport
+  goimport = 'goimport', -- goimport command, can be gopls[default] or goimport
   fillstruct = 'gopls', -- can be nil (use fillstruct, slower) and gopls
   gofmt = 'gofumpt', --gofmt cmd,
   max_line_len = 120, -- max line length in goline format
@@ -12,11 +14,12 @@ require('go').setup {
   comment_placeholder = '', -- comment_placeholder your cool placeholder e.g. ﳑ       
   icons = { breakpoint = '🧘', currentpos = '🏃' }, -- setup to `false` to disable icons setup
   verbose = false, -- output loginf in messages
+  lsp_cmd = { install_root_dir .. '/go/gopls' },
   lsp_cfg = { capabilities = capabilities, }, -- true: use non-default gopls setup specified in go/lsp.lua
   -- false: do nothing
   -- if lsp_cfg is a table, merge table with with non-default gopls setup in go/lsp.lua, e.g.
   --   lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}
-  lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
+  lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
   lsp_on_attach = nil, -- nil: use on_attach function defined in go/lsp.lua,
   --      when lsp_cfg is true
   -- if lsp_on_attach is a function: use this function as on_attach function for gopls
@@ -52,5 +55,5 @@ require('go').setup {
 -- Run gofmt + goimport on save
 vim.api.nvim_exec([[
   autocmd BufWritePre (InsertLeave?) <buffer> lua vim.lsp.buf.formatting_sync(nil,500)
-  autocmd BufWritePre *.go :silent! lua require('go.format').goimport()
 ]], false)
+--   autocmd BufWritePre *.go :silent! lua require('go.format').goimport()

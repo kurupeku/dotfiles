@@ -131,15 +131,15 @@ end)
 
 null_ls.setup({
   sources = {
+    null_ls.builtins.code_actions.refactoring,
+    null_ls.builtins.formatting.prettier,
+
     -- JS / TS
     null_ls.builtins.code_actions.eslint,
     null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.formatting.prettier,
 
     -- Golang
-    null_ls.builtins.code_actions.shellcheck,
     null_ls.builtins.diagnostics.staticcheck,
-    null_ls.builtins.diagnostics.shellcheck,
 
     -- Ruby
     null_ls.builtins.diagnostics.rubocop,
@@ -150,7 +150,8 @@ null_ls.setup({
     null_ls.builtins.diagnostics.markdownlint,
 
     -- Bash
-    null_ls.builtins.formatting.shfmt,
+    null_ls.builtins.code_actions.shellcheck,
+    null_ls.builtins.diagnostics.shellcheck,
 
     -- Lua
     null_ls.builtins.completion.luasnip,

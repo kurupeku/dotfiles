@@ -9,6 +9,7 @@ NPM_PACKAGES=(
   typescript-language-server
   bash-language-server
   remark-language-server
+  markdownlint-cli
   emmet-ls
   vscode-langservers-extracted
   @tailwindcss/language-server

@@ -3,13 +3,12 @@ local null_ls = require "null-ls"
 local ts_utils = require "nvim-lsp-ts-utils"
 
 local use_null_ls_server = {
-  'tsserver', 'jsonls'
+  'tsserver', 'jsonls', 'bashls'
 }
 
 local merge = function(t1, t2)
   for k, v in pairs(t2) do t1[k] = v end
 end
-
 
 local fix_formatting = function(client)
   for _, s in pairs(use_null_ls_server) do

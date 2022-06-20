@@ -3,7 +3,7 @@ local null_ls = require "null-ls"
 local ts_utils = require "nvim-lsp-ts-utils"
 
 local use_null_ls_server = {
-  'tsserver', 'jsonls', 'bashls'
+  'tsserver', 'jsonls', 'bashls', 'pylsp'
 }
 
 local merge = function(t1, t2)

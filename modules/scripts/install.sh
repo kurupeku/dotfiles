@@ -1,12 +1,6 @@
 #!/bin/sh
 
 DOTPATH=$HOME/dotfiles
-PACKAGES=(
-  bash
-  zsh
-  git
-  curl
-)
 
 # ディレクトリが存在しなければ先にDL
 if [ ! -e "$DOTPATH" ]; then
@@ -32,7 +26,7 @@ if [ ! -e "$DOTPATH" ]; then
     die "curl or wget required"
   fi
 
-  cd $HOME/dotfiles
+  cd "$HOME/dotfiles"
   if [ $? -ne 0 ]; then
     die "not found: $DOTPATH"
   fi
@@ -41,58 +35,55 @@ if [ ! -e "$DOTPATH" ]; then
 fi
 
 # OSの判定
-. $DOTPATH/modules/scripts/define_os.sh
+. "$DOTPATH/modules/scripts/define_os.sh"
 
 # dotfilesの反映を行う
-. $DOTPATH/setup.sh
+. "$DOTPATH/modules/scripts/setup.sh"
 
 # パッケージマネージャーのセットアップ
-if [ $OS = "Mac" ]; then
-  echo "installing homebrew..."
-  which brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo "installing homebrew..."
+which brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-  echo "run brew doctor..."
-  which brew >/dev/null 2>&1 && brew doctor
+echo "run brew doctor..."
+which brew >/dev/null 2>&1 && brew doctor
 
-  echo "run brew update..."
-  which brew >/dev/null 2>&1 && brew update
+echo "run brew update..."
+which brew >/dev/null 2>&1 && brew update
 
-  echo "run brew upgrade..."
-  brew upgrade
-fi
+echo "run brew upgrade..."
+brew upgrade
 
 # パッケージのインストールorアップグレード
 echo "installing packages..."
-for p in "${PACKAGES[@]}"; do
-  if [ $OS = "Mac" ]; then
-    brew install $p
-  fi
-done
+brew upgrade
+brew install bash
+brew install zsh
+brew install git
 
 # OS固有の処理
 if [ $OS = "Mac" ]; then
   brew install iterm2 --cask
-  brew upgrade
   brew upgrade --cask --greedy
-  brew cleanup
 fi
+
+brew cleanup
 
 # zinitのインストール
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-if [ ! -e $ZINIT_HOME ]; then
+if [ ! -e "$ZINIT_HOME" ]; then
   echo "installing zinit..."
-  mkdir -p "$(dirname $ZINIT_HOME)"
+  mkdir -p "$(dirname "$ZINIT_HOME")"
   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 # nerd-fontsの導入
 if [ ! -e "$HOME/nerd-fonts" ]; then
   echo 'installing nerd-fonts...'
-  cd $HOME
+  cd "$HOME"
   git clone --branch=master --depth 1 https://github.com/ryanoasis/nerd-fonts.git
   cd nerd-fonts
   ./install.sh
-  cd ${HOME}/dotfiles
+  cd "${HOME}/dotfiles"
 fi
 
 echo "all processes are done"

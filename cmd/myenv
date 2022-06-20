@@ -1,0 +1,14 @@
+#!/bin/sh
+# shellcheck disable=1091
+
+SH_PATH="$HOME/dotfiles/modules/scripts"
+
+case "$1" in
+  "setup" ) . "$SH_PATH/setup.sh";;
+  "install" ) . "$SH_PATH/install.sh";;
+  "asdf" ) . "$SH_PATH/asdf_setup.sh";;
+  "go" ) . "$SH_PATH/go_setup.sh";;
+  "node" ) . "$SH_PATH/node_setup.sh";;
+  "python" ) . "$SH_PATH/python_setup.sh";;
+  * ) echo "$1 is a unknown argument"
+esac

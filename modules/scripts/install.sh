@@ -1,6 +1,8 @@
 #!/bin/sh
 
 DOTPATH=$HOME/dotfiles
+PACKAGES="bash zsh git"
+GUI_APPS="iterm2"
 
 # ディレクトリが存在しなければ先にDL
 if [ ! -e "$DOTPATH" ]; then
@@ -34,8 +36,6 @@ if [ ! -e "$DOTPATH" ]; then
   echo "fetched my dotfiles"
 fi
 
-# OSの判定
-. "$DOTPATH/modules/scripts/define_os.sh"
 
 # dotfilesの反映を行う
 . "$DOTPATH/modules/scripts/setup.sh"
@@ -56,14 +56,15 @@ brew upgrade
 # パッケージのインストールorアップグレード
 echo "installing packages..."
 brew upgrade
-brew install bash
-brew install zsh
-brew install git
+echo "$PACKAGES" | xargs -L 1 -P 4 brew install
+
+# OSの判定
+. "$DOTPATH/modules/scripts/define_os.sh"
 
 # OS固有の処理
 if [ $OS = "Mac" ]; then
-  brew install iterm2 --cask
   brew upgrade --cask --greedy
+  echo "$GUI_APPS" | xargs -L 1 -P 4 brew install --cask
 fi
 
 brew cleanup

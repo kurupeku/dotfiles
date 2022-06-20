@@ -1,6 +1,7 @@
 #!/bin/sh
 
 DOTPATH=${HOME}/dotfiles
+PACKAGES="nvim ripgrep lazygit curl jq"
 
 # ディレクトリが存在しなければ先にDL
 if [ ! -e "$DOTPATH" ]; then
@@ -64,11 +65,4 @@ fi
 
 # OS個別のインストール作業
 echo "installing packages..."
-brew install nvim
-brew install ripgrep
-brew install lazygit
-brew install curl
-brew install jq
-brew cleanup
-
-exec $SHELL -l
+echo "$PACKAGES" | xargs -L 1 -P 4 brew install

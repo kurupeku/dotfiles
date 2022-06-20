@@ -130,6 +130,7 @@ end)
 
 null_ls.setup({
   sources = {
+    -- multi languages
     null_ls.builtins.code_actions.refactoring,
     null_ls.builtins.formatting.prettier,
 
@@ -139,6 +140,11 @@ null_ls.setup({
 
     -- Golang
     null_ls.builtins.diagnostics.staticcheck,
+
+    -- Python
+    null_ls.builtins.diagnostics.flake8,
+    null_ls.builtins.diagnostics.mypy,
+    null_ls.builtins.formatting.black,
 
     -- Ruby
     null_ls.builtins.diagnostics.rubocop,

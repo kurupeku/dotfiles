@@ -54,6 +54,8 @@ return packer.startup {
     use { 'j-hui/fidget.nvim', after = { 'nvim-lsp-installer' }, config = function() require 'fidget'.setup() end }
     use 'folke/lsp-colors.nvim'
     use { 'jose-elias-alvarez/null-ls.nvim' }
+    use { 'ThePrimeagen/refactoring.nvim', config = function() require('refactoring').setup() end,
+      after = { 'plenary.nvim', 'nvim-treesitter' } }
 
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }

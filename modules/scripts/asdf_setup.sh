@@ -1,23 +1,15 @@
 #!/bin/sh
 
-plug_names=(
-  "ruby"
-  "golang"
-  "python"
-  "nodejs"
-  "kubectl"
-  "minikube"
-  "terraform"
-)
+PLUGS="ruby golang nodejs python kubectl minikube terraform"
 
-plug_urls=(
-  "https://github.com/asdf-vm/asdf-ruby.git"
-  "https://github.com/kennyp/asdf-golang.git"
-  ""
-  "https://github.com/asdf-vm/asdf-nodejs.git"
-  "https://github.com/asdf-community/asdf-kubectl.git"
-  "https://github.com/alvarobp/asdf-minikube.git"
-  "https://github.com/asdf-community/asdf-hashicorp.git"
+PLUG_URLS=$(cat << EOF
+ruby https://github.com/asdf-vm/asdf-ruby.git
+golang https://github.com/kennyp/asdf-golans.git
+nodejs https://github.com/asdf-vm/asdf-nodejs.git
+kubectl https://github.com/asdf-community/asdf-kubectl.git
+minikube https://github.com/alvarobp/asdf-minikube.git
+terraform https://github.com/asdf-community/asdf-hashicorp.git
+EOF
 )
 
 enable_addon() {
@@ -26,11 +18,13 @@ enable_addon() {
     * ) asdf plugin-add "$1" "$2" ;;
   esac
 }
+export -f enable_addon
 
 setup_addon() {
   asdf install "$1" latest
   asdf global "$1" latest
 }
+export -f setup_addon
 
 # asdfがなければインストール
 if [ ! -e $HOME/.asdf ]; then
@@ -39,10 +33,6 @@ if [ ! -e $HOME/.asdf ]; then
   exec $SHELL -l
 fi
 
-i=0
-for name in "${plug_names[@]}"; do
-  url="${plug_urls[${i}]}"
-  enable_addon "$name" "$url"
-  setup_addon "$name"
-  i=$((i + 1))
-done
+echo "$PLUG_URLS" | xargs -L 1 -P 4 -I{} sh -c "enable_addon {}"
+echo "$PLUGS" | xargs -L 1 -P 4 -I{} sh -c "setup_addon {}"
+echo "$PLUGS" | xargs -L 1 -P 4 asdf reshim

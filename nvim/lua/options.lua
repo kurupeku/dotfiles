@@ -34,7 +34,6 @@ local opts = {
   -- HELPを日本語化
   helplang = "ja,en",
   -- UNDOの永続化
-  -- undodir = [[$HOME/.config/nvim/undo]],
   undofile = true,
   -- 編集されたファイルを自動読み込み
   autoread = true,
@@ -50,8 +49,6 @@ local win_opts = {
   relativenumber = true,
   -- サイン用ガーターを常に表示
   signcolumn = 'yes',
-  -- スペルチェックを有効化
-  spell = true
 }
 
 local buf_opts = {

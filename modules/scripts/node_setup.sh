@@ -18,13 +18,11 @@ intelephense
 dockerfile-language-server-nodejs
 sql-language-server
 @google/clasp
+npm-check-updates
 EOF
 )
 
-echo "update versions what installed npm packages..."
-npm update --location=global npm
-npm update --location=global
-
 echo "install global packages for development"
 echo "$NPM_PACKAGES" | xargs -L 1 -P 4 npm i --location=global
-npm audit fix --force
+
+asdf reshim nodejs

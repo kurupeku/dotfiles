@@ -43,10 +43,10 @@ return packer.startup {
     use { 'wbthomason/packer.nvim', opt = true }
 
     -- 非依存プラグイン
-    use 'nvim-lua/plenary.nvim'
-    use 'MunifTanjim/nui.nvim'
-    use "tami5/sqlite.lua"
-    use 'ray-x/guihua.lua'
+    use { 'nvim-lua/plenary.nvim', cond = { not_code } }
+    use { 'MunifTanjim/nui.nvim', cond = { not_code } }
+    use { "tami5/sqlite.lua", cond = { not_code } }
+    use { 'ray-x/guihua.lua', cond = { not_code } }
 
     -- Git関連
     use { 'lewis6991/gitsigns.nvim', config = function() require('plugins.gitsigns') end, after = { 'plenary.nvim' },
@@ -159,13 +159,15 @@ return packer.startup {
       cond = { not_code } }
 
     -- インデントの可視化
-    use { 'lukas-reineke/indent-blankline.nvim', config = function() require 'plugins.indent-blankline' end }
+    use { 'lukas-reineke/indent-blankline.nvim', config = function() require 'plugins.indent-blankline' end,
+      cond = { not_code } }
 
     -- 空白の可視化
-    use { 'mcauley-penney/tidy.nvim', config = function() require 'tidy'.setup() end, event = 'BufWritePre' }
+    use { 'mcauley-penney/tidy.nvim', config = function() require 'tidy'.setup() end, event = 'BufWritePre',
+      cond = { not_code } }
 
     -- エディターコンフィグの適応
-    use { 'editorconfig/editorconfig-vim', event = 'BufEnter' }
+    use { 'editorconfig/editorconfig-vim', event = 'BufEnter', cond = { not_code } }
 
     -- ブラケットユーティリティ
     use { 'machakann/vim-sandwich', event = "BufEnter" }
@@ -181,10 +183,10 @@ return packer.startup {
     use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end, event = 'BufEnter' }
 
     -- インサートモードに入ると絶対行数表示に変更
-    use { 'myusuf3/numbers.vim', event = 'BufEnter' }
+    use { 'myusuf3/numbers.vim', event = 'BufEnter', cond = { not_code } }
 
     -- バッファを消してもウィンドウを保持
-    use { 'famiu/bufdelete.nvim', event = 'VimEnter' }
+    use { 'famiu/bufdelete.nvim', event = 'VimEnter', cond = { not_code } }
 
     -- カーソル下の単語をブラウザで検索
     use { 'tyru/open-browser.vim', config = function() require 'plugins.open-browser' end, event = 'BufEnter' }

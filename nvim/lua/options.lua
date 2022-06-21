@@ -1,3 +1,7 @@
+local is_code = function(truthy, falsy)
+  return vim.fn.exists([[g:vscode]]) and truthy or falsy
+end
+
 local opts = {
   -- 検索時の設定
   ignorecase = true,
@@ -20,7 +24,7 @@ local opts = {
   encoding = "utf-8",
   fileencodings = "utf-8",
   -- 描画を安定させる
-  ttyfast = true,
+  ttyfast = is_code(true, false),
   ambiwidth = "single",
   -- 候補の表示方法の設定
   completeopt = "menu,menuone,noselect",
@@ -29,7 +33,7 @@ local opts = {
   -- クリップボードを共有化
   clipboard = "unnamed,unnamedplus",
   -- 色設定
-  termguicolors = true,
+  termguicolors = is_code(true, false),
   background = "dark",
   -- HELPを日本語化
   helplang = "ja,en",
@@ -46,7 +50,7 @@ local win_opts = {
   -- 行数を表示
   number = true,
   -- 相対行数を表示
-  relativenumber = true,
+  relativenumber = is_code(true, false),
   -- サイン用ガーターを常に表示
   signcolumn = 'yes',
 }

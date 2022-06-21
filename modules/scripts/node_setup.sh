@@ -8,7 +8,6 @@ NPM_PACKAGES=(
   typescript
   typescript-language-server
   bash-language-server
-  remark-language-server
   markdownlint-cli
   emmet-ls
   vscode-langservers-extracted

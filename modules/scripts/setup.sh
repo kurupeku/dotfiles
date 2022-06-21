@@ -1,6 +1,7 @@
 #!/bin/sh
 
 DOTPATH=${HOME}/dotfiles
+PACKAGES="nvim ripgrep lazygit curl jq"
 
 # ディレクトリが存在しなければ先にDL
 if [ ! -e "$DOTPATH" ]; then
@@ -49,31 +50,19 @@ mkdir -p "${DOTPATH}/.config/nvim"
 ln -snfv "${DOTPATH}/nvim/init.lua" "${HOME}/.config/nvim/init.lua"
 ln -snfv "${DOTPATH}/nvim/lua/" "${HOME}/.config/nvim/"
 
-# UNDOの永続化用ディレクトリ作成
-mkdir -p "${DOTPATH}/.config/nvim/undo"
-
-# OSの判定
-. $DOTPATH/modules/scripts/define_os.sh
-
 # cmdディレクトリの権限変更
-chmod -R 755 $HOME/dotfiles/cmd/
+chmod -R 755 "$HOME/dotfiles/cmd/"
+
+# Homebrew がなければインストール
+if ! (type "brew" > /dev/null 2>&1); then
+    BREW_URL=https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    if type "curl" > /dev/null 2>&1; then
+      curl -fsSL "$BREW_URL"
+    else
+      wget -q --trust-server-names "$BREW_URL"
+    fi
+fi
 
 # OS個別のインストール作業
 echo "installing packages..."
-if [ $OS = "Mac" ]; then
-  brew install nvim
-  brew install ripgrep
-  brew install lazygit
-  brew cleanup
-elif [ $OS = "CentOS" ]; then
-  sudo yun update
-  sudo yun install -y nvim ripgrep
-  sudo dnf copr enable atim/lazygit -y
-  sudo dnf install lazygit
-elif [ $OS = "Ubuntu" ]; then
-  sudo apt update
-  sudo apt install -y nvim ripgrep
-elif [ $OS = "Alpine" ]; then
-  apk update
-  apk install -y nvim ripgrep
-fi
+echo "$PACKAGES" | xargs -L 1 -P 4 brew install

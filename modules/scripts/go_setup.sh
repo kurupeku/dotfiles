@@ -5,3 +5,5 @@ PACKAGES="honnef.co/go/tools/cmd/staticcheck@latest github.com/mvdan/sh/cmd/shfm
 
 echo "install golang packages..."
 echo "$PACKAGES" | xargs -L 1 -P 4 go install
+
+asdf reshim golang

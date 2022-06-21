@@ -14,7 +14,6 @@ local noremaps = {
   ['*'] = [[*zz]],
   ['#'] = [[#zz]],
   ['n'] = [[nzz]],
-  ['<leader>bda'] = [[:%bd]],
 }
 
 local nmaps = {
@@ -24,8 +23,6 @@ local nmaps = {
 local nnoremaps = {
   k = "gk",
   j = "gj",
-  ["&lt;Tab&gt"] = "%",
-  x = [["_x]],
 }
 
 local inoremaps_silent = {
@@ -33,7 +30,6 @@ local inoremaps_silent = {
 }
 
 local vnoremaps = {
-  ["&lt;Tab&gt"] = "%",
   x = [["_x]],
 }
 

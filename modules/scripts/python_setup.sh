@@ -1,9 +1,14 @@
 #!/bin/sh
 
-python3 -m pip install -U pip
-python3 -m pip install -U flake8
-python3 -m pip install -U mypy
-python3 -m pip install -U black
-python3 -m pip install -U "python-lsp-server[all]"
+PACKAGES=$(cat << EOF
+pip
+flake8
+mypy
+black
+isort
+python-lsp-server[all]
+EOF
+)
 
+echo "$PACKAGES" | xargs -L 1 -P 4 python3 -m pip install -U
 asdf reshim python

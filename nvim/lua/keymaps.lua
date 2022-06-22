@@ -1,6 +1,6 @@
 vim.g.mapleader = ' '
 
-local api = vim.api
+local map = vim.api.nvim_set_keymap
 
 -- Keymaps
 
@@ -34,25 +34,52 @@ local vnoremaps = {
 }
 
 for k, v in pairs(noremaps) do
-  api.nvim_set_keymap("", k, v, { noremap = true, silent = false })
+  map("", k, v, { noremap = true, silent = false })
 end
 
 for k, v in pairs(nmaps) do
-  api.nvim_set_keymap("n", k, v, { noremap = false, silent = false })
+  map("n", k, v, { noremap = false, silent = false })
 end
 
 for k, v in pairs(nnoremaps) do
-  api.nvim_set_keymap("n", k, v, { noremap = true, silent = false })
+  map("n", k, v, { noremap = true, silent = false })
 end
 
 for k, v in pairs(inoremaps_silent) do
-  api.nvim_set_keymap("i", k, v, { noremap = true, silent = true })
+  map("i", k, v, { noremap = true, silent = true })
 end
 
 for k, v in pairs(vnoremaps) do
-  api.nvim_set_keymap("v", k, v, { noremap = true, silent = false })
+  map("v", k, v, { noremap = true, silent = false })
 end
 
 if vim.fn.exists([[g:vscode]]) == 1 then
-  api.nvim_set_keymap('n', 'z=', "<Cmd>call VSCodeNotify('keyboard-quickfix.openQuickFix')<CR>", { noremap = true })
+  local n_caller = function(key, cmd)
+    map('n', key, "<Cmd>call VSCodeNotify('" .. cmd .. "')<CR>", { noremap = true })
+  end
+
+  local code_map = {
+    ['<leader>f'] = 'editor.action.formatDocument',
+    ['<leader>r'] = 'editor.action.rename',
+    ['<leader>]'] = 'workbench.action.nextEditor',
+    ['<leader>['] = 'workbench.action.previousEditor',
+    ['<leader>a'] = 'keyboard-quickfix.openQuickFix',
+    ['<leader>x'] = 'workbench.actions.view.problems',
+    ['<leader>v'] = 'editor.action.marker.nextInFiles',
+    ['<leader>V'] = 'editor.action.marker.prevInFiles',
+    ['<C-o>'] = 'workbench.action.navigateBack',
+    ['<C-n>'] = 'workbench.view.explorer',
+    ['<C-/>'] = 'workbench.action.showCommands',
+    ['ff'] = 'workbench.action.quickOpen',
+    ['fg'] = 'workbench.view.search.focus',
+    ['gd'] = 'editor.action.revealDefinition',
+    ['gr'] = 'editor.action.goToReferences',
+    ['gi'] = 'editor.action.goToImplementation',
+  }
+
+  for k, v in pairs(code_map) do
+    n_caller(k, v)
+  end
+
+  map('n', 'z=', "<Cmd>call VSCodeNotify('keyboard-quickfix.openQuickFix')<CR>", { noremap = true })
 end

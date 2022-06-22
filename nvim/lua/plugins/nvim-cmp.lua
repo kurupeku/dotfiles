@@ -38,10 +38,8 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help' },
     { name = 'path' },
     { name = 'omni' },
-    { name = 'copilot' },
     { name = 'emoji' },
     { name = 'calc' },
-    { name = 'spell' },
     { name = 'treesitter' },
     { name = 'nvim_lua' },
     { name = 'rg' }

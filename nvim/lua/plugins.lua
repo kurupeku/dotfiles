@@ -35,6 +35,10 @@ local not_code = function()
   return vim.fn.exists('g:vscode') == 0
 end
 
+local code = function()
+  return vim.fn.exists('g:vscode') == 1
+end
+
 local packer = require 'packer'
 local util = require 'packer.util'
 return packer.startup {
@@ -76,10 +80,8 @@ return packer.startup {
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', cond = { not_code } }
     use { 'hrsh7th/cmp-path', after = 'nvim-cmp', cond = { not_code } }
     use { 'hrsh7th/cmp-omni', after = 'nvim-cmp', cond = { not_code } }
-    use { 'zbirenbaum/copilot-cmp', after = { 'nvim-cmp', 'copilot.lua' }, cond = { not_code } }
     use { 'hrsh7th/cmp-emoji', after = 'nvim-cmp', cond = { not_code } }
     use { 'hrsh7th/cmp-calc', after = 'nvim-cmp', cond = { not_code } }
-    use { 'f3fora/cmp-spell', after = 'nvim-cmp', cond = { not_code } }
     use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', cond = { not_code } }
     use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', cond = { not_code } }
     use { "lukas-reineke/cmp-rg", after = 'nvim-cmp', cond = { not_code } }
@@ -87,11 +89,6 @@ return packer.startup {
     use { 'hrsh7th/vim-vsnip-integ', after = { 'vim-vsnip' }, cond = { not_code } }
     use { 'ray-x/cmp-treesitter', after = { 'nvim-cmp', 'nvim-treesitter' }, cond = { not_code } }
     use { 'windwp/nvim-ts-autotag', after = { 'nvim-treesitter' }, cond = { not_code } }
-
-    -- AI補完系
-    use { 'github/copilot.vim', cmd = { 'Copilot' }, cond = { not_code } }
-    use { 'zbirenbaum/copilot.lua', after = 'copilot.vim', config = function() require 'plugins.copilot' end,
-      cond = { not_code } }
 
     -- ファイラー
     use { 'nvim-neo-tree/neo-tree.nvim', config = function() require 'plugins.neo-tree' end,
@@ -122,7 +119,6 @@ return packer.startup {
     use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end }
     use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end,
       after = { 'nvim-treesitter' } }
-    use { 'AckslD/nvim-anywise-reg.lua', config = function() require("anywise_reg").setup() end }
 
     -- Icon表示
     use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end,
@@ -142,7 +138,10 @@ return packer.startup {
     use { 'terryma/vim-expand-region', config = function() require 'plugins.vim-expand-region' end, event = 'VimEnter' }
 
     -- ワードジャンプ
-    use { 'phaazon/hop.nvim', config = function() require 'plugins.hop' end, event = 'VimEnter', cond = { not_code } }
+    -- use { 'phaazon/hop.nvim', config = function() require 'plugins.hop' end, event = 'VimEnter' }
+    use { 'easymotion/vim-easymotion', config = function() require 'plugins.easymotion' end, cond = { not_code } }
+    use { 'asvetliakov/vim-easymotion', config = function() require 'plugins.easymotion' end, cond = { code },
+      as = 'vsc-easymotion' }
 
     -- スクロールの円滑化
     use { 'karb94/neoscroll.nvim', config = function() require 'neoscroll'.setup() end, event = 'VimEnter',
@@ -169,7 +168,6 @@ return packer.startup {
 
     -- ブラケットユーティリティ
     use { 'machakann/vim-sandwich', event = "BufEnter" }
-    use { 'tpope/vim-repeat', event = 'VimEnter' }
 
     -- 文字区切りの変換
     use { 'endaaman/vim-case-master', config = function() require 'plugins.vim-case-master' end, event = 'BufEnter' }
@@ -178,13 +176,11 @@ return packer.startup {
     use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end, event = 'BufEnter' }
 
     -- カラーコードの可視化
-    use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end, event = 'BufEnter' }
+    use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end, event = 'BufEnter',
+      cond = { not_code } }
 
     -- インサートモードに入ると絶対行数表示に変更
     use { 'myusuf3/numbers.vim', event = 'BufEnter', cond = { not_code } }
-
-    -- バッファを消してもウィンドウを保持
-    use { 'famiu/bufdelete.nvim', event = 'VimEnter', cond = { not_code } }
 
     -- カーソル下の単語をブラウザで検索
     use { 'tyru/open-browser.vim', config = function() require 'plugins.open-browser' end, event = 'BufEnter' }
@@ -205,7 +201,7 @@ return packer.startup {
     -- Markdown用プラグイン
     use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end,
       setup = function() require 'plugins.markdown-preview' end, ft = { "markdown" }, cond = { not_code } }
-    use { "dhruvasagar/vim-table-mode", ft = { "markdown" } }
+    use { "dhruvasagar/vim-table-mode", ft = { "markdown" }, cond = { not_code } }
 
     -- JSON用プラグイン
     use { "b0o/schemastore.nvim", after = { 'nvim-lsp-installer' }, ft = { 'json', 'jsonc' }, cond = { not_code } }

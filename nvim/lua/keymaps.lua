@@ -67,6 +67,7 @@ if vim.fn.exists([[g:vscode]]) == 1 then
     ['<leader>x'] = 'workbench.actions.view.problems',
     ['<leader>v'] = 'editor.action.marker.nextInFiles',
     ['<leader>V'] = 'editor.action.marker.prevInFiles',
+    ['<leader>g'] = 'workbench.scm.focus',
     ['<C-o>'] = 'workbench.action.navigateBack',
     ['<C-n>'] = 'workbench.view.explorer',
     ['<C-/>'] = 'workbench.action.showCommands',

@@ -8,17 +8,17 @@ if [ ! -e "$DOTPATH" ]; then
   echo "fetching dotfiles repository..."
 
   # git が使えるなら git
-  if type "git" > /dev/null 2>&1; then
+  if type "git" >/dev/null 2>&1; then
     git clone --recursive "https://github.com/kurupeku/dotfiles.git" "$DOTPATH"
 
   # 使えない場合は curl か wget を使用する
-  elif type "curl" > /dev/null 2>&1 || type "wget" > /dev/null 2>&1; then
+  elif type "curl" >/dev/null 2>&1 || type "wget" >/dev/null 2>&1; then
     tarball="https://github.com/kurupeku/dotfiles/archive/master.tar.gz"
 
     # どっちかでダウンロードして，tar に流す
-    if type "curl" > /dev/null 2>&1; then
+    if type "curl" >/dev/null 2>&1; then
       curl -L $tarball
-    elif type "wget" > /dev/null 2>&1; then
+    elif type "wget" >/dev/null 2>&1; then
       wget -O - $tarball
     fi | tar zxv
 
@@ -34,7 +34,7 @@ if [ ! -e "$DOTPATH" ]; then
   echo "fetched my dotfiles"
 fi
 
-cd $DOTPATH
+cd "$DOTPATH" || exit
 # dotfileのシンボリックリンクを作成
 for f in .??*; do
   [ "$f" = ".git" ] && continue
@@ -54,13 +54,13 @@ ln -snfv "${DOTPATH}/nvim/lua/" "${HOME}/.config/nvim/"
 chmod -R 755 "$HOME/dotfiles/cmd/"
 
 # Homebrew がなければインストール
-if ! (type "brew" > /dev/null 2>&1); then
-    BREW_URL=https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-    if type "curl" > /dev/null 2>&1; then
-      curl -fsSL "$BREW_URL"
-    else
-      wget -q --trust-server-names "$BREW_URL"
-    fi
+if ! (type "brew" >/dev/null 2>&1); then
+  BREW_URL=https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  if type "curl" >/dev/null 2>&1; then
+    curl -fsSL "$BREW_URL"
+  else
+    wget -q --trust-server-names "$BREW_URL"
+  fi
 fi
 
 # OS個別のインストール作業

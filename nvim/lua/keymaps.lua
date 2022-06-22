@@ -52,3 +52,7 @@ end
 for k, v in pairs(vnoremaps) do
   api.nvim_set_keymap("v", k, v, { noremap = true, silent = false })
 end
+
+if vim.fn.exists([[g:vscode]]) == 1 then
+  api.nvim_set_keymap('n', 'z=', "<Cmd>call VSCodeNotify('keyboard-quickfix.openQuickFix')<CR>", { noremap = true })
+end

@@ -45,7 +45,6 @@ return packer.startup {
     -- 非依存プラグイン
     use { 'nvim-lua/plenary.nvim', cond = { not_code } }
     use { 'MunifTanjim/nui.nvim', cond = { not_code } }
-    use { "tami5/sqlite.lua", cond = { not_code } }
     use { 'ray-x/guihua.lua', cond = { not_code } }
 
     -- Git関連
@@ -110,8 +109,7 @@ return packer.startup {
     use { "klen/nvim-test", config = function() require('plugins.nvim-test') end, event = 'VimEnter', cond = { not_code } }
 
     -- ビジュアルスター検索
-    use { 'haya14busa/vim-asterisk', config = function() require 'plugins.vim-asterisk' end, event = 'VimEnter',
-      cond = { not_code } }
+    use { 'haya14busa/vim-asterisk', config = function() require 'plugins.vim-asterisk' end, event = 'VimEnter' }
 
     -- カラースキーマ
     use { 'EdenEast/nightfox.nvim', config = function() vim.cmd [[colorscheme nordfox]] end, cond = { not_code } }
@@ -151,7 +149,7 @@ return packer.startup {
       cond = { not_code } }
 
     -- スクロールバー表示
-    use { "petertriho/nvim-scrollbar", config = function() require("scrollbar").setup() end, event = 'BufEnter',
+    use { 'petertriho/nvim-scrollbar', config = function() require("scrollbar").setup() end, event = 'BufEnter',
       cond = { not_code } }
 
     -- 通知カスタマイズ

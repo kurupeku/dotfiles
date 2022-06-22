@@ -9,17 +9,17 @@ if [ ! -e "$DOTPATH" ]; then
   echo "fetching dotfiles repository..."
 
   # git が使えるなら git
-  if type "git" > /dev/null 2>&1; then
+  if type "git" >/dev/null 2>&1; then
     git clone --recursive "https://github.com/kurupeku/dotfiles.git" "$DOTPATH"
 
   # 使えない場合は curl か wget を使用する
-  elif type "curl" > /dev/null 2>&1 || type "wget" > /dev/null 2>&1; then
+  elif type "curl" >/dev/null 2>&1 || type "wget" >/dev/null 2>&1; then
     tarball="https://github.com/kurupeku/dotfiles/archive/master.tar.gz"
 
     # どっちかでダウンロードして，tar に流す
-    if type "curl" > /dev/null 2>&1; then
+    if type "curl" >/dev/null 2>&1; then
       curl -L $tarball
-    elif type "wget" > /dev/null 2>&1; then
+    elif type "wget" >/dev/null 2>&1; then
       wget -O - $tarball
     fi | tar zxv
 
@@ -28,7 +28,7 @@ if [ ! -e "$DOTPATH" ]; then
     die "curl or wget required"
   fi
 
-  cd "$HOME/dotfiles"
+  cd "$HOME/dotfiles" || exit
   if [ $? -ne 0 ]; then
     die "not found: $DOTPATH"
   fi
@@ -36,9 +36,8 @@ if [ ! -e "$DOTPATH" ]; then
   echo "fetched my dotfiles"
 fi
 
-
 # dotfilesの反映を行う
-. "$DOTPATH/modules/scripts/setup.sh"
+. "$DOTPATH/setup.sh"
 
 # パッケージマネージャーのセットアップ
 echo "installing homebrew..."
@@ -62,7 +61,7 @@ echo "$PACKAGES" | xargs -L 1 -P 4 brew install
 . "$DOTPATH/modules/scripts/define_os.sh"
 
 # OS固有の処理
-if [ $OS = "Mac" ]; then
+if [ "$OS" = "Mac" ]; then
   brew upgrade --cask --greedy
   echo "$GUI_APPS" | xargs -L 1 -P 4 brew install --cask
 fi
@@ -80,11 +79,11 @@ fi
 # nerd-fontsの導入
 if [ ! -e "$HOME/nerd-fonts" ]; then
   echo 'installing nerd-fonts...'
-  cd "$HOME"
+  cd "$HOME" || exit
   git clone --branch=master --depth 1 https://github.com/ryanoasis/nerd-fonts.git
-  cd nerd-fonts
+  cd nerd-fonts || exit
   ./install.sh
-  cd "${HOME}/dotfiles"
+  cd "${HOME}/dotfiles" || exit
 fi
 
 echo "all processes are done"

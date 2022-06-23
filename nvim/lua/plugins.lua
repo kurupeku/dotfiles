@@ -113,12 +113,12 @@ return packer.startup {
 
     -- TreeSitter
     use { 'nvim-treesitter/nvim-treesitter', config = function() require 'plugins.nvim-treesitter' end, run = ':TSUpdate' }
-    use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' } }
+    use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' }, cond = { not_code } }
     use { 'mfussenegger/nvim-ts-hint-textobject', config = function() require 'plugins.nvim-ts-hint-textobject' end,
       after = { 'nvim-treesitter' } }
-    use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end }
+    use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end, cond = { not_code } }
     use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end,
-      after = { 'nvim-treesitter' } }
+      after = { 'nvim-treesitter' }, cond = { not_code } }
 
     -- Icon表示
     use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end,

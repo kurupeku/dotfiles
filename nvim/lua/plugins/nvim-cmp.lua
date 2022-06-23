@@ -42,7 +42,7 @@ cmp.setup({
     { name = 'calc' },
     { name = 'treesitter' },
     { name = 'nvim_lua' },
-    { name = 'rg' }
+    -- { name = 'rg' }
   }, {
     { name = 'buffer' },
   })

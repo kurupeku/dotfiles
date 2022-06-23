@@ -138,10 +138,7 @@ return packer.startup {
     use { 'terryma/vim-expand-region', config = function() require 'plugins.vim-expand-region' end, event = 'VimEnter' }
 
     -- ワードジャンプ
-    -- use { 'phaazon/hop.nvim', config = function() require 'plugins.hop' end, event = 'VimEnter' }
-    use { 'easymotion/vim-easymotion', config = function() require 'plugins.easymotion' end, cond = { not_code } }
-    use { 'asvetliakov/vim-easymotion', config = function() require 'plugins.easymotion' end, cond = { code },
-      as = 'vsc-easymotion' }
+    use { 'phaazon/hop.nvim', config = function() require 'plugins.hop' end, event = 'VimEnter' }
 
     -- スクロールの円滑化
     use { 'karb94/neoscroll.nvim', config = function() require 'neoscroll'.setup() end, event = 'VimEnter',

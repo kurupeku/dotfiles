@@ -16,6 +16,7 @@ case "$1" in
   . "$SH_PATH/go_setup.sh"
   . "$SH_PATH/node_setup.sh"
   . "$SH_PATH/python_setup.sh"
+  . "$SH_PATH/ruby_setup.sh"
   ;;
 *) echo "$1 is a unknown argument" ;;
 esac

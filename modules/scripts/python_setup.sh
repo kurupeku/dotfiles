@@ -14,4 +14,8 @@ EOF
 )
 
 echo "$PACKAGES" | xargs -L 1 -P 4 python3 -m pip install -U
-asdf reshim python
+
+if type "asdf" >/dev/null 2>&1; then
+  echo "reshim asdf python" #コマンドが存在する時の処理
+  asdf reshim python
+fi

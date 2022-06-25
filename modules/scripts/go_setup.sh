@@ -18,4 +18,7 @@ EOF
 echo "install golang packages..."
 echo "$PACKAGES" | xargs -L 1 -P 4 go install
 
-asdf reshim golang
+if type "asdf" >/dev/null 2>&1; then
+  echo "reshim asdf golang" #コマンドが存在する時の処理
+  asdf reshim golang
+fi

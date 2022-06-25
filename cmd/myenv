@@ -11,6 +11,7 @@ case "$1" in
 "go") . "$SH_PATH/go_setup.sh" ;;
 "node") . "$SH_PATH/node_setup.sh" ;;
 "python") . "$SH_PATH/python_setup.sh" ;;
+"ruby") . "$SH_PATH/ruby_setup.sh" ;;
 "packages")
   . "$SH_PATH/go_setup.sh"
   . "$SH_PATH/node_setup.sh"

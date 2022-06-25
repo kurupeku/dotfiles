@@ -2,10 +2,12 @@
 
 PACKAGES=$(cat << EOF
 pip
+pytest
 flake8
 mypy
 black
 isort
+bandit
 python-lsp-server[all]
 EOF
 )

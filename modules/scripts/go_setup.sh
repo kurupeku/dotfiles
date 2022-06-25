@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Golang packages
-PACKAGES=$(cat << EOF
+PACKAGES=$(
+  cat <<EOF
 golang.org/x/tools/cmd/goimports@latest
 honnef.co/go/tools/cmd/staticcheck@latest
 github.com/cweill/gotests/gotests@latest

@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Node npm packages
-NPM_PACKAGES=$(cat << EOF
+NPM_PACKAGES=$(
+  cat <<EOF
 eslint
 @typescript-eslint/parser
 vue-eslint-parser

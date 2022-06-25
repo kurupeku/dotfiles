@@ -1,6 +1,7 @@
 #!/bin/sh
 
-PACKAGES=$(cat << EOF
+PACKAGES=$(
+  cat <<EOF
 pip
 pytest
 flake8

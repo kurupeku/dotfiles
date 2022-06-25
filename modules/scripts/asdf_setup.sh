@@ -2,7 +2,8 @@
 
 PLUGS="ruby golang nodejs python kubectl minikube terraform"
 
-PLUG_URLS=$(cat << EOF
+PLUG_URLS=$(
+  cat <<EOF
 ruby https://github.com/asdf-vm/asdf-ruby.git
 golang https://github.com/kennyp/asdf-golans.git
 nodejs https://github.com/asdf-vm/asdf-nodejs.git
@@ -14,8 +15,8 @@ EOF
 
 enable_addon() {
   case "$1" in
-    ruby|golang|nodejs ) asdf plugin add "$1" "$2" ;;
-    * ) asdf plugin-add "$1" "$2" ;;
+  ruby | golang | nodejs) asdf plugin add "$1" "$2" ;;
+  *) asdf plugin-add "$1" "$2" ;;
   esac
 }
 export -f enable_addon
@@ -27,9 +28,9 @@ setup_addon() {
 export -f setup_addon
 
 # asdfがなければインストール
-if [ ! -e $HOME/.asdf ]; then
+if [ ! -e "$HOME/.asdf" ]; then
   echo "installing asdf..."
-  git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.9.0
+  git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.9.0
   exec $SHELL -l
 fi
 

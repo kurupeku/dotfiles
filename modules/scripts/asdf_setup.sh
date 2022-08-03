@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PLUGS="ruby golang nodejs python kubectl minikube terraform"
+PLUGS="ruby golang nodejs python kubectl minikube terraform heroku-cli"
 
 PLUG_URLS=$(
   cat <<EOF
@@ -10,12 +10,13 @@ nodejs https://github.com/asdf-vm/asdf-nodejs.git
 kubectl https://github.com/asdf-community/asdf-kubectl.git
 minikube https://github.com/alvarobp/asdf-minikube.git
 terraform https://github.com/asdf-community/asdf-hashicorp.git
+heroku-cli https://github.com/treilly94/asdf-heroku-cli.git
 EOF
 )
 
 enable_addon() {
   case "$1" in
-  ruby | golang | nodejs) asdf plugin add "$1" "$2" ;;
+  ruby | golang | nodejs | heroku-cli) asdf plugin add "$1" "$2" ;;
   *) asdf plugin-add "$1" "$2" ;;
   esac
 }

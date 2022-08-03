@@ -9,7 +9,7 @@ local opts = {
   incsearch = true,
   hlsearch = true,
   -- 対応する括弧を表示
-  showmatch = true,
+  showmatch = is_code(false, true),
   -- バックアップを作らない
   backup = false,
   -- コマンド入力時に表示する
@@ -17,15 +17,14 @@ local opts = {
   -- スクロール時に10行余白を確保する
   scrolloff = 10,
   -- <Tab>でshiftwidthの数だけ<Space>を入力する
-  smartindent = true,
+  smartindent = is_code(false, true),
   -- マウス操作をすべて受け付ける
   mouse = "a",
   -- utf-8でエンコードする
   encoding = "utf-8",
   fileencodings = "utf-8",
   -- 描画を安定させる
-  ttyfast = is_code(true, false),
-  ambiwidth = "single",
+  ttyfast = is_code(false, true),
   -- 候補の表示方法の設定
   completeopt = "menu,menuone,noselect",
   wildmenu = true,
@@ -33,7 +32,7 @@ local opts = {
   -- クリップボードを共有化
   clipboard = "unnamed,unnamedplus",
   -- 色設定
-  termguicolors = is_code(true, false),
+  termguicolors = is_code(false, true),
   background = "dark",
   -- HELPを日本語化
   helplang = "ja,en",
@@ -46,13 +45,13 @@ local opts = {
 
 local win_opts = {
   -- カーソル行を強調
-  cursorline = true,
+  cursorline = is_code(false, true),
   -- 行数を表示
-  number = true,
+  number = is_code(false, true),
   -- 相対行数を表示
-  relativenumber = is_code(true, false),
+  relativenumber = is_code(false, true),
   -- サイン用ガーターを常に表示
-  signcolumn = 'yes',
+  signcolumn = is_code('auto', 'yes'),
 }
 
 local buf_opts = {

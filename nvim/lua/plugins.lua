@@ -62,7 +62,7 @@ return packer.startup {
     use { 'hrsh7th/cmp-calc', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
-    use { "lukas-reineke/cmp-rg", after = 'nvim-cmp' }
+    use { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' }
     use { 'hrsh7th/vim-vsnip', config = function() require 'plugins.vim-vsnip' end }
     use { 'hrsh7th/vim-vsnip-integ', after = { 'vim-vsnip' } }
     use { 'ray-x/cmp-treesitter', after = { 'nvim-cmp', 'nvim-treesitter' } }
@@ -75,10 +75,10 @@ return packer.startup {
     use { 'nvim-telescope/telescope.nvim', config = function() require 'plugins.telescope' end }
 
     -- ターミナル操作
-    use { "akinsho/toggleterm.nvim", config = function() require 'plugins.toggleterm' end, event = 'VimEnter' }
+    use { 'akinsho/toggleterm.nvim', config = function() require 'plugins.toggleterm' end, event = 'VimEnter' }
 
     -- テスト
-    use { "klen/nvim-test", config = function() require('plugins.nvim-test') end, event = 'VimEnter' }
+    use { 'klen/nvim-test', config = function() require('plugins.nvim-test') end, event = 'VimEnter' }
 
     -- ビジュアルスター検索
     use { 'haya14busa/vim-asterisk', config = function() require 'plugins.vim-asterisk' end, event = 'VimEnter' }
@@ -88,11 +88,13 @@ return packer.startup {
 
     -- TreeSitter
     use { 'nvim-treesitter/nvim-treesitter', config = function() require 'plugins.nvim-treesitter' end, run = ':TSUpdate' }
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
     use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' } }
     use { 'mfussenegger/nvim-ts-hint-textobject', config = function() require 'plugins.nvim-ts-hint-textobject' end,
       after = { 'nvim-treesitter' } }
-    use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end }
-    use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end }
+    use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end, after = { 'nvim-treesitter' } }
+    use { 'David-Kunz/treesitter-unit', config = function() require 'plugins.treesitter-unit' end,
+      after = { 'nvim-treesitter' } }
 
     -- Icon表示
     use { 'kyazdani42/nvim-web-devicons', config = function() require 'nvim-web-devicons'.setup() end }
@@ -104,7 +106,7 @@ return packer.startup {
     use { 'nvim-lualine/lualine.nvim', config = function() require 'plugins.lualine' end }
 
     -- タブ表示
-    use { 'akinsho/bufferline.nvim', config = function() require 'plugins.bufferline' end, tag = "*" }
+    use { 'akinsho/bufferline.nvim', config = function() require 'plugins.bufferline' end, tag = '*' }
 
     -- 選択範囲拡張プラグイン
     use { 'terryma/vim-expand-region', config = function() require 'plugins.vim-expand-region' end, event = 'VimEnter' }
@@ -116,7 +118,7 @@ return packer.startup {
     use { 'karb94/neoscroll.nvim', config = function() require 'neoscroll'.setup() end, event = 'VimEnter' }
 
     -- スクロールバー表示
-    use { 'petertriho/nvim-scrollbar', config = function() require("scrollbar").setup() end, event = 'BufEnter' }
+    use { 'petertriho/nvim-scrollbar', config = function() require('scrollbar').setup() end, event = 'BufEnter' }
 
     -- 通知カスタマイズ
     use { 'rcarriga/nvim-notify', config = function() require 'plugins.nvim-notify' end, event = 'VimEnter' }
@@ -131,13 +133,13 @@ return packer.startup {
     use { 'editorconfig/editorconfig-vim', event = 'BufEnter' }
 
     -- ブラケットユーティリティ
-    use { 'machakann/vim-sandwich', event = "BufEnter" }
+    use { 'kylechui/nvim-surround', config = function() require 'plugins.nvim-surround' end, event = 'BufEnter' }
 
     -- 文字区切りの変換
     use { 'endaaman/vim-case-master', config = function() require 'plugins.vim-case-master' end, event = 'BufEnter' }
 
     -- コメントアウト
-    use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end, event = 'BufEnter' }
+    use { 'numToStr/Comment.nvim', config = function() require('plugins.comment') end, event = 'BufEnter' }
 
     -- カラーコードの可視化
     use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end, event = 'BufEnter' }
@@ -161,11 +163,12 @@ return packer.startup {
     use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
 
     -- Markdown用プラグイン
-    use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end }
-    use { "dhruvasagar/vim-table-mode", ft = { "markdown" } }
+    use { 'iamcco/markdown-preview.nvim', config = function() require 'plugins.markdown-preview' end,
+      run = function() vim.fn['mkdp#util#install']() end }
+    use { 'dhruvasagar/vim-table-mode', ft = { 'markdown' } }
 
     -- JSON用プラグイン
-    use { "b0o/schemastore.nvim", ft = { 'json', 'jsonc' } }
+    use { 'b0o/schemastore.nvim', ft = { 'json', 'jsonc' } }
 
     if packer_bootstrap then
       packer.sync()

@@ -1,6 +1,8 @@
 local cmp = require 'cmp'
 local lspkind = require 'lspkind'
 local ts_utils = require "nvim-lsp-ts-utils"
+local mason = require 'mason'
+local mason_conf = require 'mason-lspconfig'
 
 local merge = function(t1, t2)
   for k, v in pairs(t2) do t1[k] = v end
@@ -40,8 +42,11 @@ local tsserver_on_attach = function(client, bufnr)
   on_attach(client, bufnr)
 end
 
-require('mason').setup()
-require('mason-lspconfig').setup_handlers({ function(server)
+mason.setup()
+mason_conf.setup {
+  automatic_installation = true
+}
+mason_conf.setup_handlers({ function(server)
   local opt = {
     capabilities = require('cmp_nvim_lsp').update_capabilities(
       vim.lsp.protocol.make_client_capabilities()
@@ -149,7 +154,6 @@ cmp.setup.cmdline(':', {
 })
 
 -- nvim-autopairsとの連携設定
--- If you want insert `(` after select function or method item
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 

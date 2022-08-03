@@ -1,7 +1,3 @@
-local path = require 'nvim-lsp-installer.core.path'
-local install_root_dir = path.concat { vim.fn.stdpath 'data', 'lsp_servers' }
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 require('go').setup {
   go = 'go', -- go command, can be go[default] or go1.18beta1
   goimport = 'goimport', -- goimport command, can be gopls[default] or goimport
@@ -14,8 +10,6 @@ require('go').setup {
   comment_placeholder = '', -- comment_placeholder your cool placeholder e.g. ﳑ       
   icons = { breakpoint = '🧘', currentpos = '🏃' }, -- setup to `false` to disable icons setup
   verbose = false, -- output loginf in messages
-  lsp_cmd = { install_root_dir .. '/go/gopls' },
-  lsp_cfg = { capabilities = capabilities, }, -- true: use non-default gopls setup specified in go/lsp.lua
   -- false: do nothing
   -- if lsp_cfg is a table, merge table with with non-default gopls setup in go/lsp.lua, e.g.
   --   lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}

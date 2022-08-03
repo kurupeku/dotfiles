@@ -1,6 +1,10 @@
 local cmp = require 'cmp'
 local lspkind = require 'lspkind'
-local null_ls = require "null-ls"
+local ts_utils = require "nvim-lsp-ts-utils"
+
+local merge = function(t1, t2)
+  for k, v in pairs(t2) do t1[k] = v end
+end
 
 local on_attach = function(client, bufnr)
   local function set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -19,6 +23,21 @@ local on_attach = function(client, bufnr)
   set_keymap('n', '<leader>x', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   set_keymap('n', '<leader>v', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   set_keymap('n', '<leader>V', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+end
+
+local tsserver_on_attach = function(client, bufnr)
+  local function set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+  local opts = { noremap = true, silent = true }
+
+  ts_utils.setup({})
+  ts_utils.setup_client(client)
+
+  set_keymap("n", "<leader>o", ":TSLspOrganize<CR>", opts)
+  set_keymap("n", "<leader>R", ":TSLspRenameFile<CR>", opts)
+  set_keymap("n", "<leader>i", ":TSLspImportAll<CR>", opts)
+
+  on_attach(client, bufnr)
 end
 
 require('mason').setup()
@@ -60,6 +79,18 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 cmp.setup({
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol_text', -- show only symbol annotations
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+
+      -- The function below will be called before any actual modifications from lspkind
+      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+      before = function(entry, vim_item)
+        return vim_item
+      end
+    })
+  },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
@@ -134,42 +165,3 @@ vim.cmd [[
     autocmd CursorMoved,CursorMovedI * lua vim.lsp.buf.clear_references()
   augroup END
 ]]
-
--- null_ls.setup({
---   sources = {
---     -- multi languages
---     null_ls.builtins.code_actions.refactoring,
---     null_ls.builtins.formatting.prettier,
---
---     -- JS / TS
---     null_ls.builtins.code_actions.eslint,
---     null_ls.builtins.diagnostics.eslint,
---
---     -- Golang
---     null_ls.builtins.diagnostics.staticcheck,
---
---     -- Python
---     null_ls.builtins.diagnostics.mypy,
---     null_ls.builtins.formatting.black,
---
---     -- Ruby
---     null_ls.builtins.diagnostics.rubocop,
---     null_ls.builtins.formatting.rubocop,
---     null_ls.builtins.formatting.erb_lint,
---
---     -- Markdown
---     null_ls.builtins.diagnostics.markdownlint,
---
---     -- Bash
---     null_ls.builtins.code_actions.shellcheck,
---     null_ls.builtins.diagnostics.shellcheck,
---     null_ls.builtins.formatting.shfmt,
---
---     -- Lua
---     null_ls.builtins.completion.luasnip,
---
---     -- Others
---     null_ls.builtins.completion.spell,
---   },
---   on_attach = on_attach
--- })

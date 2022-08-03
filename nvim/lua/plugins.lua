@@ -46,13 +46,7 @@ return packer.startup {
     use { 'neovim/nvim-lspconfig' }
     use { 'williamboman/mason.nvim' }
     use { 'williamboman/mason-lspconfig.nvim', config = function() require('plugins.lsp') end }
-    -- use { 'williamboman/nvim-lsp-installer', config = function() require 'plugins.nvim-lsp-installer' end }
-    -- use { 'tami5/lspsaga.nvim', config = function() require 'plugins.lspsaga' end, after = { 'nvim-lsp-installer' } }
-    -- use { "folke/trouble.nvim", after = { "nvim-lsp-installer", "lsp-colors.nvim" } }
     use { 'j-hui/fidget.nvim', config = function() require 'fidget'.setup() end }
-    use { 'folke/lsp-colors.nvim' }
-    use { 'jose-elias-alvarez/null-ls.nvim' }
-    -- use { 'ThePrimeagen/refactoring.nvim', config = function() require('refactoring').setup() end }
 
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }

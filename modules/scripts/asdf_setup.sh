@@ -1,33 +1,5 @@
 #!/bin/sh
 
-PLUGS="ruby golang nodejs python kubectl minikube terraform heroku-cli"
-
-PLUG_URLS=$(
-  cat <<EOF
-ruby https://github.com/asdf-vm/asdf-ruby.git
-golang https://github.com/kennyp/asdf-golans.git
-nodejs https://github.com/asdf-vm/asdf-nodejs.git
-kubectl https://github.com/asdf-community/asdf-kubectl.git
-minikube https://github.com/alvarobp/asdf-minikube.git
-terraform https://github.com/asdf-community/asdf-hashicorp.git
-heroku-cli https://github.com/treilly94/asdf-heroku-cli.git
-EOF
-)
-
-enable_addon() {
-  case "$1" in
-  ruby | golang | nodejs | heroku-cli) asdf plugin add "$1" "$2" ;;
-  *) asdf plugin-add "$1" "$2" ;;
-  esac
-}
-export -f enable_addon
-
-setup_addon() {
-  asdf install "$1" latest
-  asdf global "$1" latest
-}
-export -f setup_addon
-
 # asdfがなければインストール
 if [ ! -e "$HOME/.asdf" ]; then
   echo "installing asdf..."
@@ -35,6 +7,17 @@ if [ ! -e "$HOME/.asdf" ]; then
   exec $SHELL -l
 fi
 
-echo "$PLUG_URLS" | xargs -L 1 -P 4 -I{} sh -c "enable_addon {}"
-echo "$PLUGS" | xargs -L 1 -P 4 -I{} sh -c "setup_addon {}"
-echo "$PLUGS" | xargs -L 1 -P 4 asdf reshim
+PLUGS="ruby golang nodejs yarn python kubectl minikube terraform heroku-cli"
+
+asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+asdf plugin add golang https://github.com/kennyp/asdf-golans.git
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin-add python
+asdf plugin-add yarn
+asdf plugin-add kubectl https://github.com/asdf-community/asdf-kubectl.git
+asdf plugin-add minikube https://github.com/alvarobp/asdf-minikube.git
+asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
+
+echo "$PLUGS" | xargs -n 1 -I{} asdf install {} latest
+echo "$PLUGS" | xargs -n 1 -I{} asdf global {} latest

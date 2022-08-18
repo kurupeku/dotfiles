@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DOTPATH=$HOME/dotfiles
-PACKAGES="bash zsh git"
+PACKAGES="bash zsh git gpg"
 GUI_APPS="iterm2"
 
 # ディレクトリが存在しなければ先にDL
@@ -64,7 +64,6 @@ echo "$PACKAGES" | xargs -L 1 -P 4 brew install
 if [ "$OS" = "Mac" ]; then
   brew upgrade --cask --greedy
   echo "$GUI_APPS" | xargs -L 1 -P 4 brew install --cask
-  brew tap heroku/brew && brew install heroku && heroku autocomplete
 fi
 
 brew cleanup

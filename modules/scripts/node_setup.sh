@@ -3,6 +3,8 @@
 # Node npm packages
 NPM_PACKAGES=$(
   cat <<EOF
+yarn
+pnpm
 eslint
 @typescript-eslint/parser
 vue-eslint-parser

@@ -4,8 +4,6 @@ PACKAGES=$(
   cat <<EOF
 solargraph
 rubocop
-ruby-debug-ide
-debase
 EOF
 )
 

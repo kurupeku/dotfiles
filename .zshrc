@@ -99,3 +99,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 
 # Aliasの設定
 . $HOME/dotfiles/modules/rc/alias.sh
+
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
+[[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh

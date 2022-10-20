@@ -40,7 +40,7 @@ return packer.startup {
     use { 'ray-x/guihua.lua' }
 
     -- Git関連
-    use { 'lewis6991/gitsigns.nvim', config = function() require('plugins.gitsigns') end, after = { 'plenary.nvim' } }
+    -- use { 'lewis6991/gitsigns.nvim', config = function() require('plugins.gitsigns') end, after = { 'plenary.nvim' } }
 
     -- Nvim builtin LSP用プラグイン
     use { 'neovim/nvim-lspconfig' }
@@ -133,7 +133,7 @@ return packer.startup {
     use { 'editorconfig/editorconfig-vim', event = 'BufEnter' }
 
     -- ブラケットユーティリティ
-    use { 'kylechui/nvim-surround', config = function() require 'plugins.nvim-surround' end, event = 'BufEnter' }
+    -- use { 'kylechui/nvim-surround', config = function() require 'plugins.nvim-surround' end, event = 'BufEnter' }
 
     -- 文字区切りの変換
     use { 'endaaman/vim-case-master', config = function() require 'plugins.vim-case-master' end, event = 'BufEnter' }

@@ -1,13 +1,7 @@
 require("nvim-surround").setup({
-  delimiters = {
+  surrounds = {
     invalid_key_behavior = function(char)
       return { char, char }
     end,
-    pairs = {
-      ["<"] = false,
-    },
-    HTML = {
-      ["<"] = "type",
-    },
   },
 })

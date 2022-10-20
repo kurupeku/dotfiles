@@ -13,6 +13,8 @@ golang.org/x/tools/gopls@latest
 github.com/fatih/gomodifytags@latest
 github.com/mvdan/sh/cmd/shfmt@latest
 github.com/go-task/task/v3/cmd/task@latest
+github.com/x-motemen/gore/cmd/gore@latest
+github.com/mdempsky/gocode@latest
 EOF
 )
 

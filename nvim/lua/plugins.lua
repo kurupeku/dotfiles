@@ -43,18 +43,18 @@ return packer.startup {
     -- use { 'lewis6991/gitsigns.nvim', config = function() require('plugins.gitsigns') end, after = { 'plenary.nvim' } }
 
     -- Nvim builtin LSP用プラグイン
-    use { 'neovim/nvim-lspconfig' }
-    use { 'williamboman/mason.nvim' }
-    use { 'williamboman/mason-lspconfig.nvim', config = function() require('plugins.lsp') end }
-    use { 'j-hui/fidget.nvim', config = function() require 'fidget'.setup() end }
+    -- use { 'neovim/nvim-lspconfig' }
+    -- use { 'williamboman/mason.nvim' }
+    -- use { 'williamboman/mason-lspconfig.nvim', config = function() require('plugins.lsp') end }
+    -- use { 'j-hui/fidget.nvim', config = function() require 'fidget'.setup() end }
 
     -- AutoComplete関連のプラグイン
     use { 'windwp/nvim-autopairs', config = function() require 'plugins.nvim-autopairs' end }
-    use { 'hrsh7th/nvim-cmp', after = { 'lspkind-nvim' } }
-    use { 'onsails/lspkind-nvim' }
-    use { 'hrsh7th/cmp-nvim-lsp' }
-    use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
-    use { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' }
+    use { 'hrsh7th/nvim-cmp' }
+    -- use { 'onsails/lspkind-nvim' }
+    -- use { 'hrsh7th/cmp-nvim-lsp' }
+    -- use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
+    -- use { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-omni', after = 'nvim-cmp' }
@@ -89,7 +89,7 @@ return packer.startup {
     -- TreeSitter
     use { 'nvim-treesitter/nvim-treesitter', config = function() require 'plugins.nvim-treesitter' end, run = ':TSUpdate' }
     use 'JoosepAlviste/nvim-ts-context-commentstring'
-    use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' } }
+    -- use { 'yioneko/nvim-yati', after = { 'nvim-treesitter' } }
     use { 'mfussenegger/nvim-ts-hint-textobject', config = function() require 'plugins.nvim-ts-hint-textobject' end,
       after = { 'nvim-treesitter' } }
     use { 'm-demare/hlargs.nvim', config = function() require 'hlargs'.setup() end, after = { 'nvim-treesitter' } }
@@ -154,13 +154,13 @@ return packer.startup {
     use 'vim-jp/vimdoc-ja'
 
     -- 起動時間の高速化
-    use 'lewis6991/impatient.nvim'
+    -- use 'lewis6991/impatient.nvim'
 
     -- Golang用プラグイン
-    use { 'ray-x/go.nvim', config = function() require 'plugins.go' end, after = { 'guihua.lua' }, ft = { 'go' } }
+    -- use { 'ray-x/go.nvim', config = function() require 'plugins.go' end, after = { 'guihua.lua' }, ft = { 'go' } }
 
     -- TypeScript用プラグイン
-    use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
+    -- use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
 
     -- Markdown用プラグイン
     use { 'iamcco/markdown-preview.nvim', config = function() require 'plugins.markdown-preview' end,

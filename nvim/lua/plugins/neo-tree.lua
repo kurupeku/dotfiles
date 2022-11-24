@@ -171,4 +171,4 @@ fn.sign_define("DiagnosticSignHint",
 local api = vim.api
 -- Unless you are still migrating, remove the deprecated commands from v1.x
 api.nvim_set_var('neo_tree_remove_legacy_commands', 1)
-api.nvim_set_keymap('n', '<C-n>', '<cmd>Neotree source=filesystem reveal=true position=float<cr>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<C-m>', '<cmd>Neotree source=filesystem reveal=true position=float<cr>', { noremap = true, silent = true })

@@ -2,7 +2,7 @@
 
 DOTPATH=$HOME/dotfiles
 PACKAGES="bash zsh git gpg"
-GUI_APPS="iterm2"
+GUI_APPS="warp raycast"
 
 # ディレクトリが存在しなければ先にDL
 if [ ! -e "$DOTPATH" ]; then

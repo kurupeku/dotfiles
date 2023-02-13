@@ -16,6 +16,7 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf plugin-add python
 asdf plugin-add yarn
 asdf plugin-add kubectl https://github.com/asdf-community/asdf-kubectl.git
+asdf plugin add awscli
 asdf plugin-add minikube https://github.com/alvarobp/asdf-minikube.git
 asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 

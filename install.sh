@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DOTPATH=$HOME/dotfiles
-PACKAGES="bash zsh git gpg"
+PACKAGES="bash zsh git gpg openssl"
 GUI_APPS="warp raycast"
 
 # ディレクトリが存在しなければ先にDL

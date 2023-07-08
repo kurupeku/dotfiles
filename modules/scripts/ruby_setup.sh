@@ -3,8 +3,6 @@
 PACKAGES=$(
   cat <<EOF
 solargraph
-rubocop
-reek
 EOF
 )
 

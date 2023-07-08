@@ -1,10 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 DOTPATH=${HOME}/dotfiles
-PACKAGES="nvim ripgrep lazygit curl jq"
 
 # ディレクトリが存在しなければ先にDL
-if [ ! -e "$DOTPATH" ]; then
+if [ ! -e $DOTPATH ]; then
   echo "fetching dotfiles repository..."
 
   # git が使えるなら git
@@ -46,23 +45,30 @@ for f in .??*; do
   ln -snf "${DOTPATH}/${f}" "${HOME}/${f}"
 done
 
-mkdir -p "${DOTPATH}/.config/nvim"
+mkdir -p "${HOME}/.config/nvim"
 ln -snfv "${DOTPATH}/nvim/init.lua" "${HOME}/.config/nvim/init.lua"
 ln -snfv "${DOTPATH}/nvim/lua/" "${HOME}/.config/nvim/"
 
 # cmdディレクトリの権限変更
 chmod -R 755 "$HOME/dotfiles/cmd/"
 
-# Homebrew がなければインストール
-if ! (type "brew" >/dev/null 2>&1); then
-  BREW_URL=https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-  if type "curl" >/dev/null 2>&1; then
-    curl -fsSL "$BREW_URL"
-  else
-    wget -q --trust-server-names "$BREW_URL"
-  fi
+# zinitのインストール
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [ ! -e "$ZINIT_HOME" ]; then
+  echo "installing zinit..."
+  mkdir -p "$(dirname "$ZINIT_HOME")"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-# OS個別のインストール作業
-echo "installing packages..."
-echo "$PACKAGES" | xargs -L 1 -P 4 brew install
+# nerd-fontsの導入
+if [ ! -e "$HOME/nerd-fonts" ]; then
+  echo 'installing nerd-fonts...'
+  cd "$HOME" || exit
+  git clone --branch=master --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+  cd nerd-fonts || exit
+  ./install.sh
+  cd "${HOME}/dotfiles" || exit
+fi
+
+# パッケージのインストールを行う
+. "$DOTPATH/install.sh"

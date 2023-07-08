@@ -14,6 +14,5 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 if [ -e "$HOME/.bashrc" ] ; then
-    . $HOME/.bashrc
+    . "$HOME"/.bashrc
 fi
-

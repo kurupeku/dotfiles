@@ -6,4 +6,4 @@ PACKAGES="git curl bash zsh gpg openssl build-essential libyaml-dev \
           zlib1g-dev uuid-dev tk-dev"
 
 sudo apt-get update
-sudo apt-get install $PACKAGES
+sudo apt-get install "$PACKAGES"

@@ -21,3 +21,11 @@ export HISTSIZE=100000
 
 # Aliasの設定
 . "$HOME"/dotfiles/modules/rc/alias.sh
+
+# pnpm
+export PNPM_HOME="/home/kurupeku/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

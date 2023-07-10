@@ -4,12 +4,12 @@
 
 ## Installing
 
-設定ファイルやVimのセットアップはこちら
+開発環境全体のセットアップはこちら
 ```sh
 curl -L raw.github.com/kurupeku/dotfiles/master/setup.sh | sh
 ```
 
-開発環境全体のセットアップはこちら
+パッケージのインストールのみはこちら
 ```sh
 curl -L raw.github.com/kurupeku/dotfiles/master/install.sh | sh
 ```

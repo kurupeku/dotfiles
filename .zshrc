@@ -90,6 +90,8 @@ zinit light zsh-users/zsh-syntax-highlighting
 
 # asdfに関する設定
 . $HOME/.asdf/asdf.sh
+fpath=(${ASDF_DIR}/completions $fpath)
+autoload -Uz compinit && compinit
 
 # 環境変数の設定
 . $HOME/dotfiles/modules/rc/env.sh

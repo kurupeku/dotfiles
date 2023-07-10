@@ -3,27 +3,7 @@
 # Node npm packages
 NPM_PACKAGES=$(
   cat <<EOF
-yarn
-pnpm
-eslint
-@typescript-eslint/parser
-vue-eslint-parser
-tslint
-prettier
-typescript
-typescript-language-server
-bash-language-server
-markdownlint-cli
-emmet-ls
-vscode-langservers-extracted
-@tailwindcss/language-server
-yaml-language-server
-graphql-language-service-cli
-intelephense
-dockerfile-language-server-nodejs
-sql-language-server
 @google/clasp
-npm-check-updates
 EOF
 )
 

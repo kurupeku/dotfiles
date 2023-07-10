@@ -8,7 +8,7 @@ EOF
 )
 
 echo "install global packages for development"
-echo "$NPM_PACKAGES" | xargs -L 1 -P 4 npm i --location=global
+echo "$NPM_PACKAGES" | xargs -L 1 npm i --location=global
 
 if type "asdf" >/dev/null 2>&1; then
   echo "reshim asdf nodejs" #コマンドが存在する時の処理

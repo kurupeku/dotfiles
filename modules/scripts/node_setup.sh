@@ -3,6 +3,9 @@
 # Node npm packages
 NPM_PACKAGES=$(
   cat <<EOF
+jest
+eslint
+prettier
 @google/clasp
 EOF
 )

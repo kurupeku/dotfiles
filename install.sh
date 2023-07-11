@@ -37,9 +37,9 @@ SCRIPTSPATH=$HOME/dotfiles/modules/scripts
 KERNEL=$(uname)
 
 # OS別にパッケージのインストール処理を行う
-if [ "$KERNEL" == 'Darwin' ]; then
+if [ "$KERNEL" = 'Darwin' ]; then
   . "$SCRIPTSPATH/mac_packages_install.sh"
-elif [ "$KERNEL" == 'Linux' ]; then
+elif [ "$KERNEL" = 'Linux' ]; then
   . "$SCRIPTSPATH/apt_packages_install.sh"
 fi
 

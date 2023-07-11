@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # asdfがなければインストール
 if [ ! -e "$HOME/.asdf" ]; then

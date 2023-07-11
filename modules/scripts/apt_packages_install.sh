@@ -3,6 +3,7 @@
 PACKAGES=$(
   cat <<EOF
 git
+gh
 curl
 bash
 zsh

@@ -19,6 +19,7 @@ python
 poetry
 kubectl
 kustomize
+helm
 kind
 minikube
 terraform
@@ -43,6 +44,7 @@ asdf plugin-add python
 asdf plugin-add poetry https://github.com/asdf-community/asdf-poetry.git
 asdf plugin-add kubectl https://github.com/asdf-community/asdf-kubectl.git
 asdf plugin-add kustomize https://github.com/Banno/asdf-kustomize.git
+asdf plugin-add helm https://github.com/Antiarchitect/asdf-helm.git
 asdf plugin-add kind https://github.com/reegnz/asdf-kind.git
 asdf plugin-add minikube https://github.com/alvarobp/asdf-minikube.git
 asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
@@ -55,5 +57,5 @@ asdf plugin-add yq https://github.com/sudermanjr/asdf-yq.git
 asdf plugin-add shfmt
 asdf plugin add shellcheck https://github.com/luizm/asdf-shellcheck.git
 
-echo "$PLUGS" | xargs -I{} --max-args 1 asdf install {} latest
-echo "$PLUGS" | xargs -I{} --max-args 1 asdf global {} latest
+echo "$PLUGS" | xargs -L 1 -I{} asdf install {} latest
+echo "$PLUGS" | xargs -L 1 -I{} asdf global {} latest

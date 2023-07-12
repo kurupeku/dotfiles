@@ -11,7 +11,7 @@ if ! (type "brew" >/dev/null 2>&1); then
 fi
 
 PACKAGES="bash zsh git gpg openssl curl"
-GUI_APPS="warp raycast multipass"
+GUI_APPS="warp raycast"
 
 # パッケージマネージャーのセットアップ
 echo "installing homebrew..."

@@ -15,6 +15,8 @@ local nnoremaps = {
   ["<Esc><Esc>"] = ":nohl<CR>",
   k = "gk",
   j = "gj",
+  H = "^",
+  L = "$",
 }
 
 local inoremaps_silent = {
@@ -24,6 +26,8 @@ local inoremaps_silent = {
 local vnoremaps = {
   x = [["_x]],
   s = [["_s]],
+  H = "^",
+  L = "$",
 }
 
 for k, v in pairs(noremaps) do

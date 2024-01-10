@@ -10,24 +10,9 @@ if [ ! -e "$DOTPATH" ]; then
   if type "git" >/dev/null 2>&1; then
     git clone --recursive "https://github.com/kurupeku/dotfiles.git" "$DOTPATH"
 
-  # 使えない場合は curl か wget を使用する
-  elif type "curl" >/dev/null 2>&1 || type "wget" >/dev/null 2>&1; then
-    tarball="https://github.com/kurupeku/dotfiles/archive/master.tar.gz"
-
-    # どっちかでダウンロードして，tar に流す
-    if type "curl" >/dev/null 2>&1; then
-      curl -L $tarball
-    elif type "wget" >/dev/null 2>&1; then
-      wget -O - $tarball
-    fi | tar zxv
-
-    mv -f dotfiles-master "$DOTPATH"
+  # 使えない場合は終了
   else
-    die "curl or wget required"
-  fi
-
-  if [ $? -ne 0 ]; then
-    die "not found: $DOTPATH"
+    die "'git' command required"
   fi
 
   echo "fetched my dotfiles"
@@ -39,8 +24,8 @@ KERNEL=$(uname)
 # OS別にパッケージのインストール処理を行う
 if [ "$KERNEL" = 'Darwin' ]; then
   . "$SCRIPTSPATH/mac_packages_install.sh"
-elif [ "$KERNEL" = 'Linux' ]; then
-  . "$SCRIPTSPATH/apt_packages_install.sh"
+else
+  die "Supported MacOS only"
 fi
 
 echo "all processes are done"

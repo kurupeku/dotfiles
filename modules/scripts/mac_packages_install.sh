@@ -10,8 +10,8 @@ if ! (type "brew" >/dev/null 2>&1); then
   fi
 fi
 
-PACKAGES="bash zsh git gpg openssl curl"
-GUI_APPS="warp raycast"
+PACKAGES="bash zsh git gh gpg curl lazygit"
+GUI_APPS="raycast"
 
 # パッケージマネージャーのセットアップ
 echo "installing homebrew..."

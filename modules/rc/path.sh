@@ -10,8 +10,6 @@ case ":$PATH:" in
 *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-# Rancher Desktop の設定
-RD_BIN="$HOME/.rd/bin"
-if [ -d "$RD_BIN" ]; then
-  export PATH="$RD_BIN:$PATH"
-fi
+# pip の PATH 設定
+PATH=$(python3 -m site --user-base)/bin:$PATH
+

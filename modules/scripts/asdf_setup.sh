@@ -18,7 +18,6 @@ pnpm
 python
 poetry
 kubectl
-kustomize
 helm
 kind
 minikube
@@ -43,7 +42,6 @@ asdf plugin-add pnpm
 asdf plugin-add python
 asdf plugin-add poetry https://github.com/asdf-community/asdf-poetry.git
 asdf plugin-add kubectl https://github.com/asdf-community/asdf-kubectl.git
-asdf plugin-add kustomize https://github.com/Banno/asdf-kustomize.git
 asdf plugin-add helm https://github.com/Antiarchitect/asdf-helm.git
 asdf plugin-add kind https://github.com/reegnz/asdf-kind.git
 asdf plugin-add minikube https://github.com/alvarobp/asdf-minikube.git

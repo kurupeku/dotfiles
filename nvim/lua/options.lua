@@ -1,8 +1,8 @@
 local opts = {
   -- 検索時の設定
+  incsearch = true,
   ignorecase = true,
   smartcase = true,
-  incsearch = true,
   hlsearch = true,
   -- 対応する括弧を表示
   showmatch = true,
@@ -10,8 +10,14 @@ local opts = {
   backup = false,
   -- コマンド入力時に表示する
   showcmd = true,
+  -- コマンド・メッセージ表示欄を2行確保
+  cmdheight = 2,
+  -- ステータスラインを常に表示
+  laststatus = 2,
   -- スクロール時に10行余白を確保する
   scrolloff = 10,
+  -- シンタックスハイライトの有効化
+  syntax = "on",
   -- <Tab>でshiftwidthの数だけ<Space>を入力する
   smartindent = true,
   -- マウス操作をすべて受け付ける
@@ -19,8 +25,6 @@ local opts = {
   -- utf-8でエンコードする
   encoding = "utf-8",
   fileencodings = "utf-8",
-  -- 描画を安定させる
-  ttyfast = true,
   -- 候補の表示方法の設定
   completeopt = "menu,menuone,noselect",
   wildmenu = true,
@@ -36,7 +40,7 @@ local opts = {
   undofile = true,
   -- 編集されたファイルを自動読み込み
   autoread = true,
-  wrapscan = true
+  wrapscan = true,
 }
 
 local win_opts = {
@@ -44,10 +48,8 @@ local win_opts = {
   cursorline = true,
   -- 行数を表示
   number = true,
-  -- 相対行数を表示
-  relativenumber = true,
   -- サイン用ガーターを常に表示
-  signcolumn = 'yes'
+  signcolumn = "yes",
 }
 
 local buf_opts = {
@@ -60,7 +62,7 @@ local buf_opts = {
   autoindent = true,
   shiftwidth = 2,
   softtabstop = 2,
-  spelllang = 'en_us'
+  spelllang = "en_us",
 }
 
 local api = vim.api

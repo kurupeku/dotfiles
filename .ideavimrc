@@ -21,10 +21,10 @@ nnoremap ff :action GotoFile<CR>
 nnoremap <leader>f :action ReformatCode<CR>
 
 " 次のlint alertに移動
-nnoremap <leader>v :action GotoNextError<CR>
+nnoremap ]q :action GotoNextError<CR>
 
 " 前のlint alertに移動
-nnoremap <leader>V :action GotoPreviousError<CR>
+nnoremap [q :action GotoPreviousError<CR>
 
 " 型定義にジャンプ
 nnoremap gd :action GotoDeclaration<CR>
@@ -46,14 +46,27 @@ nnoremap <leader>[ :action PreviousTab<CR>
 " ----------------- プラグイン系 -------------------
 " ------------------------------------------------
 
+" EasyMotion の設定
 set easymotion
 let g:EasyMotion_do_mapping = 0
 map <leader><leader> <Plug>(easymotion-s2)
+
+" vim-surround を有効化
 set surround
+
+" NERDTree っぽくディレクトリ構造を扱えるプラグインの設定
 set NERDTree
-nnoremap <C-m> :NERDTreeFocus<CR>
+nnoremap <C-m> :NERDTreeToggle<CR>
 let g:NERDTreeMapActivateNode = "l"
 let g:NERDTreeMapCloseDir = "h"
+let g:NERDTreeMapOpenSplit = "x"
+let g:NERDTreeMapOpenVSplit = "v"
+
+" コメントアウトのプラグインを有効化
 set commentary
+
+" 矩形選択を有効化
 set multiple-cursors
+
+" ヤンク時にハイライトを有効化
 set highlightedyank

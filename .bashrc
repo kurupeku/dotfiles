@@ -16,8 +16,11 @@ export HISTSIZE=100000
 # 環境変数の設定
 . "$HOME"/dotfiles/modules/rc/env.sh
 
-# Pathの設定
+# Path の設定
 . "$HOME"/dotfiles/modules/rc/path.sh
 
-# Aliasの設定
+# Alias の設定
 . "$HOME"/dotfiles/modules/rc/alias.sh
+
+# direnv の設定
+. "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"

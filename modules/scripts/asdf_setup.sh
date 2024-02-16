@@ -25,7 +25,7 @@ minikube
 terraform
 awscli
 gcloud
-task
+direnv
 ripgrep
 jq
 yq
@@ -50,7 +50,7 @@ asdf plugin-add minikube https://github.com/alvarobp/asdf-minikube.git
 asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 asdf plugin add awscli
 asdf plugin add gcloud https://github.com/jthegedus/asdf-gcloud
-asdf plugin-add task https://github.com/particledecay/asdf-task.git
+asdf plugin-add direnv
 asdf plugin add ripgrep
 asdf plugin-add jq https://github.com/lsanwick/asdf-jq.git
 asdf plugin-add yq https://github.com/sudermanjr/asdf-yq.git

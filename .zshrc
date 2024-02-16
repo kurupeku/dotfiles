@@ -67,28 +67,28 @@ setopt auto_cd
 # ビープ音を消す
 setopt no_beep
 
-# コマンドを途中まで入力後、historyから絞り込み
+# コマンドを途中まで入力後、history から絞り込み
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
-# zinitに関する設定
+# zinit に関する設定
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# zinit経由でpowerlevel10k導入
+# zinit 経由で powerlevel10k 導入
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# zinit経由でzsh-completions導入
+# zinit 経由でzsh-completions 導入
 zinit light zsh-users/zsh-completions
 
-# zinit経由でzsh-syntax-highlignting導入
+# zinit 経由で zsh-syntax-highlignting 導入
 zinit light zsh-users/zsh-syntax-highlighting
 
-# asdfに関する設定
+# asdf に関する設定
 . $HOME/.asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit && compinit
@@ -96,12 +96,14 @@ autoload -Uz compinit && compinit
 # 環境変数の設定
 . $HOME/dotfiles/modules/rc/env.sh
 
-# PATH追加
+# PATH 追加
 . $HOME/dotfiles/modules/rc/path.sh
 
-# Aliasの設定
+# Alias の設定
 . $HOME/dotfiles/modules/rc/alias.sh
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
 [[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
 
+# direnv に関する設定
+. ${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc

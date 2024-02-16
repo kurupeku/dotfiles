@@ -48,7 +48,7 @@ nnoremap <leader>[ :action PreviousTab<CR>
 
 " EasyMotion の設定
 set easymotion
-let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_override_acejump = 0
 map <leader><leader> <Plug>(easymotion-s2)
 
 " vim-surround を有効化

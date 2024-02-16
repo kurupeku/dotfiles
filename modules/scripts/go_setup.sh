@@ -4,9 +4,10 @@
 PACKAGES=$(
   cat <<EOF
 golang.org/x/tools/cmd/goimports@latest
+mvdan.cc/gofumpt@latest
+github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 honnef.co/go/tools/cmd/staticcheck@latest
 github.com/cweill/gotests/gotests@latest
-mvdan.cc/gofumpt@latest
 github.com/josharian/impl@latest
 github.com/haya14busa/goplay/cmd/goplay@latest
 golang.org/x/tools/gopls@latest

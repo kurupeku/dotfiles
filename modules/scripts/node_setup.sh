@@ -6,6 +6,7 @@ NPM_PACKAGES=$(
 jest
 eslint
 prettier
+@devcontainers/cli
 @google/clasp
 EOF
 )

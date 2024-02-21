@@ -106,4 +106,4 @@ autoload -Uz compinit && compinit
 [[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
 
 # direnv に関する設定
-. ${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc
+eval "$(direnv hook zsh)"

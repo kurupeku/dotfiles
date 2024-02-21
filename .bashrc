@@ -23,4 +23,4 @@ export HISTSIZE=100000
 . "$HOME"/dotfiles/modules/rc/alias.sh
 
 # direnv の設定
-. "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+eval "$(direnv hook bash)"

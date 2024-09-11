@@ -1,9 +1,16 @@
 #!/bin/sh
-# shellcheck disable=2086
 
-export ASDFROOT=$HOME/.asdf
-export ASDFINSTALLS=$HOME/.asdf/installs
-export GOPATH=$(asdf where golang)/packages
-export GOROOT=$(asdf where golang)/go
-export NODEV="$(asdf current nodejs | sed 's/ (set by .*)//g')"
-export NODEROOT=$ASDFINSTALLS/nodejs/$NODEV
+export ASDFROOT="$HOME"/.asdf
+export ASDFINSTALLS="$HOME"/.asdf/installs
+
+go_bin_path="$(asdf which go 2>/dev/null)"
+if [ -e "${go_bin_path}" ]; then
+  export GOROOT
+  GOROOT="$(dirname "$(dirname "${go_bin_path}")")"
+
+  export GOPATH
+  GOPATH="$(dirname "${GOROOT}")/packages"
+
+  export GOBIN
+  GOBIN="$(dirname "${GOROOT}")/bin"
+fi

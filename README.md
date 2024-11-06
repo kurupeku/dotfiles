@@ -6,7 +6,7 @@
 
 開発環境全体のセットアップはこちら
 ```sh
-curl -L raw.github.com/kurupeku/dotfiles/master/setup.sh | sh
+curl -L raw.github.com/kurupeku/dotfiles/master/install.sh | sh
 ```
 
 パッケージのインストールのみはこちら

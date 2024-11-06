@@ -9,7 +9,5 @@ alias dct="docker compose -f docker-compose.test.yml"
 alias dcp="docker compose -f docker-compose.prod.yml"
 alias devc="devcontainer"
 alias kc="kubectl"
-alias python=python3
-alias pip=pip3
 alias chrome="open -a 'Google Chrome'"
 alias brave="open -a 'Brave'"

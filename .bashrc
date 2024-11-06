@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# ctrl+s で出力がロックされてしまうのを防ぐ
-stty stop undef
-
-# プロンプトの表示をカスタマイズ
-export PS1='\[\033[01;32m\]\u@\H\[\033[01;34m\] \w \$\[\033[00m\] '
-
-# これだけコマンド履歴を残す
-export HISTSIZE=100000
-
 # asdf の設定
 . "$HOME"/.asdf/asdf.sh
 . "$HOME"/.asdf/completions/asdf.bash
@@ -23,4 +14,6 @@ export HISTSIZE=100000
 . "$HOME"/dotfiles/modules/rc/alias.sh
 
 # direnv の設定
-eval "$(direnv hook bash)"
+if hash direnv 2>/dev/null; then
+  eval "$(direnv hook bash)"
+fi

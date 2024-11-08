@@ -2,6 +2,7 @@
 
 PACKAGES=$(
   cat <<EOF
+bundler
 solargraph
 EOF
 )

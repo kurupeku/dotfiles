@@ -7,3 +7,5 @@ fi
 if [ -e "$HOME/.zprofile.local" ]; then
   . $HOME/.zprofile.local
 fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"

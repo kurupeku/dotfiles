@@ -13,6 +13,10 @@
 # Alias の設定
 . "$HOME"/dotfiles/modules/rc/alias.sh
 
+if [ -e "$HOME/.bashrc.local" ]; then
+  . $HOME/.bashrc.local
+fi
+
 # direnv の設定
 if hash direnv 2>/dev/null; then
   eval "$(direnv hook bash)"

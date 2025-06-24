@@ -25,14 +25,3 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .
-
-# for ide
-.vscode
-.idea
-*.iml
-
-# binary dir
-bin
-
-
-.python_history

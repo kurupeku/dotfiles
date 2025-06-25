@@ -18,6 +18,8 @@ if [ -e "$HOME/.zshrc.local" ]; then
   . $HOME/.zshrc.local
 fi
 
+eval "$(sheldon source)"
+
 # direnv の設定
 if hash direnv 2>/dev/null; then
   eval "$(direnv hook zsh)"

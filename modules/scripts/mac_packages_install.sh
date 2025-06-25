@@ -68,7 +68,7 @@ install_packages() {
 # メイン処理
 main() {
     # 基本パッケージとGUIアプリケーションの定義
-    PACKAGES="bash zsh git gh gpg curl lazygit"
+    PACKAGES="bash zsh git gh gpg curl lazygit sheldon starship"
     GUI_APPS="raycast ghostty"
 
     # Homebrewのインストールと初期設定

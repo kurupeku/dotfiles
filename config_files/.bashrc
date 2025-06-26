@@ -21,3 +21,6 @@ fi
 if hash direnv 2>/dev/null; then
   eval "$(direnv hook bash)"
 fi
+
+# Starship の有効化
+eval "$(starship init bash)"

@@ -8,6 +8,7 @@ eslint
 prettier
 @devcontainers/cli
 @google/clasp
+@anthropic-ai/claude-code
 EOF
 )
 

@@ -47,3 +47,4 @@ background-opacity = 0.8
 macos-titlebar-proxy-icon = hidden
 window-height = 50
 window-width = 180
+font-feature = -dlig

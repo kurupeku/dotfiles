@@ -48,3 +48,4 @@ macos-titlebar-proxy-icon = hidden
 window-height = 50
 window-width = 180
 font-feature = -dlig
+keybind = shift+enter=text:\n

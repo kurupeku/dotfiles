@@ -25,8 +25,11 @@ create_symlink() {
             echo "Updating existing symlink: $dest"
             rm "$dest"
         else
-            echo "Warning: File already exists: $dest"
-            return 1
+            # Backup existing file
+            local backup_file
+            backup_file="${dest}.backup.$(date +%Y%m%d_%H%M%S)"
+            echo "Backing up existing file: $dest -> $backup_file"
+            mv "$dest" "$backup_file"
         fi
     fi
 
@@ -41,7 +44,7 @@ create_symlink() {
 # Traverse through config_files directory
 find "$CONFIG_DIR" -type f | while read -r src_file; do
     # Get relative path from config_files
-    rel_path="${src_file#$CONFIG_DIR/}"
+    rel_path="${src_file#"$CONFIG_DIR"/}"
     # Build path under home directory
     dest_file="$HOME/$rel_path"
 

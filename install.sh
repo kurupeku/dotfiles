@@ -82,11 +82,17 @@ setup_packages() {
     . "${SCRIPTSPATH}/mac_packages_install.sh"
 }
 
+# Setup mise and development tools
+setup_mise() {
+    . "${SCRIPTSPATH}/mise_setup.sh"
+}
+
 # Main process
 main() {
     clone_dotfiles
     . "${SCRIPTSPATH}/sym_link_config.sh"
     setup_packages
+    setup_mise
     echo "All processes completed successfully"
     exec "$SHELL" -l
 }

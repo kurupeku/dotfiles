@@ -15,11 +15,6 @@ setopt hist_ignore_dups
 # 開始と終了を記録
 setopt EXTENDED_HISTORY
 
-# asdf に関する設定
-. $HOME/.asdf/asdf.sh
-fpath=(${ASDF_DIR}/completions $fpath)
-autoload -Uz compinit && compinit
-
 # 環境変数の設定
 . $HOME/dotfiles/modules/rc/env.sh
 
@@ -34,6 +29,13 @@ if [ -e "$HOME/.zshrc.local" ]; then
 fi
 
 eval "$(sheldon source)"
+
+# Mise の設定
+if [ -e "$HOME/.local/bin/mise" ]; then
+  eval "$($HOME/.local/bin/mise activate zsh)"
+else
+  echo "Warning: Mise not found in ~/.local/bin. Please install it first."
+fi
 
 # direnv の設定
 if hash direnv 2>/dev/null; then

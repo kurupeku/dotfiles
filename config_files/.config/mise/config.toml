@@ -1,4 +1,5 @@
 [tools]
+direnv = "latest"
 go = "latest"
 node = "latest"
 ruby = "latest"

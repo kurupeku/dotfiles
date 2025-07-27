@@ -40,6 +40,8 @@ fi
 # direnv の設定
 if hash direnv 2>/dev/null; then
   eval "$(direnv hook zsh)"
+else
+  echo "Warning: direnv not found. Please install it via mise or your package manager."
 fi
 
 # Starship の有効化

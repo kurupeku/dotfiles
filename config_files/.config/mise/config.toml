@@ -1,5 +1,7 @@
 [tools]
-direnv = "latest"
+awscli = "latest"
+bun = "latest"
 go = "latest"
+lazygit = "latest"
 node = "latest"
 ruby = "latest"
